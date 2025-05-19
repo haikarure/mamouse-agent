@@ -95,21 +95,21 @@ class VoiceInteraction {
     this.recognition.onstart = () => {
       this.isListening = true;
       console.log('Voice interaction: Listening started');
-      
+
       // Update UI
       if (this.voiceButton) {
         this.voiceButton.classList.add('active');
       }
-      
+
       if (this.voiceVisualizer) {
         this.voiceVisualizer.classList.add('active');
       }
-      
+
       this.showStatusIndicator('listening', 'Listening...');
-      
+
       // Start visualizer
       this.startVisualizer();
-      
+
       if (this.callbacks.onListeningStart) {
         this.callbacks.onListeningStart();
       }
@@ -119,21 +119,21 @@ class VoiceInteraction {
     this.recognition.onend = () => {
       this.isListening = false;
       console.log('Voice interaction: Listening stopped');
-      
+
       // Update UI
       if (this.voiceButton) {
         this.voiceButton.classList.remove('active');
       }
-      
+
       if (this.voiceVisualizer) {
         this.voiceVisualizer.classList.remove('active');
       }
-      
+
       this.hideStatusIndicator();
-      
+
       // Stop visualizer
       this.stopVisualizer();
-      
+
       if (this.callbacks.onListeningStop) {
         this.callbacks.onListeningStop();
       }
@@ -155,12 +155,12 @@ class VoiceInteraction {
       // Jika belum diaktifkan, periksa wake word
       if (!this.isWakeWordDetected && this.options.wakeWords.some(word => transcript.includes(word))) {
         this.handleWakeWordDetected(transcript);
-      } 
+      }
       // Jika sudah diaktifkan, tangkap perintah
       else if (this.isWakeWordDetected) {
         this.handleCommand(transcript, event.results[0].isFinal);
       }
-      
+
       // Callback untuk hasil speech
       if (this.callbacks.onSpeechResult) {
         this.callbacks.onSpeechResult(transcript, event.results[0].isFinal);
@@ -170,7 +170,7 @@ class VoiceInteraction {
     // Event saat terjadi error
     this.recognition.onerror = (event) => {
       console.error('Voice interaction error:', event.error);
-      
+
       if (this.callbacks.onError) {
         this.callbacks.onError(event.error);
       }
@@ -200,9 +200,9 @@ class VoiceInteraction {
   // Setup visualizer
   setupVisualizer() {
     if (!this.visualizerCanvas) return;
-    
+
     this.visualizerContext = this.visualizerCanvas.getContext('2d');
-    
+
     // Resize canvas
     const resizeCanvas = () => {
       if (this.visualizerCanvas) {
@@ -210,7 +210,7 @@ class VoiceInteraction {
         this.visualizerCanvas.height = this.visualizerCanvas.offsetHeight;
       }
     };
-    
+
     // Resize pada load dan saat window resize
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
@@ -219,7 +219,7 @@ class VoiceInteraction {
   // Mulai visualizer
   startVisualizer() {
     if (!this.visualizerCanvas || !this.visualizerContext) return;
-    
+
     // Buat audio context jika belum ada
     if (!this.audioContext) {
       try {
@@ -227,7 +227,7 @@ class VoiceInteraction {
         this.analyser = this.audioContext.createAnalyser();
         this.analyser.fftSize = 256;
         this.visualizerData = new Uint8Array(this.analyser.frequencyBinCount);
-        
+
         // Minta akses mikrofon
         navigator.mediaDevices.getUserMedia({ audio: true })
           .then(stream => {
@@ -249,34 +249,236 @@ class VoiceInteraction {
   // Gambar visualizer
   drawVisualizer() {
     if (!this.analyser || !this.visualizerContext || !this.visualizerCanvas) return;
-    
+
     this.analyser.getByteFrequencyData(this.visualizerData);
-    
+
     const width = this.visualizerCanvas.width;
     const height = this.visualizerCanvas.height;
-    const barWidth = width / this.analyser.frequencyBinCount * 2.5;
-    const barSpacing = 1;
-    
+
     this.visualizerContext.clearRect(0, 0, width, height);
-    
-    // Gradient untuk bar
-    const gradient = this.visualizerContext.createLinearGradient(0, 0, 0, height);
-    gradient.addColorStop(0, 'rgba(0, 150, 255, 1)');
-    gradient.addColorStop(0.5, 'rgba(0, 100, 255, 0.8)');
-    gradient.addColorStop(1, 'rgba(0, 50, 255, 0.6)');
-    
-    // Gambar bar
-    for (let i = 0; i < this.analyser.frequencyBinCount; i++) {
-      const barHeight = this.visualizerData[i] / 255 * height * 0.8;
-      const x = i * (barWidth + barSpacing) + width / 2 - (this.analyser.frequencyBinCount * (barWidth + barSpacing)) / 2;
-      const y = height - barHeight;
-      
-      this.visualizerContext.fillStyle = gradient;
-      this.visualizerContext.fillRect(x, y, barWidth, barHeight);
+
+    // Dapatkan CSS variables untuk warna
+    const computedStyle = getComputedStyle(document.documentElement);
+    const primaryColor = computedStyle.getPropertyValue('--primary-color') || '#3498db';
+    const secondaryColor = computedStyle.getPropertyValue('--secondary-color') || '#2ecc71';
+    const accentColor = computedStyle.getPropertyValue('--accent-color') || '#9b59b6';
+
+    // Konversi hex ke rgb jika diperlukan
+    const hexToRgb = (hex) => {
+      const shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
+      hex = hex.replace(shorthandRegex, (m, r, g, b) => r + r + g + g + b + b);
+      const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex.trim());
+      return result ? `rgb(${parseInt(result[1], 16)}, ${parseInt(result[2], 16)}, ${parseInt(result[3], 16)})` : null;
+    };
+
+    // Pastikan warna dalam format rgb
+    const primary = primaryColor.startsWith('#') ? hexToRgb(primaryColor) : primaryColor;
+    const secondary = secondaryColor.startsWith('#') ? hexToRgb(secondaryColor) : secondaryColor;
+    const accent = accentColor.startsWith('#') ? hexToRgb(accentColor) : accentColor;
+
+    // Pilih mode visualizer berdasarkan waktu
+    const time = Date.now() / 1000;
+    const mode = Math.floor(time / 10) % 3; // Ganti mode setiap 10 detik
+
+    switch (mode) {
+      case 0:
+        // Mode 1: Bar Visualizer
+        this.drawBarVisualizer(width, height, primary, secondary, accent);
+        break;
+      case 1:
+        // Mode 2: Circle Visualizer
+        this.drawCircleVisualizer(width, height, primary, secondary, accent);
+        break;
+      case 2:
+        // Mode 3: Wave Visualizer
+        this.drawWaveVisualizer(width, height, primary, secondary, accent);
+        break;
     }
-    
+
     // Animasi frame
     this.animationFrame = requestAnimationFrame(() => this.drawVisualizer());
+  }
+
+  // Bar Visualizer
+  drawBarVisualizer(width, height, primary, secondary, accent) {
+    const barCount = this.analyser.frequencyBinCount / 2;
+    const barWidth = width / barCount - 2;
+    const barSpacing = 2;
+
+    // Gradient untuk bar
+    const gradient = this.visualizerContext.createLinearGradient(0, 0, 0, height);
+    gradient.addColorStop(0, accent);
+    gradient.addColorStop(0.5, secondary);
+    gradient.addColorStop(1, primary);
+
+    // Gambar bar
+    for (let i = 0; i < barCount; i++) {
+      const barHeight = this.visualizerData[i] / 255 * height * 0.8;
+      const x = i * (barWidth + barSpacing);
+      const y = height - barHeight;
+
+      // Rounded rectangle
+      this.visualizerContext.beginPath();
+      this.visualizerContext.roundRect(x, y, barWidth, barHeight, [4, 4, 0, 0]);
+      this.visualizerContext.fillStyle = gradient;
+      this.visualizerContext.fill();
+
+      // Glow effect
+      if (barHeight > height * 0.4) {
+        this.visualizerContext.shadowColor = accent;
+        this.visualizerContext.shadowBlur = 10;
+        this.visualizerContext.beginPath();
+        this.visualizerContext.roundRect(x, y, barWidth, barHeight, [4, 4, 0, 0]);
+        this.visualizerContext.fill();
+        this.visualizerContext.shadowBlur = 0;
+      }
+    }
+  }
+
+  // Circle Visualizer
+  drawCircleVisualizer(width, height, primary, secondary, accent) {
+    const centerX = width / 2;
+    const centerY = height / 2;
+    const radius = Math.min(width, height) / 4;
+    const barCount = this.analyser.frequencyBinCount / 2;
+    const angleStep = (2 * Math.PI) / barCount;
+
+    // Gambar lingkaran luar
+    this.visualizerContext.beginPath();
+    this.visualizerContext.arc(centerX, centerY, radius, 0, 2 * Math.PI);
+    this.visualizerContext.strokeStyle = `${primary}33`;
+    this.visualizerContext.lineWidth = 2;
+    this.visualizerContext.stroke();
+
+    // Gambar bar
+    for (let i = 0; i < barCount; i++) {
+      const barHeight = this.visualizerData[i] / 255 * radius;
+      const angle = i * angleStep;
+
+      const innerX = centerX + Math.cos(angle) * radius;
+      const innerY = centerY + Math.sin(angle) * radius;
+      const outerX = centerX + Math.cos(angle) * (radius + barHeight);
+      const outerY = centerY + Math.sin(angle) * (radius + barHeight);
+
+      // Gradient untuk bar
+      const gradient = this.visualizerContext.createLinearGradient(innerX, innerY, outerX, outerY);
+      gradient.addColorStop(0, `${primary}80`);
+      gradient.addColorStop(1, accent);
+
+      // Gambar bar
+      this.visualizerContext.beginPath();
+      this.visualizerContext.moveTo(innerX, innerY);
+      this.visualizerContext.lineTo(outerX, outerY);
+      this.visualizerContext.strokeStyle = gradient;
+      this.visualizerContext.lineWidth = 3;
+      this.visualizerContext.lineCap = 'round';
+      this.visualizerContext.stroke();
+
+      // Gambar titik di ujung bar
+      if (barHeight > radius * 0.3) {
+        this.visualizerContext.beginPath();
+        this.visualizerContext.arc(outerX, outerY, 3, 0, 2 * Math.PI);
+        this.visualizerContext.fillStyle = accent;
+        this.visualizerContext.fill();
+
+        // Glow effect
+        this.visualizerContext.shadowColor = accent;
+        this.visualizerContext.shadowBlur = 10;
+        this.visualizerContext.beginPath();
+        this.visualizerContext.arc(outerX, outerY, 3, 0, 2 * Math.PI);
+        this.visualizerContext.fill();
+        this.visualizerContext.shadowBlur = 0;
+      }
+    }
+  }
+
+  // Wave Visualizer
+  drawWaveVisualizer(width, height, primary, secondary, accent) {
+    const sliceWidth = width / this.analyser.frequencyBinCount;
+    const centerY = height / 2;
+
+    // Gambar garis tengah
+    this.visualizerContext.beginPath();
+    this.visualizerContext.moveTo(0, centerY);
+    this.visualizerContext.lineTo(width, centerY);
+    this.visualizerContext.strokeStyle = `${primary}33`;
+    this.visualizerContext.lineWidth = 1;
+    this.visualizerContext.stroke();
+
+    // Gambar wave atas
+    this.visualizerContext.beginPath();
+    this.visualizerContext.moveTo(0, centerY);
+
+    for (let i = 0; i < this.analyser.frequencyBinCount; i++) {
+      const value = this.visualizerData[i] / 255;
+      const y = centerY - value * centerY * 0.8;
+      const x = i * sliceWidth;
+
+      if (i === 0) {
+        this.visualizerContext.moveTo(x, y);
+      } else {
+        this.visualizerContext.lineTo(x, y);
+      }
+    }
+
+    // Gradient untuk wave
+    const gradient = this.visualizerContext.createLinearGradient(0, 0, 0, height);
+    gradient.addColorStop(0, accent);
+    gradient.addColorStop(0.5, `${secondary}80`);
+    gradient.addColorStop(1, `${primary}00`);
+
+    // Tutup path dan fill
+    this.visualizerContext.lineTo(width, centerY);
+    this.visualizerContext.lineTo(0, centerY);
+    this.visualizerContext.fillStyle = gradient;
+    this.visualizerContext.fill();
+
+    // Gambar wave bawah (mirror)
+    this.visualizerContext.beginPath();
+    this.visualizerContext.moveTo(0, centerY);
+
+    for (let i = 0; i < this.analyser.frequencyBinCount; i++) {
+      const value = this.visualizerData[i] / 255;
+      const y = centerY + value * centerY * 0.5; // Lebih kecil di bawah
+      const x = i * sliceWidth;
+
+      if (i === 0) {
+        this.visualizerContext.moveTo(x, y);
+      } else {
+        this.visualizerContext.lineTo(x, y);
+      }
+    }
+
+    // Gradient untuk wave bawah
+    const gradientBottom = this.visualizerContext.createLinearGradient(0, centerY, 0, height);
+    gradientBottom.addColorStop(0, `${secondary}80`);
+    gradientBottom.addColorStop(1, `${primary}00`);
+
+    // Tutup path dan fill
+    this.visualizerContext.lineTo(width, centerY);
+    this.visualizerContext.lineTo(0, centerY);
+    this.visualizerContext.fillStyle = gradientBottom;
+    this.visualizerContext.fill();
+
+    // Gambar garis wave atas
+    this.visualizerContext.beginPath();
+    this.visualizerContext.moveTo(0, centerY);
+
+    for (let i = 0; i < this.analyser.frequencyBinCount; i++) {
+      const value = this.visualizerData[i] / 255;
+      const y = centerY - value * centerY * 0.8;
+      const x = i * sliceWidth;
+
+      if (i === 0) {
+        this.visualizerContext.moveTo(x, y);
+      } else {
+        this.visualizerContext.lineTo(x, y);
+      }
+    }
+
+    this.visualizerContext.strokeStyle = accent;
+    this.visualizerContext.lineWidth = 2;
+    this.visualizerContext.stroke();
   }
 
   // Stop visualizer
@@ -285,7 +487,7 @@ class VoiceInteraction {
       cancelAnimationFrame(this.animationFrame);
       this.animationFrame = null;
     }
-    
+
     if (this.visualizerContext && this.visualizerCanvas) {
       this.visualizerContext.clearRect(0, 0, this.visualizerCanvas.width, this.visualizerCanvas.height);
     }
@@ -294,17 +496,17 @@ class VoiceInteraction {
   // Tampilkan status indicator
   showStatusIndicator(type, message, duration = 0) {
     if (!this.statusIndicator || !this.statusIndicatorText) return;
-    
+
     // Remove all status classes
     this.statusIndicator.classList.remove('listening', 'processing', 'error', 'success');
-    
+
     // Add the appropriate class
     this.statusIndicator.classList.add(type);
     this.statusIndicator.classList.add('show');
-    
+
     // Set the message
     this.statusIndicatorText.textContent = message;
-    
+
     // Hide after duration if specified
     if (duration > 0) {
       setTimeout(() => {
@@ -327,11 +529,11 @@ class VoiceInteraction {
       this.recognition.start();
       this.restartCount = 0;
       this.isMuted = false;
-      
+
       if (this.voiceButton) {
         this.voiceButton.classList.remove('muted');
       }
-      
+
       console.log('Voice interaction started');
       return true;
     } catch (error) {
@@ -365,15 +567,15 @@ class VoiceInteraction {
   mute() {
     this.isMuted = true;
     this.stop();
-    
+
     if (this.voiceButton) {
       this.voiceButton.classList.add('muted');
     }
-    
+
     if (this.callbacks.onMuteChange) {
       this.callbacks.onMuteChange(true);
     }
-    
+
     console.log('Voice interaction muted');
   }
 
@@ -381,15 +583,15 @@ class VoiceInteraction {
   unmute() {
     this.isMuted = false;
     this.start();
-    
+
     if (this.voiceButton) {
       this.voiceButton.classList.remove('muted');
     }
-    
+
     if (this.callbacks.onMuteChange) {
       this.callbacks.onMuteChange(false);
     }
-    
+
     console.log('Voice interaction unmuted');
   }
 
@@ -397,15 +599,15 @@ class VoiceInteraction {
   handleWakeWordDetected(transcript) {
     console.log('Wake word detected in:', transcript);
     this.isWakeWordDetected = true;
-    
+
     // Update UI
     this.showStatusIndicator('listening', 'Listening for command...');
-    
+
     // Panggil callback
     if (this.callbacks.onWakeWordDetected) {
       this.callbacks.onWakeWordDetected(transcript);
     }
-    
+
     // Set timeout untuk reset aktivasi jika tidak ada perintah
     this.resetCommandTimeout();
   }
@@ -414,36 +616,65 @@ class VoiceInteraction {
   handleCommand(transcript, isFinal) {
     // Reset timeout setiap kali ada input
     this.resetCommandTimeout();
-    
+
+    // Jika bukan hasil final, tampilkan sebagai typing
+    if (!isFinal && transcript.length > 0) {
+      // Dispatch custom event untuk menampilkan typing bubble
+      const typingEvent = new CustomEvent('voice-typing', {
+        detail: {
+          text: transcript,
+          timestamp: new Date().toISOString()
+        }
+      });
+      document.dispatchEvent(typingEvent);
+    }
+
     // Jika hasil final, kirim perintah
     if (isFinal) {
       console.log(`Command detected: "${transcript}"`);
-      
+
       // Tambahkan ke conversation
       this.currentConversation.push({
         role: 'user',
         text: transcript,
         timestamp: new Date().toISOString()
       });
-      
+
       // Tampilkan di input
       if (this.messageInput) {
         this.messageInput.value = transcript;
       }
-      
+
+      // Dispatch custom event untuk menampilkan voice bubble
+      const voiceBubbleEvent = new CustomEvent('voice-command', {
+        detail: {
+          text: transcript,
+          timestamp: new Date().toISOString()
+        }
+      });
+      document.dispatchEvent(voiceBubbleEvent);
+
       // Kirim perintah
       if (this.options.autoRespond && this.messageForm) {
+        // Tampilkan status AI responding
+        this.showStatusIndicator('ai-responding', 'AI is responding...');
+
+        // Kirim form
         this.messageForm.dispatchEvent(new Event('submit'));
+
+        // Dispatch custom event untuk menandai AI mulai merespons
+        const aiRespondingEvent = new CustomEvent('ai-responding');
+        document.dispatchEvent(aiRespondingEvent);
       }
-      
+
       // Panggil callback
       if (this.callbacks.onCommandDetected) {
         this.callbacks.onCommandDetected(transcript);
       }
-      
+
       // Reset aktivasi setelah perintah terdeteksi
       this.isWakeWordDetected = false;
-      
+
       // Set timeout untuk akhir percakapan
       this.setConversationTimeout();
     }
@@ -455,7 +686,7 @@ class VoiceInteraction {
     if (this.commandTimeout) {
       clearTimeout(this.commandTimeout);
     }
-    
+
     // Set timeout baru
     this.commandTimeout = setTimeout(() => {
       console.log('Command timeout, resetting activation');
@@ -470,19 +701,19 @@ class VoiceInteraction {
     if (this.conversationTimeoutId) {
       clearTimeout(this.conversationTimeoutId);
     }
-    
+
     // Set timeout baru
     this.conversationTimeoutId = setTimeout(() => {
       console.log('Conversation timeout, ending conversation');
-      
+
       // Simpan percakapan jika diaktifkan
       if (this.options.saveConversation && this.currentConversation.length > 0) {
         this.saveConversationToFile();
       }
-      
+
       // Reset percakapan
       this.currentConversation = [];
-      
+
       // Panggil callback
       if (this.callbacks.onConversationEnd) {
         this.callbacks.onConversationEnd();
@@ -494,7 +725,7 @@ class VoiceInteraction {
   saveConversationToFile() {
     // Implementasi penyimpanan percakapan
     console.log('Saving conversation:', this.currentConversation);
-    
+
     // TODO: Implementasi penyimpanan ke file
   }
 
@@ -502,19 +733,19 @@ class VoiceInteraction {
   handleAutoRestart() {
     const now = Date.now();
     const timeSinceLastRestart = now - this.lastRestartTime;
-    
+
     // Jika restart terlalu cepat, tambah counter
     if (timeSinceLastRestart < 1000) {
       this.restartCount++;
     } else {
       this.restartCount = 0;
     }
-    
+
     // Jika belum mencapai batas restart, coba restart
     if (this.restartCount < this.options.maxRestarts) {
       console.log(`Auto-restarting voice interaction (attempt ${this.restartCount + 1}/${this.options.maxRestarts})`);
       this.lastRestartTime = now;
-      
+
       setTimeout(() => {
         if (!this.isListening && !this.isMuted) {
           this.start();

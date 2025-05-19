@@ -1,0 +1,334 @@
+/* Voice Bubble Animation Styles */
+
+/* User Voice Bubble Animation */
+.bubble.user.voice-bubble {
+  position: relative;
+  overflow: hidden;
+  animation: voiceBubbleIn 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.bubble.user.voice-bubble::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg,
+    rgba(var(--accent-color-rgb), 0),
+    rgba(var(--accent-color-rgb), 0.7),
+    rgba(var(--accent-color-rgb), 0)
+  );
+  animation: shimmer 2s infinite;
+  z-index: 1;
+}
+
+.bubble.user.voice-bubble::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg,
+    rgba(var(--accent-color-rgb), 0),
+    rgba(var(--accent-color-rgb), 0.7),
+    rgba(var(--accent-color-rgb), 0)
+  );
+  animation: shimmer 2s infinite reverse;
+  z-index: 1;
+}
+
+.bubble.user.voice-bubble .bubble-content {
+  position: relative;
+}
+
+.bubble.user.voice-bubble .bubble-content::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -5px;
+  width: 3px;
+  height: 100%;
+  background: linear-gradient(180deg,
+    rgba(var(--accent-color-rgb), 0),
+    rgba(var(--accent-color-rgb), 0.5),
+    rgba(var(--accent-color-rgb), 0)
+  );
+  animation: pulseVertical 2s infinite;
+}
+
+/* AI Voice Response Animation */
+.bubble.ai.voice-response {
+  position: relative;
+  overflow: hidden;
+  animation: voiceBubbleIn 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.bubble.ai.voice-response::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg,
+    rgba(var(--secondary-color-rgb), 0),
+    rgba(var(--secondary-color-rgb), 0.7),
+    rgba(var(--secondary-color-rgb), 0)
+  );
+  animation: shimmer 2s infinite;
+  z-index: 1;
+}
+
+.bubble.ai.voice-response::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg,
+    rgba(var(--secondary-color-rgb), 0),
+    rgba(var(--secondary-color-rgb), 0.7),
+    rgba(var(--secondary-color-rgb), 0)
+  );
+  animation: shimmer 2s infinite reverse;
+  z-index: 1;
+}
+
+.bubble.ai.voice-response .bubble-content {
+  position: relative;
+}
+
+.bubble.ai.voice-response .bubble-content::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: -5px;
+  width: 3px;
+  height: 100%;
+  background: linear-gradient(180deg,
+    rgba(var(--secondary-color-rgb), 0),
+    rgba(var(--secondary-color-rgb), 0.5),
+    rgba(var(--secondary-color-rgb), 0)
+  );
+  animation: pulseVertical 2s infinite;
+}
+
+/* Voice Typing Animation */
+.bubble.user.voice-typing {
+  position: relative;
+}
+
+.bubble.user.voice-typing .bubble-content::after {
+  content: '...';
+  display: inline-block;
+  width: 1em;
+  text-align: left;
+  animation: ellipsis 1.5s infinite;
+  margin-left: 0.2em;
+}
+
+/* AI Speaking Animation */
+.bubble.ai.speaking {
+  position: relative;
+}
+
+.bubble.ai.speaking .bubble-content {
+  position: relative;
+}
+
+.bubble.ai.speaking .bubble-content::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  right: 10px;
+  width: 30px;
+  height: 4px;
+  background: linear-gradient(90deg,
+    rgba(var(--secondary-color-rgb), 0.2),
+    rgba(var(--secondary-color-rgb), 0.8)
+  );
+  border-radius: 2px;
+  animation: soundWave 1s infinite;
+}
+
+/* Animations */
+@keyframes voiceBubbleIn {
+  0% {
+    opacity: 0;
+    transform: translateY(10px) scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes ellipsis {
+  0% { content: '.'; }
+  33% { content: '..'; }
+  66% { content: '...'; }
+  100% { content: '.'; }
+}
+
+@keyframes pulseVertical {
+  0% {
+    opacity: 0.3;
+    height: 30%;
+    top: 35%;
+  }
+  50% {
+    opacity: 0.7;
+    height: 90%;
+    top: 5%;
+  }
+  100% {
+    opacity: 0.3;
+    height: 30%;
+    top: 35%;
+  }
+}
+
+@keyframes soundWave {
+  0% {
+    width: 15px;
+    opacity: 0.5;
+  }
+  50% {
+    width: 30px;
+    opacity: 0.8;
+  }
+  100% {
+    width: 15px;
+    opacity: 0.5;
+  }
+}
+
+/* Word-by-word Animation for AI Speech */
+.bubble.ai.speaking .word {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(10px);
+  animation: wordAppear 0.3s forwards;
+}
+
+@keyframes wordAppear {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Highlight current word being spoken */
+.bubble.ai.speaking .word.current {
+  background: linear-gradient(90deg,
+    rgba(var(--secondary-color-rgb), 0.1),
+    rgba(var(--secondary-color-rgb), 0.2)
+  );
+  border-radius: 3px;
+  padding: 0 2px;
+  animation: wordHighlight 0.5s infinite alternate;
+  position: relative;
+}
+
+.bubble.ai.speaking .word.current::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: var(--secondary-color);
+  animation: expandLine 0.3s ease-out;
+}
+
+@keyframes expandLine {
+  0% {
+    width: 0;
+    opacity: 0;
+  }
+  100% {
+    width: 100%;
+    opacity: 1;
+  }
+}
+
+@keyframes wordHighlight {
+  0% {
+    background: linear-gradient(90deg,
+      rgba(var(--secondary-color-rgb), 0.1),
+      rgba(var(--secondary-color-rgb), 0.2)
+    );
+    transform: scale(1);
+  }
+  100% {
+    background: linear-gradient(90deg,
+      rgba(var(--secondary-color-rgb), 0.2),
+      rgba(var(--secondary-color-rgb), 0.3)
+    );
+    transform: scale(1.05);
+  }
+}
+
+/* Completion Glow Effect */
+.completion-glow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: 1;
+  animation: completionGlow 1s ease-out;
+  opacity: 0;
+}
+
+@keyframes completionGlow {
+  0% {
+    box-shadow: 0 0 0 rgba(var(--secondary-color-rgb), 0);
+    opacity: 0;
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(var(--secondary-color-rgb), 0.5);
+    opacity: 1;
+  }
+  100% {
+    box-shadow: 0 0 0 rgba(var(--secondary-color-rgb), 0);
+    opacity: 0;
+  }
+}
+
+/* Voice Completed Animation */
+.bubble.ai.voice-completed {
+  position: relative;
+}
+
+.bubble.ai.voice-completed::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  right: 10px;
+  width: 20px;
+  height: 2px;
+  background: var(--secondary-color);
+  border-radius: 1px;
+  animation: completionLine 0.5s ease-out forwards;
+}
+
+@keyframes completionLine {
+  0% {
+    width: 0;
+    opacity: 0;
+  }
+  100% {
+    width: 20px;
+    opacity: 1;
+  }
+}
