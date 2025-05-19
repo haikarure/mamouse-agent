@@ -129,7 +129,7 @@
           <button class="close-menu" id="close-menu-btn">×</button>
         </div>
         <div class="menu-content">
-          <div class="menu-item" data-section="communication">
+          <div class="menu-item" data-section="communication" data-tooltip="Pengaturan model AI dan parameter komunikasi">
             <div class="menu-item-icon">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M4 4H20C21.1 4 22 4.9 22 6V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V6C2 4.9 2.9 4 4 4Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -137,9 +137,10 @@
               </svg>
             </div>
             <span>Communication Hub</span>
+            <div class="menu-tooltip">Pengaturan model AI dan parameter komunikasi</div>
           </div>
 
-          <div class="menu-item" data-section="api">
+          <div class="menu-item" data-section="api" data-tooltip="Konfigurasi API key dan model Gemini">
             <div class="menu-item-icon">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M12 15C13.6569 15 15 13.6569 15 12C15 10.3431 13.6569 9 12 9C10.3431 9 9 10.3431 9 12C9 13.6569 10.3431 15 12 15Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -147,6 +148,7 @@
               </svg>
             </div>
             <span>Gemini API Settings</span>
+            <div class="menu-tooltip">Konfigurasi API key dan model Gemini</div>
           </div>
           <div class="menu-section communication-section">
             <h3>Communication Hub</h3>
@@ -293,7 +295,7 @@
             </div>
           </div>
 
-          <div class="menu-item" data-section="voice">
+          <div class="menu-item" data-section="voice" data-tooltip="Pengaturan suara dan text-to-speech">
             <div class="menu-item-icon">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M12 1C11.2044 1 10.4413 1.31607 9.87868 1.87868C9.31607 2.44129 9 3.20435 9 4V12C9 12.7956 9.31607 13.5587 9.87868 14.1213C10.4413 14.6839 11.2044 15 12 15C12.7956 15 13.5587 14.6839 14.1213 14.1213C14.6839 13.5587 15 12.7956 15 12V4C15 3.20435 14.6839 2.44129 14.1213 1.87868C13.5587 1.31607 12.7956 1 12 1Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -303,6 +305,7 @@
               </svg>
             </div>
             <span>Voice Settings</span>
+            <div class="menu-tooltip">Pengaturan suara dan text-to-speech</div>
           </div>
           <div class="menu-section voice-section">
             <h3>Voice Settings</h3>
@@ -449,7 +452,7 @@
             </div>
           </div>
 
-          <div class="menu-item" data-section="theme">
+          <div class="menu-item" data-section="theme" data-tooltip="Pengaturan tema dan tampilan">
             <div class="menu-item-icon">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M12 16C14.2091 16 16 14.2091 16 12C16 9.79086 14.2091 8 12 8C9.79086 8 8 9.79086 8 12C8 14.2091 9.79086 16 12 16Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -464,6 +467,7 @@
               </svg>
             </div>
             <span>Theme Settings</span>
+            <div class="menu-tooltip">Pengaturan tema dan tampilan</div>
           </div>
           <div class="menu-section theme-section">
             <h3>Select Theme</h3>
@@ -480,7 +484,7 @@
             </div>
           </div>
 
-          <div class="menu-item" data-section="mcp">
+          <div class="menu-item" data-section="mcp" data-tooltip="Konfigurasi Model Context Protocol Servers">
             <div class="menu-item-icon">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M20 7H4C2.89543 7 2 7.89543 2 9V19C2 20.1046 2.89543 21 4 21H20C21.1046 21 22 20.1046 22 19V9C22 7.89543 21.1046 7 20 7Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -488,6 +492,7 @@
               </svg>
             </div>
             <span>MCP Servers</span>
+            <div class="menu-tooltip">Konfigurasi Model Context Protocol Servers</div>
           </div>
           <div class="menu-section mcp-section">
             <h3>Model Context Protocol Servers</h3>
@@ -506,7 +511,7 @@
 
 
 
-          <div class="menu-item" data-section="about">
+          <div class="menu-item" data-section="about" data-tooltip="Informasi tentang Mamouse Agent">
             <div class="menu-item-icon">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -515,10 +520,51 @@
               </svg>
             </div>
             <span>About</span>
+            <div class="menu-tooltip">Informasi tentang Mamouse Agent</div>
           </div>
           <div class="menu-section about-section">
-            <p>Mamous Agent v1.0</p>
-            <p>An AI personal assistant with multimodal capabilities.</p>
+            <div class="about-logo">
+              <img src="assets/logo.png" alt="Mamouse Agent Logo" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxwYXRoIGQ9Ik0xMiAyMkM2LjQ3NyAyMiAyIDE3LjUyMyAyIDEyUzYuNDc3IDIgMTIgMnMxMCA0LjQ3NyAxMCAxMC00LjQ3NyAxMC0xMCAxMHoiIHN0cm9rZT0iIzAwNzhkNyIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJNOCAxNHMxLjUgMiA0IDIgNC0yIDQtMiIgc3Ryb2tlPSIjMDA3OGQ3IiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjxwYXRoIGQ9Ik05IDlIOSIgc3Ryb2tlPSIjMDA3OGQ3IiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjxwYXRoIGQ9Ik0xNSA5SDE1IiBzdHJva2U9IiMwMDc4ZDciIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PC9zdmc+';" />
+            </div>
+            <div class="about-info">
+              <h4>Mamouse Agent v1.0</h4>
+              <p>Asisten AI personal dengan kemampuan multimodal</p>
+              <div class="about-features">
+                <div class="feature-item">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M20 6L9 17L4 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  <span>Integrasi Gemini API</span>
+                </div>
+                <div class="feature-item">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M20 6L9 17L4 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  <span>Computer Vision</span>
+                </div>
+                <div class="feature-item">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M20 6L9 17L4 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  <span>Text-to-Speech</span>
+                </div>
+                <div class="feature-item">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M20 6L9 17L4 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  <span>Pencarian Web</span>
+                </div>
+              </div>
+              <div class="about-version">
+                <p>© 2024 Mamouse Agent</p>
+                <a href="https://github.com/haikarure/mamouse-agent" target="_blank" class="github-link">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  <span>GitHub</span>
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       </div>

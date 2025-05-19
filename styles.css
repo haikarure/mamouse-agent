@@ -1643,7 +1643,7 @@ form *::after,
   height: 100%;
 }
 
-/* Slide Menu - Redesain dengan efek glassmorphism modern dan futuristik yang selaras dengan input container */
+/* Slide Menu - Redesain dengan tampilan futuristik dan minimalis */
 .slide-menu {
   position: fixed;
   top: calc(var(--input-top-position) + var(--input-height) + 20px); /* Posisikan di bawah input container */
@@ -1652,20 +1652,23 @@ form *::after,
   width: var(--input-width); /* Gunakan lebar yang sama dengan input container */
   min-width: 350px; /* Lebar minimum */
   max-width: 900px; /* Lebar maksimum */
-  background-color: var(--menu-bg-color, var(--primary-color)); /* Warna latar sesuai tema */
-  background-image: none; /* Hapus gradien */
-  backdrop-filter: none; /* Hapus blur */
-  -webkit-backdrop-filter: none; /* Hapus blur untuk Safari */
-  border-radius: 25px; /* Radius yang konsisten */
-  padding: 30px; /* Padding lebih besar untuk kenyamanan */
-  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1.2); /* Transisi lebih halus dengan sedikit bounce */
+  background: linear-gradient(135deg,
+              rgba(20, 25, 40, 0.95) 0%,
+              rgba(15, 20, 35, 0.98) 100%); /* Gradien gelap yang elegan */
+  backdrop-filter: blur(10px); /* Efek blur untuk glassmorphism */
+  -webkit-backdrop-filter: blur(10px); /* Untuk Safari */
+  border-radius: 16px; /* Radius yang lebih modern */
+  padding: 25px; /* Padding yang nyaman */
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); /* Transisi yang halus */
   z-index: 1000;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2); /* Bayangan yang selaras dengan input container */
-  max-height: 70vh; /* Kurangi sedikit max-height agar tidak terlalu tinggi */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25),
+              0 0 15px rgba(var(--primary-color-rgb), 0.15); /* Bayangan dengan aksen warna */
+  max-height: 75vh; /* Tinggi maksimum */
   overflow-y: auto !important; /* Pastikan overflow-y: auto dengan !important */
   overflow-x: visible !important; /* Ubah ke visible agar submenu tidak terpotong */
   pointer-events: none;
-  border: 1px solid var(--menu-border-color, var(--primary-color)); /* Border sesuai tema */
+  border: 1px solid rgba(var(--primary-color-rgb), 0.3); /* Border dengan warna aksen */
+  border-bottom: 2px solid var(--primary-color); /* Border bawah yang lebih tebal untuk aksen */
   opacity: 0;
   visibility: hidden;
   scrollbar-width: thin; /* Untuk Firefox */
@@ -1739,9 +1742,9 @@ form *::after,
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 30px; /* Margin lebih besar */
-  border-bottom: 1px solid rgba(var(--primary-color-rgb), 0.15); /* Border berwarna */
-  padding-bottom: 18px; /* Padding lebih besar */
+  margin-bottom: 25px; /* Margin yang seimbang */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05); /* Border tipis */
+  padding-bottom: 15px; /* Padding yang nyaman */
   position: sticky; /* Buat header tetap terlihat saat scroll */
   top: 0; /* Posisikan di bagian atas */
   z-index: 10; /* Pastikan di atas konten lain */
@@ -1768,44 +1771,57 @@ form *::after,
 .menu-header h3 {
   color: white;
   margin: 0;
-  font-size: 22px; /* Ukuran font lebih besar */
-  font-weight: 500; /* Tidak terlalu bold */
+  font-size: 20px; /* Ukuran font yang proporsional */
+  font-weight: 600; /* Sedikit lebih bold */
   letter-spacing: 0.5px; /* Sedikit spasi antar huruf */
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3); /* Bayangan teks */
-  background: linear-gradient(90deg, #ffffff, rgba(var(--primary-color-rgb), 0.9));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* Bayangan teks yang halus */
+  position: relative;
+  display: inline-block;
+  padding-left: 5px; /* Padding untuk aksen */
+}
+
+.menu-header h3::before {
+  content: '';
+  position: absolute;
+  left: -5px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3px;
+  height: 70%;
+  background: var(--primary-color); /* Aksen warna di sebelah kiri judul */
+  border-radius: 3px;
 }
 
 .close-menu {
-  background: rgba(255, 255, 255, 0.08); /* Sedikit latar untuk tombol */
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.05); /* Latar belakang yang halus */
+  border: 1px solid rgba(255, 255, 255, 0.08);
   color: white;
-  font-size: 20px;
+  font-size: 18px;
   cursor: pointer;
-  width: 38px; /* Ukuran tetap */
-  height: 38px; /* Ukuran tetap */
-  border-radius: 50%; /* Bentuk bulat */
+  width: 34px; /* Ukuran yang proporsional */
+  height: 34px; /* Ukuran yang proporsional */
+  border-radius: 8px; /* Bentuk persegi dengan sudut membulat */
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
   position: relative;
   overflow: hidden; /* Untuk efek ripple */
 }
 
 .close-menu:hover {
-  background: rgba(var(--accent-color-rgb), 0.15); /* Warna latar berubah saat hover */
-  transform: scale(1.05) translateY(-2px); /* Sedikit membesar saat hover */
-  box-shadow: 0 5px 15px rgba(var(--accent-color-rgb), 0.25),
-              0 0 10px rgba(var(--accent-color-rgb), 0.15); /* Glow effect */
-  border-color: rgba(var(--accent-color-rgb), 0.2);
+  background: rgba(255, 80, 80, 0.2); /* Warna merah untuk indikasi close */
+  transform: translateY(-2px); /* Sedikit terangkat saat hover */
+  box-shadow: 0 4px 10px rgba(255, 80, 80, 0.2); /* Bayangan dengan warna merah */
+  border-color: rgba(255, 80, 80, 0.3); /* Border dengan warna merah */
+  color: rgba(255, 80, 80, 0.9); /* Teks dengan warna merah */
 }
 
 .close-menu:active {
   transform: scale(0.95);
-  box-shadow: 0 2px 8px rgba(var(--accent-color-rgb), 0.2);
+  box-shadow: 0 2px 5px rgba(255, 80, 80, 0.15);
+  background: rgba(255, 80, 80, 0.3); /* Warna merah lebih kuat saat active */
 }
 
 .menu-content {
@@ -1820,17 +1836,15 @@ form *::after,
 }
 
 .menu-item {
-  padding: 16px 20px; /* Padding lebih besar */
-  border-radius: 14px; /* Radius lebih besar */
-  background: linear-gradient(135deg,
-              rgba(var(--primary-color-rgb), 0.08) 0%,
-              rgba(var(--tertiary-color-rgb), 0.05) 100%); /* Gradien yang selaras dengan input container */
+  padding: 16px 20px; /* Padding yang nyaman */
+  border-radius: 12px; /* Radius yang modern */
+  background: rgba(30, 35, 50, 0.5); /* Latar belakang solid yang elegan */
   color: white;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); /* Transisi dengan efek bounce */
-  border: 1px solid rgba(var(--primary-color-rgb), 0.15); /* Border yang selaras dengan input container */
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15),
-              0 0 10px rgba(var(--primary-color-rgb), 0.1); /* Bayangan yang selaras dengan input container */
+  border: 1px solid rgba(255, 255, 255, 0.05); /* Border tipis */
+  border-left: 3px solid transparent; /* Border kiri untuk efek hover */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Bayangan halus */
   font-weight: 500; /* Sedikit lebih bold */
   letter-spacing: 0.3px; /* Sedikit spasi antar huruf */
   position: relative;
@@ -1838,6 +1852,7 @@ form *::after,
   display: flex;
   align-items: center;
   gap: 15px; /* Jarak antara ikon dan teks */
+  margin-bottom: 8px; /* Jarak antar menu item */
 }
 
 .menu-item-icon {
@@ -1882,32 +1897,217 @@ form *::after,
 }
 
 .menu-item:hover {
-  background: linear-gradient(135deg,
-              rgba(var(--primary-color-rgb), 0.15) 0%,
-              rgba(var(--tertiary-color-rgb), 0.1) 100%); /* Gradien saat hover yang selaras */
-  transform: translateY(-2px) translateX(2px); /* Sedikit terangkat saat hover */
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2),
-              0 0 20px rgba(var(--primary-color-rgb), 0.25); /* Bayangan dan glow effect yang selaras dengan input container */
-  border-color: rgba(var(--primary-color-rgb), 0.3);
+  background: rgba(40, 45, 60, 0.7); /* Latar belakang yang lebih gelap saat hover */
+  transform: translateX(5px); /* Bergeser ke kanan saat hover */
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15),
+              0 0 10px rgba(var(--primary-color-rgb), 0.2); /* Bayangan dengan aksen warna */
+  border-left: 3px solid var(--primary-color); /* Border kiri dengan warna aksen */
 }
 
 .menu-item:hover::before {
   opacity: 1;
 }
 
+/* Indikator aktif untuk menu item */
+.menu-item.active {
+  background: rgba(var(--primary-color-rgb), 0.15); /* Latar belakang dengan warna aksen */
+  border-left: 3px solid var(--primary-color); /* Border kiri dengan warna aksen */
+  transform: translateX(5px); /* Bergeser ke kanan */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15),
+              0 0 10px rgba(var(--primary-color-rgb), 0.2); /* Bayangan dengan aksen warna */
+}
+
+.menu-item.active .menu-item-icon {
+  background: rgba(var(--primary-color-rgb), 0.25); /* Latar belakang ikon dengan warna aksen */
+  transform: scale(1.1); /* Sedikit membesar */
+  box-shadow: 0 4px 10px rgba(var(--primary-color-rgb), 0.2); /* Bayangan dengan aksen warna */
+  border-color: rgba(var(--primary-color-rgb), 0.3); /* Border dengan warna aksen */
+}
+
+/* Efek ripple untuk menu item */
+.menu-item::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 5px;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.7);
+  opacity: 0;
+  border-radius: 100%;
+  transform: scale(1, 1) translate(-50%, -50%);
+  transform-origin: 50% 50%;
+}
+
+@keyframes ripple {
+  0% {
+    transform: scale(0, 0) translate(-50%, -50%);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(20, 20) translate(-50%, -50%);
+    opacity: 0;
+  }
+}
+
+.menu-item:active::after {
+  animation: ripple 0.6s ease-out;
+}
+
+/* Tooltip untuk menu item */
+.menu-tooltip {
+  position: absolute;
+  top: 0;
+  right: -5px;
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateX(10px) translateY(-50%);
+  transition: all 0.3s ease;
+  pointer-events: none;
+  white-space: nowrap;
+  z-index: 100;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  border-left: 2px solid var(--primary-color);
+}
+
+.menu-tooltip::after {
+  content: '';
+  position: absolute;
+  left: -5px;
+  top: 50%;
+  transform: translateY(-50%);
+  border-width: 5px 5px 5px 0;
+  border-style: solid;
+  border-color: transparent rgba(0, 0, 0, 0.8) transparent transparent;
+}
+
+.menu-item:hover .menu-tooltip {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(calc(100% + 10px)) translateY(-50%);
+}
+
+/* Styling untuk about section */
+.about-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.about-logo {
+  width: 80px;
+  height: 80px;
+  margin-bottom: 15px;
+  border-radius: 12px;
+  overflow: hidden;
+  background: rgba(var(--primary-color-rgb), 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(var(--primary-color-rgb), 0.2);
+}
+
+.about-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.about-info {
+  width: 100%;
+}
+
+.about-info h4 {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0 0 8px 0;
+  color: white;
+  letter-spacing: 0.5px;
+}
+
+.about-info p {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.8);
+  margin: 0 0 15px 0;
+}
+
+.about-features {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin: 15px 0;
+}
+
+.feature-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.9);
+  background: rgba(var(--primary-color-rgb), 0.1);
+  padding: 8px 10px;
+  border-radius: 6px;
+  border: 1px solid rgba(var(--primary-color-rgb), 0.15);
+}
+
+.feature-item svg {
+  color: var(--primary-color);
+  flex-shrink: 0;
+}
+
+.about-version {
+  margin-top: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.6);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 15px;
+}
+
+.about-version p {
+  margin: 0;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.github-link {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: rgba(255, 255, 255, 0.8);
+  text-decoration: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  background: rgba(var(--primary-color-rgb), 0.15);
+  transition: all 0.2s ease;
+  border: 1px solid rgba(var(--primary-color-rgb), 0.2);
+}
+
+.github-link:hover {
+  background: rgba(var(--primary-color-rgb), 0.25);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
 .menu-section {
-  padding: 22px; /* Padding lebih besar */
-  margin: 5px 0 25px; /* Margin lebih besar */
-  background: linear-gradient(135deg,
-              rgba(25, 30, 45, 0.5) 0%,
-              rgba(20, 25, 40, 0.6) 100%); /* Gradien yang selaras dengan input container */
-  border-radius: 16px; /* Radius lebih besar */
+  padding: 20px; /* Padding yang nyaman */
+  margin: 5px 0 20px; /* Margin yang seimbang */
+  background: rgba(20, 25, 35, 0.7); /* Latar belakang solid yang elegan */
+  border-radius: 14px; /* Radius yang modern */
   display: none;
-  animation: fadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1); /* Animasi lebih halus */
-  border: 1px solid rgba(var(--primary-color-rgb), 0.15); /* Border berwarna yang selaras */
-  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.1),
-              0 5px 15px rgba(0, 0, 0, 0.1),
-              0 0 10px rgba(var(--primary-color-rgb), 0.1); /* Bayangan yang selaras dengan input container */
+  animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1); /* Animasi yang halus */
+  border: 1px solid rgba(255, 255, 255, 0.05); /* Border tipis */
+  border-top: 2px solid var(--primary-color); /* Border atas dengan warna aksen */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); /* Bayangan yang elegan */
   position: relative;
   overflow: visible; /* Pastikan konten tidak terpotong */
 }
