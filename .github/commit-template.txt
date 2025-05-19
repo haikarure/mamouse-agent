@@ -1,0 +1,24 @@
+# <type>(<scope>): <short summary>
+# |       |             |
+# |       |             +-> Ringkasan singkat dalam present tense.
+# |       |                 Tidak diakhiri dengan titik.
+# |       |
+# |       +-> Scope opsional: ui, api, auth, dll.
+# |
+# +-> Type: feat, fix, docs, style, refactor, perf, test, build, ci, chore, revert
+#
+# Contoh:
+# feat(ui): tambahkan animasi pada input box
+# fix(api): perbaiki error saat validasi API key
+# docs(readme): perbarui dokumentasi instalasi
+#
+# Deskripsi lengkap, jika diperlukan. Gunakan 72 karakter per baris.
+# Jelaskan masalah yang dipecahkan dan mengapa perubahan ini diperlukan.
+#
+# - Poin tambahan dapat ditambahkan sebagai list
+# - Gunakan present tense, misalnya "tambahkan" bukan "menambahkan"
+#
+# Jika terkait dengan issue, tambahkan referensi:
+# Fixes #123, Resolves #456, Related to #789
+#
+# Co-authored-by: Nama <email@example.com>

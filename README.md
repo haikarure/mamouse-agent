@@ -226,3 +226,62 @@ Mendapatkan estimasi waktu perjalanan antara dua lokasi.
 - Penyimpanan riwayat percakapan di database lokal
 - Integrasi dengan layanan kalender dan email
 - Dukungan untuk plugin pihak ketiga
+
+## Kontribusi
+
+Kami sangat menghargai kontribusi dari komunitas! Jika Anda ingin berkontribusi pada proyek Mamouse Agent, silakan ikuti langkah-langkah berikut:
+
+### Workflow Kontribusi
+
+1. **Fork repositori** ini ke akun GitHub Anda
+2. **Clone fork Anda** ke komputer lokal
+   ```bash
+   git clone https://github.com/username-anda/mamouse-agent.git
+   cd mamouse-agent
+   ```
+3. **Buat branch baru** untuk fitur atau perbaikan Anda
+   ```bash
+   git checkout -b feature/nama-fitur
+   ```
+   Gunakan konvensi penamaan berikut:
+   - `feature/nama-fitur` untuk fitur baru
+   - `bugfix/nama-bug` untuk perbaikan bug
+   - `docs/nama-perubahan` untuk perubahan dokumentasi
+   - `refactor/nama-perubahan` untuk refactoring kode
+
+4. **Buat perubahan** dan commit menggunakan [Conventional Commits](https://www.conventionalcommits.org/)
+   ```bash
+   git add .
+   git commit -m "feat(komponen): tambahkan fitur baru"
+   ```
+
+5. **Push ke GitHub** dan buat Pull Request
+   ```bash
+   git push origin feature/nama-fitur
+   ```
+
+6. **Buat Pull Request** dari branch Anda ke branch `develop` repositori utama
+
+### Panduan Kontribusi
+
+- Pastikan kode Anda mengikuti gaya dan konvensi yang ada
+- Tambahkan komentar yang jelas untuk kode yang kompleks
+- Perbarui dokumentasi jika diperlukan
+- Pastikan semua test lulus sebelum membuat Pull Request
+- Satu Pull Request sebaiknya fokus pada satu perubahan
+
+### Struktur Branch
+
+Proyek ini menggunakan model branch berikut:
+- `master`: Kode produksi yang stabil
+- `develop`: Branch pengembangan utama
+- `feature/*`: Branch untuk fitur baru
+- `bugfix/*`: Branch untuk perbaikan bug
+- `release/*`: Branch untuk persiapan rilis
+
+### Versioning
+
+Proyek ini menggunakan [Semantic Versioning](https://semver.org/):
+- **MAJOR**: Perubahan yang tidak kompatibel dengan versi sebelumnya
+- **MINOR**: Fitur baru yang kompatibel dengan versi sebelumnya
+- **PATCH**: Perbaikan bug yang kompatibel dengan versi sebelumnya

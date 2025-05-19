@@ -45,21 +45,43 @@ Kami selalu terbuka untuk ide-ide baru!
 
 1. **Fork Repositori**: Fork repositori ke akun GitHub Anda.
 2. **Clone Repositori**: Clone fork Anda ke mesin lokal Anda.
-3. **Buat Branch Baru**: Buat branch baru untuk perubahan Anda.
+3. **Buat Branch Baru**: Buat branch baru dari `develop` untuk perubahan Anda.
    ```bash
+   git checkout develop
+   git pull origin develop
    git checkout -b feature/amazing-feature
    ```
-4. **Buat Perubahan**: Buat perubahan yang diperlukan dan commit dengan pesan yang jelas.
+
+   Gunakan konvensi penamaan berikut:
+   - `feature/nama-fitur` untuk fitur baru
+   - `bugfix/nama-bug` untuk perbaikan bug
+   - `docs/nama-perubahan` untuk perubahan dokumentasi
+   - `refactor/nama-perubahan` untuk refactoring kode
+
+4. **Buat Perubahan**: Buat perubahan yang diperlukan dan commit dengan menggunakan Conventional Commits.
    ```bash
-   git commit -m "Menambahkan fitur amazing-feature"
+   git add .
+   git commit -m "feat(ui): tambahkan animasi pada input box"
    ```
-5. **Push ke Branch**: Push perubahan Anda ke branch di fork Anda.
+
+   Lihat bagian [Conventional Commits](#conventional-commits) untuk detail lebih lanjut.
+
+5. **Sinkronisasi dengan Develop**: Sebelum membuat Pull Request, pastikan branch Anda up-to-date dengan `develop`.
+   ```bash
+   git checkout develop
+   git pull origin develop
+   git checkout feature/amazing-feature
+   git rebase develop
+   ```
+
+6. **Push ke Branch**: Push perubahan Anda ke branch di fork Anda.
    ```bash
    git push origin feature/amazing-feature
    ```
-6. **Buat Pull Request**: Buat pull request dari branch Anda ke branch `main` repositori asli.
-7. **Ikuti Template**: Gunakan template pull request yang disediakan.
-8. **Tunggu Review**: Tunggu review dari maintainer.
+
+7. **Buat Pull Request**: Buat pull request dari branch Anda ke branch `develop` repositori asli.
+8. **Ikuti Template**: Gunakan template pull request yang disediakan.
+9. **Tunggu Review**: Tunggu review dari maintainer.
 
 ## Panduan Pengembangan
 
@@ -131,6 +153,84 @@ mamouse-agent/
    - Gunakan nama yang deskriptif
    - Hindari singkatan yang tidak umum
    - Gunakan prefiks `is` atau `has` untuk boolean
+
+### Conventional Commits
+
+Proyek ini menggunakan [Conventional Commits](https://www.conventionalcommits.org/) untuk pesan commit. Format dasarnya adalah:
+
+```
+<type>(<scope>): <description>
+
+[optional body]
+
+[optional footer]
+```
+
+Tipe yang umum digunakan:
+- `feat`: Fitur baru
+- `fix`: Perbaikan bug
+- `docs`: Perubahan dokumentasi
+- `style`: Perubahan yang tidak memengaruhi arti kode (spasi, format, dll.)
+- `refactor`: Perubahan kode yang tidak memperbaiki bug atau menambahkan fitur
+- `perf`: Perubahan kode yang meningkatkan performa
+- `test`: Menambahkan atau memperbaiki test
+- `build`: Perubahan pada sistem build atau dependensi eksternal
+- `ci`: Perubahan pada file konfigurasi CI dan script
+- `chore`: Perubahan lain yang tidak memodifikasi file src atau test
+
+Contoh:
+- `feat(ui): tambahkan animasi pada input box`
+- `fix(api): perbaiki error saat validasi API key`
+- `docs(readme): perbarui dokumentasi instalasi`
+
+### Workflow Git
+
+Proyek ini menggunakan model branch berikut:
+- `master`: Kode produksi yang stabil
+- `develop`: Branch pengembangan utama
+- `feature/*`: Branch untuk fitur baru
+- `bugfix/*`: Branch untuk perbaikan bug
+- `release/*`: Branch untuk persiapan rilis
+
+Alur kerja dasar:
+
+1. **Mulai Hari**
+   ```bash
+   git checkout develop
+   git pull origin develop
+   ```
+
+2. **Mulai Fitur Baru**
+   ```bash
+   git checkout -b feature/nama-fitur
+   ```
+
+3. **Commit Sering**
+   ```bash
+   git add .
+   git commit -m "feat: implementasi fungsi X"
+   ```
+
+4. **Sinkronisasi dengan Develop**
+   ```bash
+   git checkout develop
+   git pull origin develop
+   git checkout feature/nama-fitur
+   git rebase develop
+   ```
+
+5. **Push dan Buat PR**
+   ```bash
+   git push -u origin feature/nama-fitur
+   # Buat PR di GitHub
+   ```
+
+6. **Setelah PR di-merge**
+   ```bash
+   git checkout develop
+   git pull origin develop
+   git branch -d feature/nama-fitur
+   ```
 
 ### Testing
 
