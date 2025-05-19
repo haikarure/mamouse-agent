@@ -1,0 +1,150 @@
+/* Voice Settings Tabs */
+.voice-tabs {
+  display: flex;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  margin-bottom: 20px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.voice-tab {
+  flex: 1;
+  padding: 10px;
+  text-align: center;
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.7);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.voice-tab:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: white;
+}
+
+.voice-tab.active {
+  background: rgba(var(--primary-color-rgb), 0.2);
+  color: white;
+  border-bottom: 2px solid var(--primary-color);
+}
+
+.voice-tab-content {
+  display: none;
+}
+
+.voice-tab-content.active {
+  display: block;
+  animation: fadeIn 0.3s ease;
+}
+
+/* Voice Gender Options */
+.voice-gender-options {
+  display: flex;
+  gap: 15px;
+  margin-top: 5px;
+}
+
+.voice-gender-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.voice-gender-option input[type="radio"] {
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  background: transparent;
+  position: relative;
+  cursor: pointer;
+}
+
+.voice-gender-option input[type="radio"]:checked {
+  border-color: var(--primary-color);
+}
+
+.voice-gender-option input[type="radio"]:checked::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--primary-color);
+}
+
+.voice-gender-option label {
+  margin: 0;
+  cursor: pointer;
+}
+
+/* Folder Selector */
+.folder-selector {
+  display: flex;
+  gap: 10px;
+}
+
+.folder-selector input {
+  flex: 1;
+  background: rgba(0, 0, 0, 0.2);
+  cursor: default;
+}
+
+/* Voice Status */
+#voice-status {
+  margin-top: 15px;
+  padding: 10px;
+  border-radius: 6px;
+  font-size: 14px;
+  display: none;
+}
+
+#voice-status.success {
+  display: block;
+  background-color: rgba(0, 200, 100, 0.2);
+  color: #00cc66;
+  border: 1px solid rgba(0, 200, 100, 0.3);
+}
+
+#voice-status.error {
+  display: block;
+  background-color: rgba(200, 0, 0, 0.2);
+  color: #ff3333;
+  border: 1px solid rgba(200, 0, 0, 0.3);
+}
+
+#voice-status.info {
+  display: block;
+  background-color: rgba(0, 100, 200, 0.2);
+  color: #55aaff;
+  border: 1px solid rgba(0, 100, 200, 0.3);
+}
+
+/* Test Voice Button */
+#test-voice-btn {
+  margin-top: 10px;
+  padding: 8px 12px;
+  background: rgba(var(--primary-color-rgb), 0.2);
+  border: 1px solid rgba(var(--primary-color-rgb), 0.3);
+  border-radius: 6px;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+#test-voice-btn:hover {
+  background: rgba(var(--primary-color-rgb), 0.3);
+  transform: translateY(-2px);
+}
+
+#test-voice-btn:active {
+  transform: translateY(0);
+}
