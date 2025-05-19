@@ -1,0 +1,236 @@
+[2025-05-18T11:39:30.304Z] [DEBUG] [BUBBLE_DEBUG] Memproses permintaan streaming untuk pesan ID: c120c014-c526-4321-ac82-1cc1817be1d9
+[2025-05-18T11:39:30.305Z] [DEBUG] [BUBBLE_DEBUG] Pesan: p
+[2025-05-18T11:39:30.306Z] [DEBUG] [BUBBLE_DEBUG] Status inisialisasi Gemini API: Sudah diinisialisasi
+[2025-05-18T11:39:30.307Z] [DEBUG] [BUBBLE_DEBUG] Memanggil geminiService.getStreamingResponse...
+[2025-05-18T11:39:31.280Z] [DEBUG] [BUBBLE_DEBUG] Callback chunk dipanggil dengan data: {"error":false,"toolCall":true,"toolName":"","toolParams":{},"toolResult":{"success":false,"toolName":"","error":"Tool \"\" tidak ditemukan"},"done":false}
+[2025-05-18T11:39:31.334Z] [DEBUG] [BUBBLE_DEBUG] Callback chunk dipanggil dengan data: {"error":true,"toolCall":true,"toolName":"","message":"Error saat mengirim hasil tool ke model: request is not iterable","done":false}
+[2025-05-18T11:39:31.339Z] [DEBUG] [BUBBLE_DEBUG] Callback chunk dipanggil dengan data: {"error":false,"toolCall":true,"toolName":"","toolParams":{},"toolResult":{"success":false,"toolName":"","error":"Tool \"\" tidak ditemukan"},"done":false}
+[2025-05-18T11:39:31.343Z] [DEBUG] [BUBBLE_DEBUG] Callback chunk dipanggil dengan data: {"error":true,"toolCall":true,"toolName":"","message":"Error saat mengirim hasil tool ke model: request is not iterable","done":false}
+[2025-05-18T11:39:31.345Z] [DEBUG] [BUBBLE_DEBUG] Callback chunk dipanggil dengan data: {"error":false,"chunk":"","done":true}
+[2025-05-18T11:40:32.647Z] [DEBUG] [BUBBLE_DEBUG] Memproses permintaan streaming untuk pesan ID: 3db7eaed-3781-4c8c-8e36-a8f9c48b1bdb
+[2025-05-18T11:40:32.648Z] [DEBUG] [BUBBLE_DEBUG] Pesan: hi
+[2025-05-18T11:40:32.649Z] [DEBUG] [BUBBLE_DEBUG] Status inisialisasi Gemini API: Sudah diinisialisasi
+[2025-05-18T11:40:32.650Z] [DEBUG] [BUBBLE_DEBUG] Memanggil geminiService.getStreamingResponse...
+[2025-05-18T11:40:34.235Z] [DEBUG] [BUBBLE_DEBUG] Callback chunk dipanggil dengan data: {"error":false,"toolCall":true,"toolName":"","toolParams":{},"toolResult":{"success":false,"toolName":"","error":"Tool \"\" tidak ditemukan"},"done":false}
+[2025-05-18T11:40:34.345Z] [DEBUG] [BUBBLE_DEBUG] Callback chunk dipanggil dengan data: {"error":true,"toolCall":true,"toolName":"","message":"Error saat mengirim hasil tool ke model: request is not iterable","done":false}
+[2025-05-18T11:40:34.353Z] [DEBUG] [BUBBLE_DEBUG] Callback chunk dipanggil dengan data: {"error":false,"toolCall":true,"toolName":"","toolParams":{},"toolResult":{"success":false,"toolName":"","error":"Tool \"\" tidak ditemukan"},"done":false}
+[2025-05-18T11:40:34.360Z] [DEBUG] [BUBBLE_DEBUG] Callback chunk dipanggil dengan data: {"error":true,"toolCall":true,"toolName":"","message":"Error saat mengirim hasil tool ke model: request is not iterable","done":false}
+[2025-05-18T11:40:34.365Z] [DEBUG] [BUBBLE_DEBUG] Callback chunk dipanggil dengan data: {"error":false,"chunk":"","done":true}
+[2025-05-18T11:40:34.881Z] [DEBUG] [BUBBLE_DEBUG] Memproses permintaan streaming untuk pesan ID: 21081da7-05b8-4542-97b3-2c64976f544f
+[2025-05-18T11:40:34.882Z] [DEBUG] [BUBBLE_DEBUG] Pesan: w
+[2025-05-18T11:40:34.882Z] [DEBUG] [BUBBLE_DEBUG] Status inisialisasi Gemini API: Sudah diinisialisasi
+[2025-05-18T11:40:34.883Z] [DEBUG] [BUBBLE_DEBUG] Memanggil geminiService.getStreamingResponse...
+[2025-05-18T11:40:35.360Z] [DEBUG] [BUBBLE_DEBUG] Callback chunk dipanggil dengan data: {"error":false,"toolCall":true,"toolName":"","toolParams":{},"toolResult":{"success":false,"toolName":"","error":"Tool \"\" tidak ditemukan"},"done":false}
+[2025-05-18T11:40:35.513Z] [DEBUG] [BUBBLE_DEBUG] Callback chunk dipanggil dengan data: {"error":true,"toolCall":true,"toolName":"","message":"Error saat mengirim hasil tool ke model: request is not iterable","done":false}
+[2025-05-18T11:40:35.515Z] [DEBUG] [BUBBLE_DEBUG] Callback chunk dipanggil dengan data: {"error":false,"toolCall":true,"toolName":"","toolParams":{},"toolResult":{"success":false,"toolName":"","error":"Tool \"\" tidak ditemukan"},"done":false}
+[2025-05-18T11:40:35.518Z] [DEBUG] [BUBBLE_DEBUG] Callback chunk dipanggil dengan data: {"error":true,"toolCall":true,"toolName":"","message":"Error saat mengirim hasil tool ke model: request is not iterable","done":false}
+[2025-05-18T11:40:35.520Z] [DEBUG] [BUBBLE_DEBUG] Callback chunk dipanggil dengan data: {"error":false,"chunk":"","done":true}
+[2025-05-18T11:40:35.645Z] [DEBUG] [BUBBLE_DEBUG] Memproses permintaan streaming untuk pesan ID: ccb8f839-2501-48ef-a51b-ee82bc032bae
+[2025-05-18T11:40:35.646Z] [DEBUG] [BUBBLE_DEBUG] Pesan: e
+[2025-05-18T11:40:35.646Z] [DEBUG] [BUBBLE_DEBUG] Status inisialisasi Gemini API: Sudah diinisialisasi
+[2025-05-18T11:40:35.647Z] [DEBUG] [BUBBLE_DEBUG] Memanggil geminiService.getStreamingResponse...
+[2025-05-18T11:40:36.434Z] [DEBUG] [BUBBLE_DEBUG] Callback chunk dipanggil dengan data: {"error":false,"toolCall":true,"toolName":"","toolParams":{},"toolResult":{"success":false,"toolName":"","error":"Tool \"\" tidak ditemukan"},"done":false}
+[2025-05-18T11:40:36.443Z] [DEBUG] [BUBBLE_DEBUG] Memproses permintaan streaming untuk pesan ID: 3f23ea62-9bf4-4b2d-b2df-867e11939c64
+[2025-05-18T11:40:36.444Z] [DEBUG] [BUBBLE_DEBUG] Pesan: r
+[2025-05-18T11:40:36.444Z] [DEBUG] [BUBBLE_DEBUG] Status inisialisasi Gemini API: Sudah diinisialisasi
+[2025-05-18T11:40:36.445Z] [DEBUG] [BUBBLE_DEBUG] Memanggil geminiService.getStreamingResponse...
+[2025-05-18T11:40:36.639Z] [DEBUG] [BUBBLE_DEBUG] Callback chunk dipanggil dengan data: {"error":true,"toolCall":true,"toolName":"","message":"Error saat mengirim hasil tool ke model: request is not iterable","done":false}
+[2025-05-18T11:40:36.643Z] [DEBUG] [BUBBLE_DEBUG] Callback chunk dipanggil dengan data: {"error":false,"toolCall":true,"toolName":"","toolParams":{},"toolResult":{"success":false,"toolName":"","error":"Tool \"\" tidak ditemukan"},"done":false}
+[2025-05-18T11:40:37.270Z] [DEBUG] [BUBBLE_DEBUG] Callback chunk dipanggil dengan data: {"error":false,"toolCall":true,"toolName":"","toolParams":{},"toolResult":{"success":false,"toolName":"","error":"Tool \"\" tidak ditemukan"},"done":false}
+[2025-05-18T11:40:37.442Z] [DEBUG] [BUBBLE_DEBUG] Callback chunk dipanggil dengan data: {"error":true,"toolCall":true,"toolName":"","message":"Error saat mengirim hasil tool ke model: request is not iterable","done":false}
+[2025-05-18T11:40:37.443Z] [DEBUG] [BUBBLE_DEBUG] Callback chunk dipanggil dengan data: {"error":true,"toolCall":true,"toolName":"","message":"Error saat mengirim hasil tool ke model: request is not iterable","done":false}
+[2025-05-18T11:40:37.448Z] [DEBUG] [BUBBLE_DEBUG] Callback chunk dipanggil dengan data: {"error":false,"toolCall":true,"toolName":"","toolParams":{},"toolResult":{"success":false,"toolName":"","error":"Tool \"\" tidak ditemukan"},"done":false}
+[2025-05-18T11:40:37.449Z] [DEBUG] [BUBBLE_DEBUG] Callback chunk dipanggil dengan data: {"error":false,"toolCall":true,"toolName":"","toolParams":{},"toolResult":{"success":false,"toolName":"","error":"Tool \"\" tidak ditemukan"},"done":false}
+[2025-05-18T11:40:37.451Z] [DEBUG] [BUBBLE_DEBUG] Callback chunk dipanggil dengan data: {"error":true,"toolCall":true,"toolName":"","message":"Error saat mengirim hasil tool ke model: request is not iterable","done":false}
+[2025-05-18T11:40:37.452Z] [DEBUG] [BUBBLE_DEBUG] Callback chunk dipanggil dengan data: {"error":true,"toolCall":true,"toolName":"","message":"Error saat mengirim hasil tool ke model: request is not iterable","done":false}
+[2025-05-18T11:40:37.454Z] [DEBUG] [BUBBLE_DEBUG] Callback chunk dipanggil dengan data: {"error":false,"chunk":"","done":true}
+[2025-05-18T11:40:37.456Z] [DEBUG] [BUBBLE_DEBUG] Callback chunk dipanggil dengan data: {"error":false,"chunk":"","done":true}
+[2025-05-18T11:40:37.640Z] [DEBUG] [BUBBLE_DEBUG] Memproses permintaan streaming untuk pesan ID: 186c4022-c2db-4695-941b-155f78436fd7
+[2025-05-18T11:40:37.640Z] [DEBUG] [BUBBLE_DEBUG] Pesan: t
+[2025-05-18T11:40:37.641Z] [DEBUG] [BUBBLE_DEBUG] Status inisialisasi Gemini API: Sudah diinisialisasi
+[2025-05-18T11:40:37.642Z] [DEBUG] [BUBBLE_DEBUG] Memanggil geminiService.getStreamingResponse...
+[2025-05-18T11:40:38.188Z] [DEBUG] [BUBBLE_DEBUG] Callback chunk dipanggil dengan data: {"error":false,"toolCall":true,"toolName":"","toolParams":{},"toolResult":{"success":false,"toolName":"","error":"Tool \"\" tidak ditemukan"},"done":false}
+[2025-05-18T11:40:38.352Z] [DEBUG] [BUBBLE_DEBUG] Callback chunk dipanggil dengan data: {"error":true,"toolCall":true,"toolName":"","message":"Error saat mengirim hasil tool ke model: request is not iterable","done":false}
+[2025-05-18T11:40:38.355Z] [DEBUG] [BUBBLE_DEBUG] Callback chunk dipanggil dengan data: {"error":false,"toolCall":true,"toolName":"","toolParams":{},"toolResult":{"success":false,"toolName":"","error":"Tool \"\" tidak ditemukan"},"done":false}
+[2025-05-18T11:40:38.357Z] [DEBUG] [BUBBLE_DEBUG] Callback chunk dipanggil dengan data: {"error":true,"toolCall":true,"toolName":"","message":"Error saat mengirim hasil tool ke model: request is not iterable","done":false}
+[2025-05-18T11:40:38.360Z] [DEBUG] [BUBBLE_DEBUG] Callback chunk dipanggil dengan data: {"error":false,"toolCall":true,"toolName":"","toolParams":{},"toolResult":{"success":false,"toolName":"","error":"Tool \"\" tidak ditemukan"},"done":false}
+[2025-05-18T11:40:38.362Z] [DEBUG] [BUBBLE_DEBUG] Callback chunk dipanggil dengan data: {"error":true,"toolCall":true,"toolName":"","message":"Error saat mengirim hasil tool ke model: request is not iterable","done":false}
+[2025-05-18T11:40:38.364Z] [DEBUG] [BUBBLE_DEBUG] Callback chunk dipanggil dengan data: {"error":false,"chunk":"","done":true}
+[2025-05-18T11:40:38.705Z] [DEBUG] [BUBBLE_DEBUG] Memproses permintaan streaming untuk pesan ID: 3a7db460-e609-4a95-a0e7-eecbd0b82061
+[2025-05-18T11:40:38.705Z] [DEBUG] [BUBBLE_DEBUG] Pesan: y
+[2025-05-18T11:40:38.706Z] [DEBUG] [BUBBLE_DEBUG] Status inisialisasi Gemini API: Sudah diinisialisasi
+[2025-05-18T11:40:38.707Z] [DEBUG] [BUBBLE_DEBUG] Memanggil geminiService.getStreamingResponse...
+[2025-05-18T11:40:39.292Z] [DEBUG] [BUBBLE_DEBUG] Callback chunk dipanggil dengan data: {"error":false,"toolCall":true,"toolName":"","toolParams":{},"toolResult":{"success":false,"toolName":"","error":"Tool \"\" tidak ditemukan"},"done":false}
+[2025-05-18T11:40:39.430Z] [DEBUG] [BUBBLE_DEBUG] Callback chunk dipanggil dengan data: {"error":true,"toolCall":true,"toolName":"","message":"Error saat mengirim hasil tool ke model: request is not iterable","done":false}
+[2025-05-18T11:40:39.432Z] [DEBUG] [BUBBLE_DEBUG] Callback chunk dipanggil dengan data: {"error":false,"toolCall":true,"toolName":"","toolParams":{},"toolResult":{"success":false,"toolName":"","error":"Tool \"\" tidak ditemukan"},"done":false}
+[2025-05-18T11:40:39.435Z] [DEBUG] [BUBBLE_DEBUG] Callback chunk dipanggil dengan data: {"error":true,"toolCall":true,"toolName":"","message":"Error saat mengirim hasil tool ke model: request is not iterable","done":false}
+[2025-05-18T11:40:39.438Z] [DEBUG] [BUBBLE_DEBUG] Callback chunk dipanggil dengan data: {"error":false,"toolCall":true,"toolName":"","toolParams":{},"toolResult":{"success":false,"toolName":"","error":"Tool \"\" tidak ditemukan"},"done":false}
+[2025-05-18T11:40:39.441Z] [DEBUG] [BUBBLE_DEBUG] Callback chunk dipanggil dengan data: {"error":true,"toolCall":true,"toolName":"","message":"Error saat mengirim hasil tool ke model: request is not iterable","done":false}
+[2025-05-18T11:40:39.443Z] [DEBUG] [BUBBLE_DEBUG] Callback chunk dipanggil dengan data: {"error":false,"chunk":"","done":true}
+[2025-05-18T11:40:39.932Z] [DEBUG] [BUBBLE_DEBUG] Memproses permintaan streaming untuk pesan ID: 26b7d3f2-ecd4-4841-9d4c-5383e3ac6a22
+[2025-05-18T11:40:39.933Z] [DEBUG] [BUBBLE_DEBUG] Pesan: f
+[2025-05-18T11:40:39.933Z] [DEBUG] [BUBBLE_DEBUG] Status inisialisasi Gemini API: Sudah diinisialisasi
+[2025-05-18T11:40:39.934Z] [DEBUG] [BUBBLE_DEBUG] Memanggil geminiService.getStreamingResponse...
+[2025-05-18T11:40:40.517Z] [DEBUG] [BUBBLE_DEBUG] Callback chunk dipanggil dengan data: {"error":false,"toolCall":true,"toolName":"","toolParams":{},"toolResult":{"success":false,"toolName":"","error":"Tool \"\" tidak ditemukan"},"done":false}
+[2025-05-18T11:40:40.657Z] [DEBUG] [BUBBLE_DEBUG] Callback chunk dipanggil dengan data: {"error":true,"toolCall":true,"toolName":"","message":"Error saat mengirim hasil tool ke model: request is not iterable","done":false}
+[2025-05-18T11:40:40.660Z] [DEBUG] [BUBBLE_DEBUG] Callback chunk dipanggil dengan data: {"error":false,"toolCall":true,"toolName":"","toolParams":{},"toolResult":{"success":false,"toolName":"","error":"Tool \"\" tidak ditemukan"},"done":false}
+[2025-05-18T11:40:40.663Z] [DEBUG] [BUBBLE_DEBUG] Callback chunk dipanggil dengan data: {"error":true,"toolCall":true,"toolName":"","message":"Error saat mengirim hasil tool ke model: request is not iterable","done":false}
+[2025-05-18T11:40:40.667Z] [DEBUG] [BUBBLE_DEBUG] Callback chunk dipanggil dengan data: {"error":false,"toolCall":true,"toolName":"","toolParams":{},"toolResult":{"success":false,"toolName":"","error":"Tool \"\" tidak ditemukan"},"done":false}
+[2025-05-18T11:40:40.670Z] [DEBUG] [BUBBLE_DEBUG] Callback chunk dipanggil dengan data: {"error":true,"toolCall":true,"toolName":"","message":"Error saat mengirim hasil tool ke model: request is not iterable","done":false}
+[2025-05-18T11:40:40.672Z] [DEBUG] [BUBBLE_DEBUG] Callback chunk dipanggil dengan data: {"error":false,"chunk":"","done":true}
+[2025-05-18T11:40:42.503Z] [DEBUG] [BUBBLE_DEBUG] Memproses permintaan streaming untuk pesan ID: 8a879251-f4cb-46d5-9643-c2e8bd7b87f3
+[2025-05-18T11:40:42.504Z] [DEBUG] [BUBBLE_DEBUG] Pesan: f
+[2025-05-18T11:40:42.504Z] [DEBUG] [BUBBLE_DEBUG] Status inisialisasi Gemini API: Sudah diinisialisasi
+[2025-05-18T11:40:42.505Z] [DEBUG] [BUBBLE_DEBUG] Memanggil geminiService.getStreamingResponse...
+[2025-05-18T11:40:42.958Z] [DEBUG] [BUBBLE_DEBUG] Callback chunk dipanggil dengan data: {"error":false,"toolCall":true,"toolName":"","toolParams":{},"toolResult":{"success":false,"toolName":"","error":"Tool \"\" tidak ditemukan"},"done":false}
+[2025-05-18T11:40:43.153Z] [DEBUG] [BUBBLE_DEBUG] Callback chunk dipanggil dengan data: {"error":true,"toolCall":true,"toolName":"","message":"Error saat mengirim hasil tool ke model: request is not iterable","done":false}
+[2025-05-18T11:40:43.157Z] [DEBUG] [BUBBLE_DEBUG] Callback chunk dipanggil dengan data: {"error":false,"toolCall":true,"toolName":"","toolParams":{},"toolResult":{"success":false,"toolName":"","error":"Tool \"\" tidak ditemukan"},"done":false}
+[2025-05-18T11:40:43.159Z] [DEBUG] [BUBBLE_DEBUG] Callback chunk dipanggil dengan data: {"error":true,"toolCall":true,"toolName":"","message":"Error saat mengirim hasil tool ke model: request is not iterable","done":false}
+[2025-05-18T11:40:43.162Z] [DEBUG] [BUBBLE_DEBUG] Callback chunk dipanggil dengan data: {"error":false,"toolCall":true,"toolName":"","toolParams":{},"toolResult":{"success":false,"toolName":"","error":"Tool \"\" tidak ditemukan"},"done":false}
+[2025-05-18T11:40:43.164Z] [DEBUG] [BUBBLE_DEBUG] Callback chunk dipanggil dengan data: {"error":true,"toolCall":true,"toolName":"","message":"Error saat mengirim hasil tool ke model: request is not iterable","done":false}
+[2025-05-18T11:40:43.166Z] [DEBUG] [BUBBLE_DEBUG] Callback chunk dipanggil dengan data: {"error":false,"chunk":"","done":true}
+[2025-05-18T12:30:52.288Z] [DEBUG] [BUBBLE_DEBUG] Memproses permintaan streaming untuk pesan ID: a0f76af8-131b-48c2-b9ea-46c527388535
+[2025-05-18T12:30:52.289Z] [DEBUG] [BUBBLE_DEBUG] Pesan: a
+[2025-05-18T12:30:52.290Z] [DEBUG] [BUBBLE_DEBUG] Status inisialisasi Gemini API: Sudah diinisialisasi
+[2025-05-18T12:30:52.290Z] [DEBUG] [BUBBLE_DEBUG] Memanggil geminiService.getStreamingResponse...
+[2025-05-18T12:30:53.991Z] [DEBUG] [BUBBLE_DEBUG] Callback chunk dipanggil dengan data: {"error":false,"toolCall":true,"toolName":"","toolParams":{},"toolResult":{"success":false,"toolName":"","error":"Tool \"\" tidak ditemukan"},"done":false}
+[2025-05-18T12:30:54.073Z] [DEBUG] [BUBBLE_DEBUG] Callback chunk dipanggil dengan data: {"error":true,"toolCall":true,"toolName":"","message":"Error saat mengirim hasil tool ke model: request is not iterable","done":false}
+[2025-05-18T12:30:54.076Z] [DEBUG] [BUBBLE_DEBUG] Callback chunk dipanggil dengan data: {"error":false,"toolCall":true,"toolName":"","toolParams":{},"toolResult":{"success":false,"toolName":"","error":"Tool \"\" tidak ditemukan"},"done":false}
+[2025-05-18T12:30:54.078Z] [DEBUG] [BUBBLE_DEBUG] Callback chunk dipanggil dengan data: {"error":true,"toolCall":true,"toolName":"","message":"Error saat mengirim hasil tool ke model: request is not iterable","done":false}
+[2025-05-18T12:30:54.078Z] [DEBUG] [BUBBLE_DEBUG] Callback chunk dipanggil dengan data: {"error":false,"chunk":"","done":true}
+[2025-05-18T12:31:19.132Z] [DEBUG] [BUBBLE_DEBUG] Memproses permintaan streaming untuk pesan ID: cb61eda2-d9f6-406a-934b-7e41ae72f7fb
+[2025-05-18T12:31:19.132Z] [DEBUG] [BUBBLE_DEBUG] Pesan: e
+[2025-05-18T12:31:19.133Z] [DEBUG] [BUBBLE_DEBUG] Status inisialisasi Gemini API: Sudah diinisialisasi
+[2025-05-18T12:31:19.133Z] [DEBUG] [BUBBLE_DEBUG] Memanggil geminiService.getStreamingResponse...
+[2025-05-18T12:31:19.756Z] [DEBUG] [BUBBLE_DEBUG] Callback chunk dipanggil dengan data: {"error":false,"toolCall":true,"toolName":"","toolParams":{},"toolResult":{"success":false,"toolName":"","error":"Tool \"\" tidak ditemukan"},"done":false}
+[2025-05-18T12:31:19.869Z] [DEBUG] [BUBBLE_DEBUG] Callback chunk dipanggil dengan data: {"error":true,"toolCall":true,"toolName":"","message":"Error saat mengirim hasil tool ke model: request is not iterable","done":false}
+[2025-05-18T12:31:19.871Z] [DEBUG] [BUBBLE_DEBUG] Callback chunk dipanggil dengan data: {"error":false,"toolCall":true,"toolName":"","toolParams":{},"toolResult":{"success":false,"toolName":"","error":"Tool \"\" tidak ditemukan"},"done":false}
+[2025-05-18T12:31:19.872Z] [DEBUG] [BUBBLE_DEBUG] Callback chunk dipanggil dengan data: {"error":true,"toolCall":true,"toolName":"","message":"Error saat mengirim hasil tool ke model: request is not iterable","done":false}
+[2025-05-18T12:31:19.873Z] [DEBUG] [BUBBLE_DEBUG] Callback chunk dipanggil dengan data: {"error":false,"chunk":"","done":true}
+[2025-05-18T12:31:23.043Z] [DEBUG] [BUBBLE_DEBUG] Memproses permintaan streaming untuk pesan ID: 99f9b16a-1db3-4054-91fa-2a14a064cf36
+[2025-05-18T12:31:23.043Z] [DEBUG] [BUBBLE_DEBUG] Pesan: hi
+[2025-05-18T12:31:23.044Z] [DEBUG] [BUBBLE_DEBUG] Status inisialisasi Gemini API: Sudah diinisialisasi
+[2025-05-18T12:31:23.044Z] [DEBUG] [BUBBLE_DEBUG] Memanggil geminiService.getStreamingResponse...
+[2025-05-18T12:31:23.583Z] [DEBUG] [BUBBLE_DEBUG] Callback chunk dipanggil dengan data: {"error":false,"toolCall":true,"toolName":"","toolParams":{},"toolResult":{"success":false,"toolName":"","error":"Tool \"\" tidak ditemukan"},"done":false}
+[2025-05-18T12:31:23.623Z] [DEBUG] [BUBBLE_DEBUG] Callback chunk dipanggil dengan data: {"error":true,"toolCall":true,"toolName":"","message":"Error saat mengirim hasil tool ke model: request is not iterable","done":false}
+[2025-05-18T12:31:23.625Z] [DEBUG] [BUBBLE_DEBUG] Callback chunk dipanggil dengan data: {"error":false,"toolCall":true,"toolName":"","toolParams":{},"toolResult":{"success":false,"toolName":"","error":"Tool \"\" tidak ditemukan"},"done":false}
+[2025-05-18T12:31:23.626Z] [DEBUG] [BUBBLE_DEBUG] Callback chunk dipanggil dengan data: {"error":true,"toolCall":true,"toolName":"","message":"Error saat mengirim hasil tool ke model: request is not iterable","done":false}
+[2025-05-18T12:31:23.627Z] [DEBUG] [BUBBLE_DEBUG] Callback chunk dipanggil dengan data: {"error":false,"chunk":"","done":true}
+[2025-05-18T12:31:35.416Z] [DEBUG] [BUBBLE_DEBUG] Memproses permintaan streaming untuk pesan ID: b73a3479-c7f2-4451-9813-16db4b3bffab
+[2025-05-18T12:31:35.416Z] [DEBUG] [BUBBLE_DEBUG] Pesan: why
+[2025-05-18T12:31:35.417Z] [DEBUG] [BUBBLE_DEBUG] Status inisialisasi Gemini API: Sudah diinisialisasi
+[2025-05-18T12:31:35.418Z] [DEBUG] [BUBBLE_DEBUG] Memanggil geminiService.getStreamingResponse...
+[2025-05-18T12:31:36.036Z] [DEBUG] [BUBBLE_DEBUG] Callback chunk dipanggil dengan data: {"error":false,"toolCall":true,"toolName":"","toolParams":{},"toolResult":{"success":false,"toolName":"","error":"Tool \"\" tidak ditemukan"},"done":false}
+[2025-05-18T12:31:36.234Z] [DEBUG] [BUBBLE_DEBUG] Callback chunk dipanggil dengan data: {"error":true,"toolCall":true,"toolName":"","message":"Error saat mengirim hasil tool ke model: request is not iterable","done":false}
+[2025-05-18T12:31:36.236Z] [DEBUG] [BUBBLE_DEBUG] Callback chunk dipanggil dengan data: {"error":false,"toolCall":true,"toolName":"","toolParams":{},"toolResult":{"success":false,"toolName":"","error":"Tool \"\" tidak ditemukan"},"done":false}
+[2025-05-18T12:31:36.237Z] [DEBUG] [BUBBLE_DEBUG] Callback chunk dipanggil dengan data: {"error":true,"toolCall":true,"toolName":"","message":"Error saat mengirim hasil tool ke model: request is not iterable","done":false}
+[2025-05-18T12:31:36.238Z] [DEBUG] [BUBBLE_DEBUG] Callback chunk dipanggil dengan data: {"error":false,"toolCall":true,"toolName":"","toolParams":{},"toolResult":{"success":false,"toolName":"","error":"Tool \"\" tidak ditemukan"},"done":false}
+[2025-05-18T12:31:36.240Z] [DEBUG] [BUBBLE_DEBUG] Callback chunk dipanggil dengan data: {"error":true,"toolCall":true,"toolName":"","message":"Error saat mengirim hasil tool ke model: request is not iterable","done":false}
+[2025-05-18T12:31:36.242Z] [DEBUG] [BUBBLE_DEBUG] Callback chunk dipanggil dengan data: {"error":false,"chunk":"","done":true}
+[2025-05-18T12:34:51.711Z] [DEBUG] [BUBBLE_DEBUG] Memproses permintaan streaming untuk pesan ID: da01e1cd-b923-4c84-a5b6-b967921dc668
+[2025-05-18T12:34:51.711Z] [DEBUG] [BUBBLE_DEBUG] Pesan: hi
+[2025-05-18T12:34:51.712Z] [DEBUG] [BUBBLE_DEBUG] Status inisialisasi Gemini API: Sudah diinisialisasi
+[2025-05-18T12:34:51.712Z] [DEBUG] [BUBBLE_DEBUG] Memanggil geminiService.getStreamingResponse...
+[2025-05-18T12:34:53.247Z] [DEBUG] [BUBBLE_DEBUG] Callback chunk dipanggil dengan data: {"error":true,"toolCall":true,"toolName":"","message":"Nama tool kosong atau tidak valid","done":false}
+[2025-05-18T12:34:53.347Z] [DEBUG] [BUBBLE_DEBUG] Callback chunk dipanggil dengan data: {"error":true,"toolCall":true,"toolName":"","message":"Nama tool kosong atau tidak valid","done":false}
+[2025-05-18T12:34:53.364Z] [DEBUG] [BUBBLE_DEBUG] Callback chunk dipanggil dengan data: {"error":false,"chunk":"","done":true}
+[2025-05-18T12:37:15.022Z] [DEBUG] [BUBBLE_DEBUG] Memproses permintaan streaming untuk pesan ID: fd2508c2-ce1e-49e0-b2ba-67d0bf308500
+[2025-05-18T12:37:15.023Z] [DEBUG] [BUBBLE_DEBUG] Pesan: hi
+[2025-05-18T12:37:15.024Z] [DEBUG] [BUBBLE_DEBUG] Status inisialisasi Gemini API: Sudah diinisialisasi
+[2025-05-18T12:37:15.024Z] [DEBUG] [BUBBLE_DEBUG] Memanggil geminiService.getStreamingResponse...
+[2025-05-18T12:37:15.654Z] [DEBUG] [BUBBLE_DEBUG] Callback chunk dipanggil dengan data: {"error":true,"toolCall":true,"toolName":"","message":"Error saat memanggil fungsi functionCall(): Cannot read properties of undefined (reading '0')","done":false}
+[2025-05-18T12:37:15.734Z] [DEBUG] [BUBBLE_DEBUG] Callback chunk dipanggil dengan data: {"error":true,"toolCall":true,"toolName":"","message":"Error saat memanggil fungsi functionCall(): Cannot read properties of undefined (reading '0')","done":false}
+[2025-05-18T12:37:15.746Z] [DEBUG] [BUBBLE_DEBUG] Callback chunk dipanggil dengan data: {"error":false,"chunk":"","done":true}
+[2025-05-18T12:42:26.767Z] [DEBUG] [BUBBLE_DEBUG] Memproses permintaan streaming untuk pesan ID: 96af4712-4f96-4043-aeb9-689bcaa76d8b
+[2025-05-18T12:42:26.767Z] [DEBUG] [BUBBLE_DEBUG] Pesan: hi
+[2025-05-18T12:42:26.768Z] [DEBUG] [BUBBLE_DEBUG] Status inisialisasi Gemini API: Sudah diinisialisasi
+[2025-05-18T12:42:26.768Z] [DEBUG] [BUBBLE_DEBUG] Memanggil geminiService.getStreamingResponse...
+[2025-05-18T12:42:27.409Z] [DEBUG] [BUBBLE_DEBUG] Callback chunk dipanggil dengan data: {"error":false,"chunk":"Halo! Ada","done":false}
+[2025-05-18T12:42:27.446Z] [DEBUG] [BUBBLE_DEBUG] Callback chunk dipanggil dengan data: {"error":false,"chunk":" yang bisa saya bantu?\n","done":false}
+[2025-05-18T12:42:27.463Z] [DEBUG] [BUBBLE_DEBUG] Callback chunk dipanggil dengan data: {"error":false,"chunk":"","done":true}
+[2025-05-18T12:42:35.688Z] [DEBUG] [BUBBLE_DEBUG] Memproses permintaan streaming untuk pesan ID: 14b57495-565c-4e80-8e18-b81cc3e7111e
+[2025-05-18T12:42:35.689Z] [DEBUG] [BUBBLE_DEBUG] Pesan: haloo
+[2025-05-18T12:42:35.690Z] [DEBUG] [BUBBLE_DEBUG] Status inisialisasi Gemini API: Sudah diinisialisasi
+[2025-05-18T12:42:35.691Z] [DEBUG] [BUBBLE_DEBUG] Memanggil geminiService.getStreamingResponse...
+[2025-05-18T12:42:36.340Z] [DEBUG] [BUBBLE_DEBUG] Callback chunk dipanggil dengan data: {"error":false,"chunk":"Halo","done":false}
+[2025-05-18T12:42:36.415Z] [DEBUG] [BUBBLE_DEBUG] Callback chunk dipanggil dengan data: {"error":false,"chunk":"! Apa yang bisa saya bantu hari ini?\n","done":false}
+[2025-05-18T12:42:36.426Z] [DEBUG] [BUBBLE_DEBUG] Callback chunk dipanggil dengan data: {"error":false,"chunk":"","done":true}
+[2025-05-18T12:48:50.504Z] [DEBUG] [BUBBLE_DEBUG] Memproses permintaan streaming untuk pesan ID: fb08b7b7-8cc3-4eb2-93cf-aa63e704d5fc
+[2025-05-18T12:48:50.505Z] [DEBUG] [BUBBLE_DEBUG] Pesan: hi
+[2025-05-18T12:48:50.505Z] [DEBUG] [BUBBLE_DEBUG] Status inisialisasi Gemini API: Sudah diinisialisasi
+[2025-05-18T12:48:50.506Z] [DEBUG] [BUBBLE_DEBUG] Memanggil geminiService.getStreamingResponse...
+[2025-05-18T12:48:51.305Z] [DEBUG] [BUBBLE_DEBUG] Callback chunk dipanggil dengan data: {"error":false,"chunk":"Halo! Ada","done":false}
+[2025-05-18T12:48:51.435Z] [DEBUG] [BUBBLE_DEBUG] Callback chunk dipanggil dengan data: {"error":false,"chunk":" yang bisa saya bantu?\n","done":false}
+[2025-05-18T12:48:51.447Z] [DEBUG] [BUBBLE_DEBUG] Callback chunk dipanggil dengan data: {"error":false,"chunk":"","done":true}
+[2025-05-18T12:54:18.922Z] [DEBUG] [BUBBLE_DEBUG] Memproses permintaan streaming untuk pesan ID: cf88fe53-e301-4b89-adaa-94a6c4631b65
+[2025-05-18T12:54:18.924Z] [DEBUG] [BUBBLE_DEBUG] Pesan: halo
+[2025-05-18T12:54:18.924Z] [DEBUG] [BUBBLE_DEBUG] Status inisialisasi Gemini API: Sudah diinisialisasi
+[2025-05-18T12:54:18.925Z] [DEBUG] [BUBBLE_DEBUG] Memanggil geminiService.getStreamingResponse...
+[2025-05-18T12:54:19.697Z] [DEBUG] [BUBBLE_DEBUG] Callback chunk dipanggil dengan data: {"error":false,"chunk":"Halo! Ada","done":false}
+[2025-05-18T12:54:19.730Z] [DEBUG] [BUBBLE_DEBUG] Callback chunk dipanggil dengan data: {"error":false,"chunk":" yang bisa saya bantu?\n","done":false}
+[2025-05-18T12:54:19.748Z] [DEBUG] [BUBBLE_DEBUG] Callback chunk dipanggil dengan data: {"error":false,"chunk":"","done":true}
+[2025-05-18T12:54:32.981Z] [DEBUG] [BUBBLE_DEBUG] Memproses permintaan streaming untuk pesan ID: 9b1ce474-2994-4b1b-906c-38e7d36e61c4
+[2025-05-18T12:54:32.982Z] [DEBUG] [BUBBLE_DEBUG] Pesan: hi
+[2025-05-18T12:54:32.982Z] [DEBUG] [BUBBLE_DEBUG] Status inisialisasi Gemini API: Sudah diinisialisasi
+[2025-05-18T12:54:32.982Z] [DEBUG] [BUBBLE_DEBUG] Memanggil geminiService.getStreamingResponse...
+[2025-05-18T12:54:34.572Z] [DEBUG] [BUBBLE_DEBUG] Callback chunk dipanggil dengan data: {"error":false,"chunk":"Hai","done":false}
+[2025-05-18T12:54:34.652Z] [DEBUG] [BUBBLE_DEBUG] Callback chunk dipanggil dengan data: {"error":false,"chunk":"! Apa yang bisa saya bantu?\n","done":false}
+[2025-05-18T12:54:34.660Z] [DEBUG] [BUBBLE_DEBUG] Callback chunk dipanggil dengan data: {"error":false,"chunk":"","done":true}
+[2025-05-18T13:05:11.524Z] [DEBUG] [BUBBLE_DEBUG] Memproses permintaan streaming untuk pesan ID: 499b3058-0691-465f-93b3-dbcf71395f5d
+[2025-05-18T13:05:11.525Z] [DEBUG] [BUBBLE_DEBUG] Pesan: hi
+[2025-05-18T13:05:11.525Z] [DEBUG] [BUBBLE_DEBUG] Status inisialisasi Gemini API: Sudah diinisialisasi
+[2025-05-18T13:05:11.526Z] [DEBUG] [BUBBLE_DEBUG] Memanggil geminiService.getStreamingResponse...
+[2025-05-18T13:05:13.127Z] [DEBUG] [BUBBLE_DEBUG] Callback chunk dipanggil dengan data: {"error":false,"chunk":"Hai","done":false}
+[2025-05-18T13:05:13.258Z] [DEBUG] [BUBBLE_DEBUG] Callback chunk dipanggil dengan data: {"error":false,"chunk":"! Ada yang bisa saya bantu?\n","done":false}
+[2025-05-18T13:05:13.262Z] [DEBUG] [BUBBLE_DEBUG] Callback chunk dipanggil dengan data: {"error":false,"chunk":"","done":true}
+[2025-05-18T13:05:23.781Z] [DEBUG] [BUBBLE_DEBUG] Memproses permintaan streaming untuk pesan ID: 6f362618-12b8-4bc3-a041-a154383629a8
+[2025-05-18T13:05:23.782Z] [DEBUG] [BUBBLE_DEBUG] Pesan: maksudnya?
+[2025-05-18T13:05:23.782Z] [DEBUG] [BUBBLE_DEBUG] Status inisialisasi Gemini API: Sudah diinisialisasi
+[2025-05-18T13:05:23.783Z] [DEBUG] [BUBBLE_DEBUG] Memanggil geminiService.getStreamingResponse...
+[2025-05-18T13:05:25.280Z] [DEBUG] [BUBBLE_DEBUG] Callback chunk dipanggil dengan data: {"error":false,"chunk":"M","done":false}
+[2025-05-18T13:05:25.448Z] [DEBUG] [BUBBLE_DEBUG] Callback chunk dipanggil dengan data: {"error":false,"chunk":"aksud saya, apakah Anda memiliki pertanyaan atau tugas yang ingin saya bantu selesaikan? Misalnya","done":false}
+[2025-05-18T13:05:25.592Z] [DEBUG] [BUBBLE_DEBUG] Callback chunk dipanggil dengan data: {"error":false,"chunk":", Anda bisa meminta saya untuk mencari informasi di internet, memberikan berita terkini, member","done":false}
+[2025-05-18T13:05:25.694Z] [DEBUG] [BUBBLE_DEBUG] Callback chunk dipanggil dengan data: {"error":false,"chunk":"itahu cuaca, membuka aplikasi, dan banyak lagi.\n","done":false}
+[2025-05-18T13:05:25.704Z] [DEBUG] [BUBBLE_DEBUG] Callback chunk dipanggil dengan data: {"error":false,"chunk":"","done":true}
+[2025-05-18T13:07:39.453Z] [DEBUG] [BUBBLE_DEBUG] Memproses permintaan streaming untuk pesan ID: a3b5c058-060c-4508-9948-eab1d635cb82
+[2025-05-18T13:07:39.453Z] [DEBUG] [BUBBLE_DEBUG] Pesan: 2+2 berapa
+[2025-05-18T13:07:39.454Z] [DEBUG] [BUBBLE_DEBUG] Status inisialisasi Gemini API: Sudah diinisialisasi
+[2025-05-18T13:07:39.454Z] [DEBUG] [BUBBLE_DEBUG] Memanggil geminiService.getStreamingResponse...
+[2025-05-18T13:07:39.987Z] [DEBUG] [BUBBLE_DEBUG] Callback chunk dipanggil dengan data: {"error":false,"chunk":"4","done":false}
+[2025-05-18T13:07:40.037Z] [DEBUG] [BUBBLE_DEBUG] Callback chunk dipanggil dengan data: {"error":false,"chunk":"\\n","done":false}
+[2025-05-18T13:07:40.043Z] [DEBUG] [BUBBLE_DEBUG] Callback chunk dipanggil dengan data: {"error":false,"chunk":"","done":true}
+[2025-05-18T13:07:47.550Z] [DEBUG] [BUBBLE_DEBUG] Memproses permintaan streaming untuk pesan ID: 9c708ce5-4eb2-40d1-8238-d221e4d246fe
+[2025-05-18T13:07:47.551Z] [DEBUG] [BUBBLE_DEBUG] Pesan: sekarang jam berapa
+[2025-05-18T13:07:47.551Z] [DEBUG] [BUBBLE_DEBUG] Status inisialisasi Gemini API: Sudah diinisialisasi
+[2025-05-18T13:07:47.552Z] [DEBUG] [BUBBLE_DEBUG] Memanggil geminiService.getStreamingResponse...
+[2025-05-18T13:07:48.249Z] [DEBUG] [BUBBLE_DEBUG] Callback chunk dipanggil dengan data: {"error":false,"toolCall":true,"toolName":"get_current_time","toolParams":{},"toolResult":{"success":true,"toolName":"get_current_time","result":{"time":"20.07.48","date":"18/5/2025","timezone":"Asia/Jakarta","timestamp":1747573668248}},"done":false}
+[2025-05-18T13:07:48.252Z] [DEBUG] [BUBBLE_DEBUG] Callback chunk dipanggil dengan data: {"error":true,"toolCall":true,"toolName":"get_current_time","message":"Error saat menjalankan tool: request is not iterable","done":false}
+[2025-05-18T13:07:48.254Z] [DEBUG] [BUBBLE_DEBUG] Callback chunk dipanggil dengan data: {"error":false,"chunk":"","done":true}
+[2025-05-18T13:14:43.680Z] [DEBUG] [BUBBLE_DEBUG] Memproses permintaan streaming untuk pesan ID: 38000498-13d9-4588-89b6-ece3d61a3099
+[2025-05-18T13:14:43.681Z] [DEBUG] [BUBBLE_DEBUG] Pesan: halo
+[2025-05-18T13:14:43.681Z] [DEBUG] [BUBBLE_DEBUG] Status inisialisasi Gemini API: Sudah diinisialisasi
+[2025-05-18T13:14:43.682Z] [DEBUG] [BUBBLE_DEBUG] Memanggil geminiService.getStreamingResponse...
+[2025-05-18T13:14:45.429Z] [DEBUG] [BUBBLE_DEBUG] Callback chunk dipanggil dengan data: {"error":false,"chunk":"Halo! Ada","done":false}
+[2025-05-18T13:14:45.479Z] [DEBUG] [BUBBLE_DEBUG] Callback chunk dipanggil dengan data: {"error":false,"chunk":" yang bisa saya bantu?\n","done":false}
+[2025-05-18T13:14:45.489Z] [DEBUG] [BUBBLE_DEBUG] Callback chunk dipanggil dengan data: {"error":false,"chunk":"","done":true}
+[2025-05-18T13:19:43.682Z] [DEBUG] [BUBBLE_DEBUG] Memproses permintaan streaming untuk pesan ID: de0284c2-906e-4b0e-acaf-f20ef1691a3b
+[2025-05-18T13:19:43.682Z] [DEBUG] [BUBBLE_DEBUG] Pesan: halo
+[2025-05-18T13:19:43.683Z] [DEBUG] [BUBBLE_DEBUG] Status inisialisasi Gemini API: Sudah diinisialisasi
+[2025-05-18T13:19:43.683Z] [DEBUG] [BUBBLE_DEBUG] Memanggil geminiService.getStreamingResponse...
+[2025-05-18T13:19:45.517Z] [DEBUG] [BUBBLE_DEBUG] Callback chunk dipanggil dengan data: {"error":false,"chunk":"Halo! Ada","done":false}
+[2025-05-18T13:19:45.575Z] [DEBUG] [BUBBLE_DEBUG] Callback chunk dipanggil dengan data: {"error":false,"chunk":" yang bisa saya bantu?\n","done":false}
+[2025-05-18T13:19:45.630Z] [DEBUG] [BUBBLE_DEBUG] Callback chunk dipanggil dengan data: {"error":false,"chunk":" ","done":true}
+[2025-05-18T13:19:47.961Z] [DEBUG] [BUBBLE_DEBUG] Memproses permintaan streaming untuk pesan ID: e79078da-fb08-4b2c-b534-bd2599406ddb
+[2025-05-18T13:19:47.962Z] [DEBUG] [BUBBLE_DEBUG] Pesan: hi
+[2025-05-18T13:19:47.962Z] [DEBUG] [BUBBLE_DEBUG] Status inisialisasi Gemini API: Sudah diinisialisasi
+[2025-05-18T13:19:47.963Z] [DEBUG] [BUBBLE_DEBUG] Memanggil geminiService.getStreamingResponse...
+[2025-05-18T13:19:48.539Z] [DEBUG] [BUBBLE_DEBUG] Callback chunk dipanggil dengan data: {"error":false,"chunk":"Hai","done":false}
+[2025-05-18T13:19:48.637Z] [DEBUG] [BUBBLE_DEBUG] Callback chunk dipanggil dengan data: {"error":false,"chunk":"! Apa yang bisa saya bantu untuk Anda?\n","done":false}
+[2025-05-18T13:19:48.646Z] [DEBUG] [BUBBLE_DEBUG] Callback chunk dipanggil dengan data: {"error":false,"chunk":" ","done":true}
+[2025-05-18T13:19:52.340Z] [DEBUG] [BUBBLE_DEBUG] Memproses permintaan streaming untuk pesan ID: 17b1b635-2213-4b9a-a60d-871fc7f27211
+[2025-05-18T13:19:52.341Z] [DEBUG] [BUBBLE_DEBUG] Pesan: siapa anda
+[2025-05-18T13:19:52.342Z] [DEBUG] [BUBBLE_DEBUG] Status inisialisasi Gemini API: Sudah diinisialisasi
+[2025-05-18T13:19:52.342Z] [DEBUG] [BUBBLE_DEBUG] Memanggil geminiService.getStreamingResponse...
+[2025-05-18T13:19:52.926Z] [DEBUG] [BUBBLE_DEBUG] Callback chunk dipanggil dengan data: {"error":false,"chunk":"Saya","done":false}
+[2025-05-18T13:19:53.069Z] [DEBUG] [BUBBLE_DEBUG] Callback chunk dipanggil dengan data: {"error":false,"chunk":" adalah model bahasa besar, yang dilatih oleh Google.\n","done":false}
+[2025-05-18T13:19:53.077Z] [DEBUG] [BUBBLE_DEBUG] Callback chunk dipanggil dengan data: {"error":false,"chunk":" ","done":true}

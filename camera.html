@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mamouse Camera</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #000;
+      overflow: hidden;
+    }
+
+    #camera-container {
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    #video {
+      max-width: 100%;
+      max-height: 100%;
+      display: none;
+    }
+
+    #canvas {
+      display: none;
+    }
+
+    .error-message {
+      color: #ff0000;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div id="camera-container">
+    <video id="video" autoplay playsinline></video>
+    <canvas id="canvas"></canvas>
+    <div id="error" class="error-message"></div>
+  </div>
+
+  <script>
+    // Elemen DOM
+    const video = document.getElementById('video');
+    const canvas = document.getElementById('canvas');
+    const errorElement = document.getElementById('error');
+
+    // Variabel untuk menyimpan stream kamera
+    let stream = null;
+
+    // Inisialisasi kamera saat halaman dimuat
+    document.addEventListener('DOMContentLoaded', initCamera);
+
+    // Fungsi untuk menginisialisasi kamera
+    async function initCamera() {
+      try {
+        // Reset error message
+        errorElement.textContent = '';
+
+        // Periksa apakah browser mendukung getUserMedia
+        if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+          const errorMsg = 'Browser tidak mendukung akses kamera (getUserMedia API)';
+          console.error(errorMsg);
+          errorElement.textContent = `Error: ${errorMsg}`;
+          return;
+        }
+
+        // Periksa apakah kamera sudah aktif
+        if (stream) {
+          console.log('Kamera sudah aktif, menghentikan stream yang ada sebelum memulai yang baru');
+          try {
+            stopCamera();
+          } catch (stopError) {
+            console.warn('Error saat menghentikan stream yang ada:', stopError);
+            // Lanjutkan meskipun ada error
+          }
+        }
+
+        console.log('Meminta akses ke kamera...');
+
+        // Dapatkan akses ke kamera dengan timeout
+        const timeoutPromise = new Promise((_, reject) => {
+          setTimeout(() => reject(new Error('Timeout saat mengakses kamera')), 10000);
+        });
+
+        // Race antara getUserMedia dan timeout
+        stream = await Promise.race([
+          navigator.mediaDevices.getUserMedia({
+            video: {
+              width: { ideal: 1280 },
+              height: { ideal: 720 },
+              facingMode: 'user' // Gunakan kamera depan
+            },
+            audio: false
+          }),
+          timeoutPromise
+        ]);
+
+        console.log('Akses kamera berhasil');
+
+        // Tampilkan video dari kamera
+        if (video) {
+          video.srcObject = stream;
+          video.style.display = 'block';
+
+          // Sesuaikan ukuran canvas dengan video setelah metadata dimuat
+          video.onloadedmetadata = () => {
+            if (canvas) {
+              canvas.width = video.videoWidth;
+              canvas.height = video.videoHeight;
+              console.log(`Canvas disesuaikan dengan ukuran video: ${canvas.width}x${canvas.height}`);
+            }
+          };
+
+          // Tambahkan handler untuk error video
+          video.onerror = (e) => {
+            console.error('Error pada video element:', e);
+            errorElement.textContent = `Error pada video element: ${e.message || 'Unknown error'}`;
+          };
+        } else {
+          throw new Error('Video element tidak tersedia');
+        }
+      } catch (error) {
+        console.error('Error saat mengakses kamera:', error);
+
+        // Bersihkan stream jika ada
+        if (stream) {
+          try {
+            stopCamera();
+          } catch (stopError) {
+            console.warn('Error saat membersihkan stream setelah error:', stopError);
+          }
+        }
+
+        // Tampilkan pesan error yang lebih spesifik
+        let errorMsg = error.message || 'Tidak dapat mengakses kamera';
+
+        if (error.name === 'NotAllowedError' || error.name === 'PermissionDeniedError') {
+          errorMsg = 'Akses kamera ditolak. Berikan izin untuk menggunakan kamera.';
+        } else if (error.name === 'NotFoundError' || error.name === 'DevicesNotFoundError') {
+          errorMsg = 'Tidak ada kamera yang ditemukan pada perangkat ini.';
+        } else if (error.name === 'NotReadableError' || error.name === 'TrackStartError') {
+          errorMsg = 'Kamera sedang digunakan oleh aplikasi lain.';
+        } else if (error.name === 'OverconstrainedError') {
+          errorMsg = 'Kamera tidak mendukung resolusi yang diminta.';
+        } else if (error.message && error.message.includes('Timeout')) {
+          errorMsg = 'Timeout saat mengakses kamera. Periksa koneksi kamera Anda.';
+        }
+
+        errorElement.textContent = `Error: ${errorMsg}`;
+      }
+    }
+
+    // Fungsi untuk mengambil gambar dari kamera
+    function captureImage() {
+      try {
+        // Periksa apakah stream kamera aktif
+        if (!stream) {
+          console.error('Kamera tidak aktif saat mencoba mengambil gambar');
+          return {
+            success: false,
+            error: 'Kamera tidak aktif'
+          };
+        }
+
+        // Periksa apakah video element sudah siap
+        if (!video || !video.videoWidth || !video.videoHeight) {
+          console.error('Video element belum siap saat mencoba mengambil gambar');
+          return {
+            success: false,
+            error: 'Video element belum siap, coba lagi dalam beberapa detik'
+          };
+        }
+
+        // Periksa apakah canvas element tersedia
+        if (!canvas) {
+          console.error('Canvas element tidak tersedia');
+          return {
+            success: false,
+            error: 'Canvas element tidak tersedia'
+          };
+        }
+
+        // Sesuaikan ukuran canvas dengan video
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
+
+        // Dapatkan konteks canvas
+        const ctx = canvas.getContext('2d');
+        if (!ctx) {
+          console.error('Tidak dapat mendapatkan konteks canvas 2D');
+          return {
+            success: false,
+            error: 'Tidak dapat mendapatkan konteks canvas 2D'
+          };
+        }
+
+        // Gambar frame video ke canvas
+        ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+        // Dapatkan data gambar sebagai base64
+        try {
+          const imageData = canvas.toDataURL('image/png');
+
+          // Validasi data gambar
+          if (!imageData || !imageData.startsWith('data:image/png;base64,')) {
+            console.error('Data gambar tidak valid');
+            return {
+              success: false,
+              error: 'Data gambar tidak valid'
+            };
+          }
+
+          console.log('Gambar berhasil diambil, ukuran data:', Math.round(imageData.length / 1024), 'KB');
+
+          return {
+            success: true,
+            imageData: imageData
+          };
+        } catch (dataUrlError) {
+          console.error('Error saat mengkonversi canvas ke data URL:', dataUrlError);
+          return {
+            success: false,
+            error: 'Error saat mengkonversi canvas ke data URL: ' + (dataUrlError.message || 'Unknown error')
+          };
+        }
+      } catch (error) {
+        console.error('Error saat mengambil gambar:', error);
+        return {
+          success: false,
+          error: error.message || 'Error saat mengambil gambar'
+        };
+      }
+    }
+
+    // Fungsi untuk menghentikan kamera
+    function stopCamera() {
+      try {
+        if (stream) {
+          // Hentikan semua track dalam stream
+          const tracks = stream.getTracks();
+          if (tracks && tracks.length > 0) {
+            tracks.forEach(track => {
+              try {
+                track.stop();
+              } catch (trackError) {
+                console.error('Error saat menghentikan track:', trackError);
+              }
+            });
+          }
+
+          // Reset stream
+          stream = null;
+        }
+
+        // Reset video element
+        if (video) {
+          try {
+            video.srcObject = null;
+            video.style.display = 'none';
+          } catch (videoError) {
+            console.error('Error saat mereset video element:', videoError);
+          }
+        }
+
+        console.log('Kamera berhasil dihentikan');
+        return true;
+      } catch (error) {
+        console.error('Error saat menghentikan kamera:', error);
+        // Pastikan stream dan video direset meskipun terjadi error
+        stream = null;
+        if (video) {
+          video.srcObject = null;
+          video.style.display = 'none';
+        }
+        return false;
+      }
+    }
+
+    // Event listener untuk menutup jendela
+    window.addEventListener('beforeunload', (event) => {
+      try {
+        stopCamera();
+      } catch (error) {
+        console.error('Error saat menutup kamera:', error);
+        // Pastikan stream dan video direset meskipun terjadi error
+        if (stream) {
+          try {
+            stream.getTracks().forEach(track => track.stop());
+          } catch (e) {}
+          stream = null;
+        }
+        if (video) {
+          try {
+            video.srcObject = null;
+          } catch (e) {}
+        }
+      }
+    });
+
+    // Event listener untuk pesan dari main process
+    window.addEventListener('message', (event) => {
+      try {
+        const message = event.data;
+
+        if (message && message.type === 'command') {
+          if (message.command === 'stopCamera') {
+            stopCamera();
+          } else if (message.command === 'startCamera') {
+            initCamera();
+          } else if (message.command === 'captureImage') {
+            const result = captureImage();
+            // Kirim hasil kembali ke pengirim
+            event.source.postMessage({
+              type: 'result',
+              command: 'captureImage',
+              result: result
+            }, '*');
+          }
+        }
+      } catch (error) {
+        console.error('Error saat memproses pesan:', error);
+      }
+    });
+  </script>
+</body>
+</html>

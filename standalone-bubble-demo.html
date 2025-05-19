@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Standalone Bubble Chat Demo</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="standalone-bubble.css">
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #1e1e1e;
+      color: white;
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .demo-controls {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      padding: 20px;
+      background-color: #2d3748;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      width: 80%;
+      max-width: 500px;
+    }
+    
+    .control-group {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    
+    .control-group label {
+      font-weight: bold;
+    }
+    
+    .control-group input, .control-group textarea {
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #4a5568;
+      background-color: #1a202c;
+      color: white;
+    }
+    
+    .button-group {
+      display: flex;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    
+    button {
+      padding: 10px 15px;
+      border-radius: 5px;
+      border: none;
+      background-color: #0078d7;
+      color: white;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    
+    button:hover {
+      background-color: #0063b1;
+      transform: translateY(-2px);
+    }
+    
+    button.secondary {
+      background-color: #4a5568;
+    }
+    
+    button.secondary:hover {
+      background-color: #2d3748;
+    }
+    
+    button.danger {
+      background-color: #e53e3e;
+    }
+    
+    button.danger:hover {
+      background-color: #c53030;
+    }
+    
+    .title {
+      margin-bottom: 20px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <h1 class="title">Standalone Bubble Chat Demo</h1>
+  
+  <div class="demo-controls">
+    <div class="control-group">
+      <label for="message-text">Message Text:</label>
+      <textarea id="message-text" rows="3" placeholder="Enter message text...">Hello, this is a standalone bubble chat message!</textarea>
+    </div>
+    
+    <div class="control-group">
+      <label>Message Type:</label>
+      <div class="button-group">
+        <button id="user-message-btn">Show User Message</button>
+        <button id="assistant-message-btn">Show Assistant Message</button>
+      </div>
+    </div>
+    
+    <div class="control-group">
+      <label>Special Actions:</label>
+      <div class="button-group">
+        <button id="typing-indicator-btn">Show Typing Indicator</button>
+        <button id="clear-all-btn" class="danger">Clear All Bubbles</button>
+      </div>
+    </div>
+  </div>
+  
+  <script src="standalone-bubble.js"></script>
+  <script>
+    // Demo controls
+    document.addEventListener('DOMContentLoaded', () => {
+      const messageText = document.getElementById('message-text');
+      const userMessageBtn = document.getElementById('user-message-btn');
+      const assistantMessageBtn = document.getElementById('assistant-message-btn');
+      const typingIndicatorBtn = document.getElementById('typing-indicator-btn');
+      const clearAllBtn = document.getElementById('clear-all-btn');
+      
+      // Show user message
+      userMessageBtn.addEventListener('click', () => {
+        const text = messageText.value.trim();
+        if (text) {
+          window.standaloneBubble.showMessage({
+            id: Date.now().toString(),
+            isUser: true,
+            text: text
+          });
+        }
+      });
+      
+      // Show assistant message
+      assistantMessageBtn.addEventListener('click', () => {
+        const text = messageText.value.trim();
+        if (text) {
+          window.standaloneBubble.showMessage({
+            id: Date.now().toString(),
+            isUser: false,
+            text: text
+          });
+        }
+      });
+      
+      // Show typing indicator
+      typingIndicatorBtn.addEventListener('click', () => {
+        const typingBubble = window.standaloneBubble.showTypingIndicator();
+        
+        // Simulate typing and then show message
+        setTimeout(() => {
+          const text = messageText.value.trim() || "This is a response after typing...";
+          window.standaloneBubble.updateBubbleContent(typingBubble.dataset.messageId, text);
+        }, 2000);
+      });
+      
+      // Clear all bubbles
+      clearAllBtn.addEventListener('click', () => {
+        window.standaloneBubble.clearAllBubbles();
+      });
+    });
+  </script>
+</body>
+</html>

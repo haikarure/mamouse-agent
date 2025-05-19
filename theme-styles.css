@@ -1,0 +1,527 @@
+/* Theme Options Styling */
+.theme-section {
+  background: linear-gradient(135deg,
+              rgba(10, 15, 25, 0.85) 0%,
+              rgba(5, 10, 20, 0.95) 100%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* Tema Warna untuk Input Container, Bubble Chat, dan Menubar */
+/* Tema Default */
+[data-theme="default"] {
+  --primary-color: #0078d7;
+  --primary-color-rgb: 0, 120, 215;
+  --secondary-color: #2b88d8;
+  --secondary-color-rgb: 43, 136, 216;
+  --accent-color: #60cdff;
+  --accent-color-rgb: 96, 205, 255;
+  --tertiary-color: #4cc2ff;
+  --tertiary-color-rgb: 76, 194, 255;
+
+  /* Warna untuk input container */
+  --input-bg-color: #0078d7;
+  --input-border-color: #0078d7;
+
+  /* Warna untuk bubble chat */
+  --user-bubble-color: #0078d7;
+  --assistant-bubble-color: #0078d7;
+  --bubble-border-color: #0078d7;
+
+  /* Warna untuk menubar */
+  --menu-bg-color: #0078d7;
+  --menu-border-color: #0078d7;
+}
+
+/* Tema Dark */
+[data-theme="dark"] {
+  --primary-color: #9d4edd;
+  --primary-color-rgb: 157, 78, 221;
+  --secondary-color: #7b2cbf;
+  --secondary-color-rgb: 123, 44, 191;
+  --accent-color: #c77dff;
+  --accent-color-rgb: 199, 125, 255;
+  --tertiary-color: #a663cc;
+  --tertiary-color-rgb: 166, 99, 204;
+
+  /* Warna untuk input container */
+  --input-bg-color: #480ca8;
+  --input-border-color: #9d4edd;
+
+  /* Warna untuk bubble chat */
+  --user-bubble-color: #9d4edd;
+  --assistant-bubble-color: #9d4edd;
+  --bubble-border-color: #9d4edd;
+
+  /* Warna untuk menubar */
+  --menu-bg-color: #480ca8;
+  --menu-border-color: #9d4edd;
+}
+
+/* Tema Light */
+[data-theme="light"] {
+  --primary-color: #ff6b6b;
+  --primary-color-rgb: 255, 107, 107;
+  --secondary-color: #ff8364;
+  --secondary-color-rgb: 255, 131, 100;
+  --accent-color: #ffaa5a;
+  --accent-color-rgb: 255, 170, 90;
+  --tertiary-color: #ff9a76;
+  --tertiary-color-rgb: 255, 154, 118;
+
+  /* Warna untuk input container */
+  --input-bg-color: #ff6b6b;
+  --input-border-color: #ff6b6b;
+
+  /* Warna untuk bubble chat */
+  --user-bubble-color: #ff6b6b;
+  --assistant-bubble-color: #ff6b6b;
+  --bubble-border-color: #ff6b6b;
+
+  /* Warna untuk menubar */
+  --menu-bg-color: #ff6b6b;
+  --menu-border-color: #ff6b6b;
+}
+
+/* Tema Neon */
+[data-theme="neon"] {
+  --primary-color: #0aefff;
+  --primary-color-rgb: 10, 239, 255;
+  --secondary-color: #7b00ff;
+  --secondary-color-rgb: 123, 0, 255;
+  --accent-color: #00ffaa;
+  --accent-color-rgb: 0, 255, 170;
+  --tertiary-color: #00f2ff;
+  --tertiary-color-rgb: 0, 242, 255;
+
+  /* Warna untuk input container */
+  --input-bg-color: #0aefff;
+  --input-border-color: #0aefff;
+
+  /* Warna untuk bubble chat */
+  --user-bubble-color: #0aefff;
+  --assistant-bubble-color: #0aefff;
+  --bubble-border-color: #0aefff;
+
+  /* Warna untuk menubar */
+  --menu-bg-color: #0aefff;
+  --menu-border-color: #0aefff;
+}
+
+/* Tema Ocean */
+[data-theme="ocean"] {
+  --primary-color: #00b4d8;
+  --primary-color-rgb: 0, 180, 216;
+  --secondary-color: #0077b6;
+  --secondary-color-rgb: 0, 119, 182;
+  --accent-color: #90e0ef;
+  --accent-color-rgb: 144, 224, 239;
+  --tertiary-color: #48cae4;
+  --tertiary-color-rgb: 72, 202, 228;
+
+  /* Warna untuk input container */
+  --input-bg-color: #00b4d8;
+  --input-border-color: #00b4d8;
+
+  /* Warna untuk bubble chat */
+  --user-bubble-color: #00b4d8;
+  --assistant-bubble-color: #00b4d8;
+  --bubble-border-color: #00b4d8;
+
+  /* Warna untuk menubar */
+  --menu-bg-color: #00b4d8;
+  --menu-border-color: #00b4d8;
+}
+
+/* Tema Sunset */
+[data-theme="sunset"] {
+  --primary-color: #ff9e00;
+  --primary-color-rgb: 255, 158, 0;
+  --secondary-color: #f72585;
+  --secondary-color-rgb: 247, 37, 133;
+  --accent-color: #ffca3a;
+  --accent-color-rgb: 255, 202, 58;
+  --tertiary-color: #ff6b6b;
+  --tertiary-color-rgb: 255, 107, 107;
+
+  /* Warna untuk input container */
+  --input-bg-color: #ff9e00;
+  --input-border-color: #ff9e00;
+
+  /* Warna untuk bubble chat */
+  --user-bubble-color: #ff9e00;
+  --assistant-bubble-color: #ff9e00;
+  --bubble-border-color: #ff9e00;
+
+  /* Warna untuk menubar */
+  --menu-bg-color: #ff9e00;
+  --menu-border-color: #ff9e00;
+}
+
+/* Tema Forest */
+[data-theme="forest"] {
+  --primary-color: #2ecc71;
+  --primary-color-rgb: 46, 204, 113;
+  --secondary-color: #3498db;
+  --secondary-color-rgb: 52, 152, 219;
+  --accent-color: #6ab04c;
+  --accent-color-rgb: 106, 176, 76;
+  --tertiary-color: #27ae60;
+  --tertiary-color-rgb: 39, 174, 96;
+
+  /* Warna untuk input container */
+  --input-bg-color: #2ecc71;
+  --input-border-color: #2ecc71;
+
+  /* Warna untuk bubble chat */
+  --user-bubble-color: #2ecc71;
+  --assistant-bubble-color: #2ecc71;
+  --bubble-border-color: #2ecc71;
+
+  /* Warna untuk menubar */
+  --menu-bg-color: #2ecc71;
+  --menu-border-color: #2ecc71;
+}
+
+/* Tema Midnight */
+[data-theme="midnight"] {
+  --primary-color: #5204a8;
+  --primary-color-rgb: 82, 4, 168;
+  --secondary-color: #00f2ff;
+  --secondary-color-rgb: 0, 242, 255;
+  --accent-color: #9d4edd;
+  --accent-color-rgb: 157, 78, 221;
+  --tertiary-color: #7b2cbf;
+  --tertiary-color-rgb: 123, 44, 191;
+
+  /* Warna untuk input container */
+  --input-bg-color: #5204a8;
+  --input-border-color: #00f2ff;
+
+  /* Warna untuk bubble chat */
+  --user-bubble-color: #5204a8;
+  --assistant-bubble-color: #5204a8;
+  --bubble-border-color: #00f2ff;
+
+  /* Warna untuk menubar */
+  --menu-bg-color: #5204a8;
+  --menu-border-color: #00f2ff;
+}
+
+/* Tema Chameleon */
+[data-theme="chameleon"] {
+  --primary-color: #00ff00;
+  --primary-color-rgb: 0, 255, 0;
+  --secondary-color: #0096ff;
+  --secondary-color-rgb: 0, 150, 255;
+  --accent-color: #00ffaa;
+  --accent-color-rgb: 0, 255, 170;
+  --tertiary-color: #00f2ff;
+  --tertiary-color-rgb: 0, 242, 255;
+
+  /* Warna untuk input container */
+  --input-bg-color: #00ff00;
+  --input-border-color: #00ff00;
+
+  /* Warna untuk bubble chat */
+  --user-bubble-color: #00ff00;
+  --assistant-bubble-color: #00ff00;
+  --bubble-border-color: #00ff00;
+
+  /* Warna untuk menubar */
+  --menu-bg-color: #00ff00;
+  --menu-border-color: #00ff00;
+}
+
+/* Menambahkan overlay gelap untuk meningkatkan kontras */
+.theme-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3);
+  pointer-events: none;
+  z-index: -1;
+  border-radius: inherit;
+}
+
+.theme-section h3 {
+  color: white !important;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+  margin-bottom: 15px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.theme-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.theme-option {
+  padding: 12px 18px;
+  background: linear-gradient(135deg,
+              rgba(var(--primary-color-rgb), 0.15) 0%,
+              rgba(var(--tertiary-color-rgb), 0.1) 100%);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  border: 1px solid rgba(var(--primary-color-rgb), 0.25);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2),
+              0 0 10px rgba(var(--primary-color-rgb), 0.15);
+  font-weight: 700; /* Lebih tebal */
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 100px;
+  text-align: center;
+  color: white !important; /* Memastikan teks selalu putih */
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.7),
+               0 0 5px rgba(0, 0, 0, 0.5); /* Bayangan lebih kuat untuk keterbacaan */
+  letter-spacing: 0.5px; /* Sedikit spasi antar huruf untuk keterbacaan */
+}
+
+/* Warna khusus untuk setiap tema */
+.theme-option[data-theme="default"] {
+  background: linear-gradient(135deg, rgba(0, 168, 255, 0.3) 0%, rgba(140, 30, 255, 0.2) 100%);
+  border-color: rgba(0, 168, 255, 0.4);
+}
+
+.theme-option[data-theme="dark"] {
+  background: linear-gradient(135deg, rgba(157, 78, 221, 0.3) 0%, rgba(72, 12, 168, 0.2) 100%);
+  border-color: rgba(157, 78, 221, 0.4);
+}
+
+.theme-option[data-theme="light"] {
+  background: linear-gradient(135deg, rgba(255, 107, 107, 0.4) 0%, rgba(255, 131, 100, 0.3) 100%);
+  border-color: rgba(255, 107, 107, 0.5);
+  color: #ffffff !important; /* Mengubah warna teks menjadi putih */
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.7),
+               0 0 5px rgba(0, 0, 0, 0.5); /* Bayangan lebih kuat untuk keterbacaan */
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.25),
+              0 0 15px rgba(255, 107, 107, 0.3); /* Bayangan lebih kuat */
+}
+
+.theme-option[data-theme="neon"] {
+  background: linear-gradient(135deg, rgba(10, 239, 255, 0.3) 0%, rgba(123, 0, 255, 0.2) 100%);
+  border-color: rgba(10, 239, 255, 0.4);
+  box-shadow: 0 0 15px rgba(10, 239, 255, 0.4);
+}
+
+.theme-option[data-theme="ocean"] {
+  background: linear-gradient(135deg, rgba(0, 180, 216, 0.3) 0%, rgba(0, 119, 182, 0.2) 100%);
+  border-color: rgba(0, 180, 216, 0.4);
+}
+
+.theme-option[data-theme="sunset"] {
+  background: linear-gradient(135deg, rgba(255, 158, 0, 0.3) 0%, rgba(247, 37, 133, 0.2) 100%);
+  border-color: rgba(255, 158, 0, 0.4);
+}
+
+.theme-option[data-theme="forest"] {
+  background: linear-gradient(135deg, rgba(46, 204, 113, 0.3) 0%, rgba(52, 152, 219, 0.2) 100%);
+  border-color: rgba(46, 204, 113, 0.4);
+}
+
+.theme-option[data-theme="midnight"] {
+  background: linear-gradient(135deg, rgba(82, 4, 168, 0.3) 0%, rgba(0, 242, 255, 0.2) 100%);
+  border-color: rgba(0, 242, 255, 0.4);
+  box-shadow: 0 0 15px rgba(0, 242, 255, 0.3);
+}
+
+.theme-option[data-theme="chameleon"] {
+  background: linear-gradient(135deg, rgba(0, 255, 0, 0.3) 0%, rgba(0, 150, 255, 0.2) 100%);
+  border-color: rgba(0, 255, 0, 0.4);
+  box-shadow: 0 0 15px rgba(0, 255, 0, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.theme-option[data-theme="chameleon"]::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg,
+    rgba(255, 0, 0, 0.3) 0%,
+    rgba(255, 255, 0, 0.3) 20%,
+    rgba(0, 255, 0, 0.3) 40%,
+    rgba(0, 255, 255, 0.3) 60%,
+    rgba(0, 0, 255, 0.3) 80%,
+    rgba(255, 0, 255, 0.3) 100%);
+  animation: chameleon-shift 5s infinite linear;
+  mix-blend-mode: overlay;
+  opacity: 0.5;
+  z-index: 1;
+  border-radius: inherit;
+}
+
+@keyframes chameleon-shift {
+  0% {
+    background-position: 0% 0%;
+  }
+  100% {
+    background-position: 200% 200%;
+  }
+}
+
+.theme-option::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 3px;
+  background: linear-gradient(180deg,
+              rgba(var(--primary-color-rgb), 0.7),
+              rgba(var(--tertiary-color-rgb), 0.7));
+  opacity: 0;
+  transition: all 0.3s ease;
+  border-radius: 3px;
+}
+
+.theme-option:hover {
+  transform: translateY(-2px) translateX(2px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25),
+              0 0 20px rgba(var(--primary-color-rgb), 0.35);
+  color: white !important;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
+}
+
+/* Hover states for each theme */
+.theme-option[data-theme="default"]:hover {
+  background: linear-gradient(135deg, rgba(0, 168, 255, 0.5) 0%, rgba(140, 30, 255, 0.4) 100%);
+  border-color: rgba(0, 168, 255, 0.6);
+  box-shadow: 0 0 20px rgba(0, 168, 255, 0.5);
+}
+
+.theme-option[data-theme="dark"]:hover {
+  background: linear-gradient(135deg, rgba(157, 78, 221, 0.5) 0%, rgba(72, 12, 168, 0.4) 100%);
+  border-color: rgba(157, 78, 221, 0.6);
+  box-shadow: 0 0 20px rgba(157, 78, 221, 0.5);
+}
+
+.theme-option[data-theme="light"]:hover {
+  background: linear-gradient(135deg, rgba(255, 107, 107, 0.6) 0%, rgba(255, 131, 100, 0.5) 100%);
+  border-color: rgba(255, 107, 107, 0.7);
+  box-shadow: 0 0 20px rgba(255, 107, 107, 0.6);
+  color: #ffffff !important;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8),
+               0 0 5px rgba(0, 0, 0, 0.6);
+}
+
+.theme-option[data-theme="neon"]:hover {
+  background: linear-gradient(135deg, rgba(10, 239, 255, 0.5) 0%, rgba(123, 0, 255, 0.4) 100%);
+  border-color: rgba(10, 239, 255, 0.6);
+  box-shadow: 0 0 25px rgba(10, 239, 255, 0.6);
+}
+
+.theme-option[data-theme="ocean"]:hover {
+  background: linear-gradient(135deg, rgba(0, 180, 216, 0.5) 0%, rgba(0, 119, 182, 0.4) 100%);
+  border-color: rgba(0, 180, 216, 0.6);
+  box-shadow: 0 0 20px rgba(0, 180, 216, 0.5);
+}
+
+.theme-option[data-theme="sunset"]:hover {
+  background: linear-gradient(135deg, rgba(255, 158, 0, 0.5) 0%, rgba(247, 37, 133, 0.4) 100%);
+  border-color: rgba(255, 158, 0, 0.6);
+  box-shadow: 0 0 20px rgba(255, 158, 0, 0.5);
+}
+
+.theme-option[data-theme="forest"]:hover {
+  background: linear-gradient(135deg, rgba(46, 204, 113, 0.5) 0%, rgba(52, 152, 219, 0.4) 100%);
+  border-color: rgba(46, 204, 113, 0.6);
+  box-shadow: 0 0 20px rgba(46, 204, 113, 0.5);
+}
+
+.theme-option[data-theme="midnight"]:hover {
+  background: linear-gradient(135deg, rgba(82, 4, 168, 0.5) 0%, rgba(0, 242, 255, 0.4) 100%);
+  border-color: rgba(0, 242, 255, 0.6);
+  box-shadow: 0 0 25px rgba(0, 242, 255, 0.5);
+}
+
+.theme-option:hover::before {
+  opacity: 1;
+}
+
+.theme-option.active {
+  transform: translateY(-1px);
+  color: white !important;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.7);
+}
+
+/* Active states for each theme */
+.theme-option[data-theme="default"].active {
+  background: linear-gradient(135deg, rgba(0, 168, 255, 0.6) 0%, rgba(140, 30, 255, 0.5) 100%);
+  border-color: rgba(0, 168, 255, 0.8);
+  box-shadow: 0 0 25px rgba(0, 168, 255, 0.6);
+}
+
+.theme-option[data-theme="dark"].active {
+  background: linear-gradient(135deg, rgba(157, 78, 221, 0.6) 0%, rgba(72, 12, 168, 0.5) 100%);
+  border-color: rgba(157, 78, 221, 0.8);
+  box-shadow: 0 0 25px rgba(157, 78, 221, 0.6);
+}
+
+.theme-option[data-theme="light"].active {
+  background: linear-gradient(135deg, rgba(255, 107, 107, 0.7) 0%, rgba(255, 131, 100, 0.6) 100%);
+  border-color: rgba(255, 107, 107, 0.9);
+  box-shadow: 0 0 25px rgba(255, 107, 107, 0.7);
+  color: #ffffff !important;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9),
+               0 0 5px rgba(0, 0, 0, 0.7);
+}
+
+.theme-option[data-theme="neon"].active {
+  background: linear-gradient(135deg, rgba(10, 239, 255, 0.6) 0%, rgba(123, 0, 255, 0.5) 100%);
+  border-color: rgba(10, 239, 255, 0.8);
+  box-shadow: 0 0 30px rgba(10, 239, 255, 0.7);
+}
+
+.theme-option[data-theme="ocean"].active {
+  background: linear-gradient(135deg, rgba(0, 180, 216, 0.6) 0%, rgba(0, 119, 182, 0.5) 100%);
+  border-color: rgba(0, 180, 216, 0.8);
+  box-shadow: 0 0 25px rgba(0, 180, 216, 0.6);
+}
+
+.theme-option[data-theme="sunset"].active {
+  background: linear-gradient(135deg, rgba(255, 158, 0, 0.6) 0%, rgba(247, 37, 133, 0.5) 100%);
+  border-color: rgba(255, 158, 0, 0.8);
+  box-shadow: 0 0 25px rgba(255, 158, 0, 0.6);
+}
+
+.theme-option[data-theme="forest"].active {
+  background: linear-gradient(135deg, rgba(46, 204, 113, 0.6) 0%, rgba(52, 152, 219, 0.5) 100%);
+  border-color: rgba(46, 204, 113, 0.8);
+  box-shadow: 0 0 25px rgba(46, 204, 113, 0.6);
+}
+
+.theme-option[data-theme="midnight"].active {
+  background: linear-gradient(135deg, rgba(82, 4, 168, 0.6) 0%, rgba(0, 242, 255, 0.5) 100%);
+  border-color: rgba(0, 242, 255, 0.8);
+  box-shadow: 0 0 30px rgba(0, 242, 255, 0.6);
+}
+
+.theme-option[data-theme="chameleon"].active {
+  background: linear-gradient(135deg, rgba(0, 255, 0, 0.6) 0%, rgba(0, 150, 255, 0.5) 100%);
+  border-color: rgba(0, 255, 0, 0.8);
+  box-shadow: 0 0 30px rgba(0, 255, 0, 0.6);
+}
+
+.theme-option[data-theme="chameleon"].active::after {
+  opacity: 0.8;
+  animation: chameleon-shift 3s infinite linear;
+}
+
+.theme-option.active::before {
+  opacity: 1;
+  width: 5px;
+}

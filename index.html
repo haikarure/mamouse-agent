@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en" style="background: transparent; margin: 0; padding: 0; border: none; overflow: hidden;">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mamous Agent</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="theme-styles.css">
+  <link rel="stylesheet" href="standalone-bubble.css">
+  <style>
+    /* Inline styles untuk memastikan transparansi */
+    html, body {
+      background: transparent !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      border: none !important;
+      overflow: hidden !important;
+      width: 100% !important;
+      height: 100% !important;
+      pointer-events: none !important; /* Ubah menjadi none agar klik bisa melewati ke aplikasi di belakangnya */
+    }
+
+    /* Pastikan semua elemen yang tidak perlu interaksi memiliki pointer-events: none */
+    .app-container, .app-window, .app-content, .chat-container {
+      pointer-events: none !important;
+    }
+
+    /* Pastikan hanya input-container, slide-menu dan elemen interaktif di dalamnya yang dapat menerima event mouse */
+    .input-container, .input-container *, .window-controls, .window-controls *,
+    .slide-menu.active, .slide-menu.active *, .menu-item, .menu-section, .display-mode-option,
+    .theme-option, .btn, button, input, select, a {
+      pointer-events: auto !important;
+    }
+  </style>
+</head>
+<body style="background: transparent; margin: 0; padding: 0; border: none; overflow: hidden; pointer-events: none !important;">
+  <div class="app-container normal" style="background: transparent; border: none; box-shadow: none; overflow: hidden; pointer-events: none !important;">
+    <div class="app-window" style="background: transparent; border: none; box-shadow: none; overflow: hidden; pointer-events: none !important;">
+      <!-- Drag Handle removed -->
+
+      <!-- Menu Bar (Hidden) -->
+      <div class="menu-bar"></div>
+
+      <!-- Drag Area -->
+      <div class="drag-area"></div>
+
+      <!-- App Content -->
+      <div class="app-content">
+        <!-- Connection Status -->
+        <div class="connection-status-container" id="connection-status">
+          <div class="connection-status-message">
+            <div class="connection-spinner"></div>
+            <p>Connecting to server...</p>
+          </div>
+        </div>
+
+        <!-- Input Box -->
+        <div class="input-container" id="input-container">
+          <!-- Window Controls -->
+          <div class="window-controls">
+            <button class="window-control-button window-minimize" id="window-minimize-btn" title="Minimize">
+              <span>—</span>
+            </button>
+            <button class="window-control-button window-close" id="window-close-btn" title="Close">
+              <span>×</span>
+            </button>
+          </div>
+
+          <!-- Area drag removed -->
+
+          <div class="neon-border"></div>
+          <form id="message-form">
+            <input
+              type="text"
+              id="message-input"
+              placeholder="Tell Mamouse what to do..."
+              class="input-box"
+            />
+            <button type="submit" class="submit-button" title="Send">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+            <button
+              type="button"
+              class="voice-button"
+              id="voice-btn"
+              title="Voice Input"
+            >
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M19 10v2a7 7 0 0 1-14 0v-2M12 19v4M8 23h8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+            <button type="button" class="menu-button" id="menu-btn" title="Menu">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M3 12h18M3 6h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+          </form>
+        </div>
+
+        <!-- Voice Visualizer -->
+        <div class="voice-visualizer-container" id="voice-visualizer">
+          <canvas id="visualizer-canvas" class="voice-visualizer"></canvas>
+        </div>
+
+        <!-- Status Indicator -->
+        <div class="status-indicator" id="status-indicator">
+          <div class="status-indicator-icon" id="status-indicator-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+              <path d="M12 8V12L15 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="status-indicator-text" id="status-indicator-text">Processing...</div>
+        </div>
+
+        <!-- Area konten untuk bubble chat -->
+        <div class="bubble-content-area" id="bubble-content-area">
+          <!-- Bubble chat akan ditambahkan di sini -->
+        </div>
+      </div>
+
+      <!-- Slide Menu -->
+      <div class="slide-menu" id="slide-menu">
+        <div class="menu-header">
+          <h3>Menu</h3>
+          <button class="close-menu" id="close-menu-btn">×</button>
+        </div>
+        <div class="menu-content">
+          <div class="menu-item" data-section="communication">
+            <div class="menu-item-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M4 4H20C21.1 4 22 4.9 22 6V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V6C2 4.9 2.9 4 4 4Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M22 6L12 13L2 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <span>Communication Hub</span>
+          </div>
+
+          <div class="menu-item" data-section="api">
+            <div class="menu-item-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 15C13.6569 15 15 13.6569 15 12C15 10.3431 13.6569 9 12 9C10.3431 9 9 10.3431 9 12C9 13.6569 10.3431 15 12 15Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M19.4 15C19.2669 15.3016 19.2272 15.6362 19.286 15.9606C19.3448 16.285 19.4995 16.5843 19.73 16.82L19.79 16.88C19.976 17.0657 20.1235 17.2863 20.2241 17.5291C20.3248 17.7719 20.3766 18.0322 20.3766 18.295C20.3766 18.5578 20.3248 18.8181 20.2241 19.0609C20.1235 19.3037 19.976 19.5243 19.79 19.71C19.6043 19.896 19.3837 20.0435 19.1409 20.1441C18.8981 20.2448 18.6378 20.2966 18.375 20.2966C18.1122 20.2966 17.8519 20.2448 17.6091 20.1441C17.3663 20.0435 17.1457 19.896 16.96 19.71L16.9 19.65C16.6643 19.4195 16.365 19.2648 16.0406 19.206C15.7162 19.1472 15.3816 19.1869 15.08 19.32C14.7842 19.4468 14.532 19.6572 14.3543 19.9255C14.1766 20.1938 14.0813 20.5082 14.08 20.83V21C14.08 21.5304 13.8693 22.0391 13.4942 22.4142C13.1191 22.7893 12.6104 23 12.08 23C11.5496 23 11.0409 22.7893 10.6658 22.4142C10.2907 22.0391 10.08 21.5304 10.08 21V20.91C10.0723 20.579 9.96512 20.258 9.77251 19.9887C9.5799 19.7194 9.31074 19.5143 9 19.4C8.69838 19.2669 8.36381 19.2272 8.03941 19.286C7.71502 19.3448 7.41568 19.4995 7.18 19.73L7.12 19.79C6.93425 19.976 6.71368 20.1235 6.47088 20.2241C6.22808 20.3248 5.96783 20.3766 5.705 20.3766C5.44217 20.3766 5.18192 20.3248 4.93912 20.2241C4.69632 20.1235 4.47575 19.976 4.29 19.79C4.10405 19.6043 3.95653 19.3837 3.85588 19.1409C3.75523 18.8981 3.70343 18.6378 3.70343 18.375C3.70343 18.1122 3.75523 17.8519 3.85588 17.6091C3.95653 17.3663 4.10405 17.1457 4.29 16.96L4.35 16.9C4.58054 16.6643 4.73519 16.365 4.794 16.0406C4.85282 15.7162 4.81312 15.3816 4.68 15.08C4.55324 14.7842 4.34276 14.532 4.07447 14.3543C3.80618 14.1766 3.49179 14.0813 3.17 14.08H3C2.46957 14.08 1.96086 13.8693 1.58579 13.4942C1.21071 13.1191 1 12.6104 1 12.08C1 11.5496 1.21071 11.0409 1.58579 10.6658C1.96086 10.2907 2.46957 10.08 3 10.08H3.09C3.42099 10.0723 3.742 9.96512 4.0113 9.77251C4.28059 9.5799 4.48572 9.31074 4.6 9C4.73312 8.69838 4.77282 8.36381 4.714 8.03941C4.65519 7.71502 4.50054 7.41568 4.27 7.18L4.21 7.12C4.02405 6.93425 3.87653 6.71368 3.77588 6.47088C3.67523 6.22808 3.62343 5.96783 3.62343 5.705C3.62343 5.44217 3.67523 5.18192 3.77588 4.93912C3.87653 4.69632 4.02405 4.47575 4.21 4.29C4.39575 4.10405 4.61632 3.95653 4.85912 3.85588C5.10192 3.75523 5.36217 3.70343 5.625 3.70343C5.88783 3.70343 6.14808 3.75523 6.39088 3.85588C6.63368 3.95653 6.85425 4.10405 7.04 4.29L7.1 4.35C7.33568 4.58054 7.63502 4.73519 7.95941 4.794C8.28381 4.85282 8.61838 4.81312 8.92 4.68H9C9.29577 4.55324 9.54802 4.34276 9.72569 4.07447C9.90337 3.80618 9.99872 3.49179 10 3.17V3C10 2.46957 10.2107 1.96086 10.5858 1.58579C10.9609 1.21071 11.4696 1 12 1C12.5304 1 13.0391 1.21071 13.4142 1.58579C13.7893 1.96086 14 2.46957 14 3V3.09C14.0013 3.41179 14.0966 3.72618 14.2743 3.99447C14.452 4.26276 14.7042 4.47324 15 4.6C15.3016 4.73312 15.6362 4.77282 15.9606 4.714C16.285 4.65519 16.5843 4.50054 16.82 4.27L16.88 4.21C17.0657 4.02405 17.2863 3.87653 17.5291 3.77588C17.7719 3.67523 18.0322 3.62343 18.295 3.62343C18.5578 3.62343 18.8181 3.67523 19.0609 3.77588C19.3037 3.87653 19.5243 4.02405 19.71 4.21C19.896 4.39575 20.0435 4.61632 20.1441 4.85912C20.2448 5.10192 20.2966 5.36217 20.2966 5.625C20.2966 5.88783 20.2448 6.14808 20.1441 6.39088C20.0435 6.63368 19.896 6.85425 19.71 7.04L19.65 7.1C19.4195 7.33568 19.2648 7.63502 19.206 7.95941C19.1472 8.28381 19.1869 8.61838 19.32 8.92V9C19.4468 9.29577 19.6572 9.54802 19.9255 9.72569C20.1938 9.90337 20.5082 9.99872 20.83 10H21C21.5304 10 22.0391 10.2107 22.4142 10.5858C22.7893 10.9609 23 11.4696 23 12C23 12.5304 22.7893 13.0391 22.4142 13.4142C22.0391 13.7893 21.5304 14 21 14H20.91C20.5882 14.0013 20.2738 14.0966 20.0055 14.2743C19.7372 14.452 19.5268 14.7042 19.4 15Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <span>Gemini API Settings</span>
+          </div>
+          <div class="menu-section communication-section">
+            <h3>Communication Hub</h3>
+            <div class="communication-form">
+              <div class="form-group">
+                <label>AI Model Selection</label>
+                <div class="model-selection">
+                  <div class="model-option">
+                    <div class="toggle-container">
+                      <input type="checkbox" id="gemini-toggle" class="toggle-checkbox" checked>
+                      <label for="gemini-toggle" class="toggle-label"></label>
+                      <span class="toggle-text">Gemini</span>
+                    </div>
+                  </div>
+                  <div class="model-option">
+                    <div class="toggle-container">
+                      <input type="checkbox" id="openai-toggle" class="toggle-checkbox">
+                      <label for="openai-toggle" class="toggle-label"></label>
+                      <span class="toggle-text">OpenAI</span>
+                    </div>
+                  </div>
+                  <div class="model-option">
+                    <div class="toggle-container">
+                      <input type="checkbox" id="anthropic-toggle" class="toggle-checkbox">
+                      <label for="anthropic-toggle" class="toggle-label"></label>
+                      <span class="toggle-text">Anthropic</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="auto-fallback-toggle">Auto Fallback</label>
+                <div class="toggle-container">
+                  <input type="checkbox" id="auto-fallback-toggle" class="toggle-checkbox" checked>
+                  <label for="auto-fallback-toggle" class="toggle-label"></label>
+                  <span class="toggle-text">Aktif</span>
+                </div>
+                <p class="auto-fallback-description">
+                  Secara otomatis beralih ke model alternatif jika model utama tidak tersedia.
+                </p>
+              </div>
+
+              <div class="form-group">
+                <label for="model-rotation-toggle">Model Rotation</label>
+                <div class="toggle-container">
+                  <input type="checkbox" id="model-rotation-toggle" class="toggle-checkbox">
+                  <label for="model-rotation-toggle" class="toggle-label"></label>
+                  <span class="toggle-text">Nonaktif</span>
+                </div>
+                <p class="model-rotation-description">
+                  Secara otomatis berotasi antara model yang tersedia untuk mengoptimalkan biaya.
+                </p>
+              </div>
+
+              <div class="form-group">
+                <label for="response-caching-toggle">Response Caching</label>
+                <div class="toggle-container">
+                  <input type="checkbox" id="response-caching-toggle" class="toggle-checkbox" checked>
+                  <label for="response-caching-toggle" class="toggle-label"></label>
+                  <span class="toggle-text">Aktif</span>
+                </div>
+                <p class="response-caching-description">
+                  Menyimpan respons untuk menghemat token dan mempercepat respons untuk pertanyaan yang sama.
+                </p>
+              </div>
+
+              <h3>Model Parameters</h3>
+
+              <div class="form-group">
+                <label for="temperature-slider">Temperature: <span id="temperature-value">0.7</span></label>
+                <div class="slider-container">
+                  <input type="range" id="temperature-slider" min="0" max="1" step="0.1" value="0.7" class="slider">
+                </div>
+                <p class="parameter-description">
+                  Nilai rendah menghasilkan respons yang lebih deterministik, nilai tinggi lebih kreatif.
+                </p>
+              </div>
+
+              <div class="form-group">
+                <label for="top-p-slider">Top P: <span id="top-p-value">0.9</span></label>
+                <div class="slider-container">
+                  <input type="range" id="top-p-slider" min="0" max="1" step="0.1" value="0.9" class="slider">
+                </div>
+                <p class="parameter-description">
+                  Mengontrol keragaman respons dengan nucleus sampling.
+                </p>
+              </div>
+
+              <div class="form-group">
+                <label for="max-tokens-input">Max Tokens</label>
+                <input type="number" id="max-tokens-input" min="100" max="8000" value="4000" />
+                <p class="parameter-description">
+                  Jumlah maksimum token yang akan dihasilkan dalam respons.
+                </p>
+              </div>
+
+              <div class="form-group">
+                <button id="save-communication-settings-btn" class="btn">Save Settings</button>
+                <button id="reset-communication-settings-btn" class="btn btn-secondary">Reset to Default</button>
+              </div>
+
+              <div id="communication-status" class="status-message"></div>
+            </div>
+          </div>
+
+          <div class="menu-section api-section">
+            <h3>Gemini API Configuration</h3>
+            <div class="api-form">
+              <div class="form-group">
+                <label for="gemini-api-key">API Key</label>
+                <input type="password" id="gemini-api-key" placeholder="Enter your Gemini API key" />
+                <div class="button-group">
+                  <button id="validate-api-key-btn" class="btn btn-secondary">Validate</button>
+                  <button id="save-api-key-btn" class="btn">Save API Key</button>
+                </div>
+                <div class="api-key-help">
+                  <p>Dapatkan API key dari <a href="https://aistudio.google.com/apikey" id="get-api-key-link" target="_blank">Google AI Studio</a></p>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="gemini-model">Model</label>
+                <select id="gemini-model">
+                  <option value="gemini-2.0-flash-001">gemini-2.0-flash-001 (Fast)</option>
+                  <option value="gemini-2.0-pro-001">gemini-2.0-pro-001 (Powerful)</option>
+                </select>
+                <button id="save-model-btn" class="btn">Save Model</button>
+              </div>
+              <div class="form-group">
+                <label for="tools-toggle">Tools/Widgets</label>
+                <div class="toggle-container">
+                  <input type="checkbox" id="tools-toggle" class="toggle-checkbox" checked>
+                  <label for="tools-toggle" class="toggle-label"></label>
+                  <span class="toggle-text">Aktif</span>
+                </div>
+                <p class="tools-description">
+                  Aktifkan tools untuk memberikan kemampuan tambahan seperti cuaca, pencarian web, dan waktu.
+                </p>
+              </div>
+              <div class="form-group">
+                <button id="reset-chat-btn" class="btn">Reset Chat</button>
+              </div>
+              <div id="api-status" class="status-message"></div>
+            </div>
+          </div>
+
+          <div class="menu-item" data-section="voice">
+            <div class="menu-item-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 1C11.2044 1 10.4413 1.31607 9.87868 1.87868C9.31607 2.44129 9 3.20435 9 4V12C9 12.7956 9.31607 13.5587 9.87868 14.1213C10.4413 14.6839 11.2044 15 12 15C12.7956 15 13.5587 14.6839 14.1213 14.1213C14.6839 13.5587 15 12.7956 15 12V4C15 3.20435 14.6839 2.44129 14.1213 1.87868C13.5587 1.31607 12.7956 1 12 1Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M19 10V12C19 13.8565 18.2625 15.637 16.9497 16.9497C15.637 18.2625 13.8565 19 12 19C10.1435 19 8.36301 18.2625 7.05025 16.9497C5.7375 15.637 5 13.8565 5 12V10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M12 19V23" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M8 23H16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <span>Voice Settings</span>
+          </div>
+          <div class="menu-section voice-section">
+            <h3>Voice Settings</h3>
+            <div class="voice-form">
+              <div class="form-group">
+                <label for="tts-toggle">Text-to-Speech</label>
+                <div class="toggle-container">
+                  <input type="checkbox" id="tts-toggle" class="toggle-checkbox" checked>
+                  <label for="tts-toggle" class="toggle-label"></label>
+                  <span class="toggle-text" id="tts-toggle-text">Aktif</span>
+                </div>
+                <p class="tts-description">
+                  Aktifkan Text-to-Speech untuk mendengarkan respons dari asisten.
+                </p>
+              </div>
+
+              <div class="form-group">
+                <label for="voice-activation-toggle">Voice Activation (Wake Word)</label>
+                <div class="toggle-container">
+                  <input type="checkbox" id="voice-activation-toggle" class="toggle-checkbox" checked>
+                  <label for="voice-activation-toggle" class="toggle-label"></label>
+                  <span class="toggle-text" id="voice-activation-toggle-text">Aktif</span>
+                </div>
+                <p class="voice-activation-description">
+                  Aktifkan Voice Activation untuk menggunakan wake word seperti "Hey Mamouse".
+                </p>
+              </div>
+
+              <div class="form-group">
+                <label for="wake-words">Wake Words</label>
+                <input type="text" id="wake-words" placeholder="hey mamouse, hai mamouse, halo mamouse, ok mamouse" />
+                <p class="wake-words-description">
+                  Kata-kata yang akan memicu asisten (pisahkan dengan koma).
+                </p>
+              </div>
+
+              <div class="form-group">
+                <label for="speech-language">Bahasa Pengenalan Suara</label>
+                <select id="speech-language">
+                  <option value="id-ID">Indonesia (id-ID)</option>
+                  <option value="en-US">English (US)</option>
+                  <option value="en-GB">English (UK)</option>
+                  <option value="ja-JP">日本語 (Japanese)</option>
+                  <option value="ko-KR">한국어 (Korean)</option>
+                  <option value="zh-CN">中文 (Chinese)</option>
+                  <option value="fr-FR">Français (French)</option>
+                  <option value="de-DE">Deutsch (German)</option>
+                  <option value="es-ES">Español (Spanish)</option>
+                  <option value="it-IT">Italiano (Italian)</option>
+                  <option value="pt-BR">Português (Brazil)</option>
+                  <option value="ru-RU">Русский (Russian)</option>
+                  <option value="ar-SA">العربية (Arabic)</option>
+                  <option value="hi-IN">हिन्दी (Hindi)</option>
+                  <option value="nl-NL">Nederlands (Dutch)</option>
+                  <option value="pl-PL">Polski (Polish)</option>
+                </select>
+                <p class="speech-language-description">
+                  Pilih bahasa untuk pengenalan suara.
+                </p>
+              </div>
+
+              <div class="form-group">
+                <label for="auto-detect-language-toggle">Deteksi Otomatis Bahasa</label>
+                <div class="toggle-container">
+                  <input type="checkbox" id="auto-detect-language-toggle" class="toggle-checkbox">
+                  <label for="auto-detect-language-toggle" class="toggle-label"></label>
+                  <span class="toggle-text" id="auto-detect-language-toggle-text">Nonaktif</span>
+                </div>
+                <p class="auto-detect-language-description">
+                  Aktifkan untuk mendeteksi bahasa secara otomatis (eksperimental).
+                </p>
+              </div>
+
+              <h3>ElevenLabs API Configuration</h3>
+              <div class="form-group">
+                <label for="elevenlabs-api-key">ElevenLabs API Key</label>
+                <input type="password" id="elevenlabs-api-key" placeholder="Enter your ElevenLabs API key" />
+                <div class="button-group">
+                  <button id="validate-elevenlabs-api-key-btn" class="btn btn-secondary">Validate</button>
+                </div>
+                <div class="api-key-help">
+                  <p>Dapatkan API key dari <a href="https://elevenlabs.io/app/account" id="get-elevenlabs-api-key-link" target="_blank">ElevenLabs</a></p>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="elevenlabs-voice">Voice</label>
+                <select id="elevenlabs-voice">
+                  <option value="pNInz6obpgDQGcFmaJgB">Adam (Default)</option>
+                  <option value="ErXwobaYiN019PkySvjV">Antoni</option>
+                  <option value="VR6AewLTigWG4xSOukaG">Arnold</option>
+                  <option value="EXAVITQu4vr4xnSDxMaL">Bella</option>
+                  <option value="IKne3meq5aSn9XLyUdCD">Charlie</option>
+                  <option value="2EiwWnXFnvU5JabPnv8n">Clyde</option>
+                  <option value="onwK4e9ZLuTAKqWW03F9">Daniel</option>
+                  <option value="CYw3kZ02Hs0563khs1Fj">Dave</option>
+                  <option value="ThT5KcBeYPX3keUQqHPh">Dorothy</option>
+                  <option value="5Q0t7uMcjvnagumLfvZi">Ethan</option>
+                  <option value="jsCqWAovK2LkecY7zXl4">Freya</option>
+                  <option value="jBpfuIE2acCO8z3wKNLl">Gigi</option>
+                  <option value="oWAxZDx7w5VEj9dCyTzz">Grace</option>
+                  <option value="SOYHLrjzK2X1ezoPC6cr">Harry</option>
+                  <option value="ZQe5CZNOzWyzPSCn5a3c">James</option>
+                  <option value="bVMeCyTHy58xNoL34h3p">Jeremy</option>
+                  <option value="TxGEqnHWrfWFTfGW9XjX">Josh</option>
+                  <option value="XrExE9yKIg1WjnnlVkGX">Matilda</option>
+                  <option value="zrHiDhphv9ZnVXBqCLjz">Mimi</option>
+                  <option value="piTKgcLEGmPE4e6mEKli">Nicole</option>
+                  <option value="21m00Tcm4TlvDq8ikWAM">Rachel</option>
+                  <option value="yoZ06aMxZJJ28mfd3POQ">Sam</option>
+                  <option value="GBv7mTt0atIp3Br8iCZE">Thomas</option>
+                  <option value="IKne3meq5aSn9XLyUdCD">Jarvis</option>
+                </select>
+              </div>
+
+              <h3>Voice Settings</h3>
+
+              <div class="form-group">
+                <label for="tts-speed">Speed: <span id="tts-speed-value">1.0</span></label>
+                <div class="slider-container">
+                  <input type="range" id="tts-speed" min="0.5" max="2.0" step="0.1" value="1.0" class="slider">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="tts-pitch">Pitch: <span id="tts-pitch-value">1.0</span></label>
+                <div class="slider-container">
+                  <input type="range" id="tts-pitch" min="0.5" max="2.0" step="0.1" value="1.0" class="slider">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="tts-volume">Volume: <span id="tts-volume-value">1.0</span></label>
+                <div class="slider-container">
+                  <input type="range" id="tts-volume" min="0.0" max="1.0" step="0.1" value="1.0" class="slider">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <button id="reset-voice-settings-btn" class="btn btn-secondary">Reset to Default</button>
+              </div>
+
+              <div id="elevenlabs-status" class="status-message"></div>
+            </div>
+          </div>
+
+          <div class="menu-item" data-section="theme">
+            <div class="menu-item-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 16C14.2091 16 16 14.2091 16 12C16 9.79086 14.2091 8 12 8C9.79086 8 8 9.79086 8 12C8 14.2091 9.79086 16 12 16Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M12 2V4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M12 20V22" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M4.93 4.93L6.34 6.34" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M17.66 17.66L19.07 19.07" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M2 12H4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M20 12H22" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M6.34 17.66L4.93 19.07" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M19.07 4.93L17.66 6.34" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <span>Theme Settings</span>
+          </div>
+          <div class="menu-section theme-section">
+            <h3>Select Theme</h3>
+            <div class="theme-options">
+              <div class="theme-option" data-theme="default">Default</div>
+              <div class="theme-option" data-theme="dark">Dark</div>
+              <div class="theme-option" data-theme="light">Light</div>
+              <div class="theme-option" data-theme="neon">Neon</div>
+              <div class="theme-option" data-theme="ocean">Ocean</div>
+              <div class="theme-option" data-theme="sunset">Sunset</div>
+              <div class="theme-option" data-theme="forest">Forest</div>
+              <div class="theme-option" data-theme="midnight">Midnight</div>
+              <div class="theme-option" data-theme="chameleon">Chameleon</div>
+            </div>
+          </div>
+
+          <div class="menu-item" data-section="mcp">
+            <div class="menu-item-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20 7H4C2.89543 7 2 7.89543 2 9V19C2 20.1046 2.89543 21 4 21H20C21.1046 21 22 20.1046 22 19V9C22 7.89543 21.1046 7 20 7Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M16 21V5C16 4.46957 15.7893 3.96086 15.4142 3.58579C15.0391 3.21071 14.5304 3 14 3H10C9.46957 3 8.96086 3.21071 8.58579 3.58579C8.21071 3.96086 8 4.46957 8 5V21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <span>MCP Servers</span>
+          </div>
+          <div class="menu-section mcp-section">
+            <h3>Model Context Protocol Servers</h3>
+            <div class="mcp-form">
+              <div class="form-group">
+                <p class="mcp-description">
+                  MCP servers enable Mamouse Agent to interact with external tools and services.
+                </p>
+                <div id="mcp-servers-list" class="mcp-servers-list">
+                  <!-- MCP servers will be listed here -->
+                </div>
+                <button id="add-mcp-server-btn" class="btn">Add MCP Server</button>
+              </div>
+            </div>
+          </div>
+
+
+
+          <div class="menu-item" data-section="about">
+            <div class="menu-item-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M12 16V12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M12 8H12.01" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <span>About</span>
+          </div>
+          <div class="menu-section about-section">
+            <p>Mamous Agent v1.0</p>
+            <p>An AI personal assistant with multimodal capabilities.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal untuk menambahkan MCP Server -->
+  <div id="mcp-modal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Add MCP Server</h3>
+        <span class="close-modal">&times;</span>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="mcp-name">Server Name</label>
+          <input type="text" id="mcp-name" placeholder="e.g., desktop-automation, terminal-controller" />
+        </div>
+        <div class="form-group">
+          <label for="mcp-command">Command</label>
+          <input type="text" id="mcp-command" placeholder="e.g., npx, uvx, python" />
+        </div>
+        <div class="form-group">
+          <label for="mcp-args">Arguments (comma-separated)</label>
+          <input type="text" id="mcp-args" placeholder="e.g., -y, mcp-desktop-automation" />
+        </div>
+        <div class="form-group">
+          <label for="mcp-env">Environment Variables (JSON format)</label>
+          <textarea id="mcp-env" placeholder='e.g., {"API_KEY": "your-key"}'></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button id="save-mcp-server-btn" class="btn">Save Server</button>
+        <button id="cancel-mcp-server-btn" class="btn btn-secondary">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/axios@1.9.0/dist/axios.min.js"></script>
+  <script src="virtual-scroll.js"></script>
+  <script src="standalone-bubble.js"></script>
+  <script src="voice-activation.js"></script>
+  <script src="renderer.js"></script>
+</body>
+</html>

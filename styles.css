@@ -1,0 +1,3675 @@
+:root {
+  /* Warna utama dengan nuansa biru yang selaras dengan Windows 11 */
+  --primary-color: #0078d7;
+  --primary-color-rgb: 0, 120, 215;
+  --secondary-color: #2b88d8;
+  --secondary-color-rgb: 43, 136, 216;
+  --accent-color: #60cdff;
+  --accent-color-rgb: 96, 205, 255;
+  --tertiary-color: #4cc2ff;
+  --tertiary-color-rgb: 76, 194, 255;
+
+  /* Warna latar dan teks */
+  --background-color: #1e1e1e; /* Warna solid gelap */
+  --text-color: white;
+  --text-shadow: none; /* Hapus bayangan teks */
+
+  /* Warna bubble chat solid */
+  --user-bubble-color: var(--user-bubble-color, var(--primary-color)); /* Warna solid untuk bubble user sesuai tema */
+  --assistant-bubble-color: var(--user-bubble-color, var(--primary-color)); /* Warna solid untuk bubble asisten sama dengan user */
+
+  /* Variabel untuk tingkat blur */
+  --blur-light: 0px; /* Hapus blur */
+  --blur-medium: 0px; /* Hapus blur */
+  --blur-strong: 0px; /* Hapus blur */
+
+  /* Variabel untuk tingkat transparansi */
+  --transparency-light: 1; /* Tidak transparan */
+  --transparency-medium: 1; /* Tidak transparan */
+  --transparency-strong: 1; /* Tidak transparan */
+
+  /* Warna untuk efek glassmorphism */
+  --glass-border-color: #ffffff; /* Border solid */
+  --glass-shadow-color: #000000; /* Bayangan solid */
+  --glass-highlight: #ffffff; /* Highlight solid */
+
+  /* Variabel untuk efek glassmorphism yang berbeda */
+  --glass-light: #f0f0f0; /* Warna solid light */
+  --glass-medium: #e0e0e0; /* Warna solid medium */
+  --glass-strong: #d0d0d0; /* Warna solid strong */
+
+  /* Variabel untuk border glassmorphism */
+  --glass-border-light: 1px solid #e0e0e0; /* Border solid light */
+  --glass-border-medium: 1px solid #d0d0d0; /* Border solid medium */
+  --glass-border-strong: 1px solid #c0c0c0; /* Border solid strong */
+
+  /* Warna untuk efek glow */
+  --glow-primary: #0078d7; /* Warna solid untuk glow primary */
+  --glow-secondary: #4cc2ff; /* Warna solid untuk glow secondary */
+  --glow-accent: #60cdff; /* Warna solid untuk glow accent */
+
+  /* Variabel untuk efek glow yang berbeda */
+  --glow-light: 0 0 5px;
+  --glow-medium: 0 0 10px;
+  --glow-strong: 0 0 15px;
+
+  /* Warna untuk status dan notifikasi */
+  --success-color: #00cc66;
+  --success-color-rgb: 0, 204, 102;
+  --error-color: #ff3333;
+  --error-color-rgb: 255, 51, 51;
+  --warning-color: #ffcc00;
+  --warning-color-rgb: 255, 204, 0;
+
+  /* Variabel untuk ukuran elemen (berbasis persentase) */
+  --input-width: 500px; /* Ukuran standar untuk input container */
+  --chat-width: 500px; /* Ukuran standar untuk chat container */
+
+  /* Variabel untuk posisi horizontal yang konsisten */
+  --element-left-position: 50%;
+  --element-transform-x: -50%;
+
+  /* Variabel untuk tinggi input container (berbasis persentase) */
+  --input-height: 9vh; /* Tinggi standar untuk input container */
+
+  /* Variabel untuk posisi top input container */
+  --input-top-position: 5vh; /* Diubah dari 8vh menjadi 5vh untuk posisi lebih tinggi */
+
+  /* Variabel untuk jarak antara input dan chat container */
+  --gap-between-containers: 10vh; /* Diubah dari 8vh menjadi 10vh untuk jarak lebih besar */
+
+  /* Variabel untuk posisi chat container (berbasis persentase) */
+  /* Posisi chat container dihitung dari posisi input + tinggi input + jarak */
+  --chat-top: calc(var(--input-top-position) + var(--input-height) + var(--gap-between-containers));
+
+  /* Variabel untuk offset animasi chat container */
+  --chat-animation-start-offset: 2vh;
+  --chat-animation-overshoot-offset: -1vh;
+
+  /* Variabel untuk ukuran minimum dan maksimum dalam persentase */
+  --min-width-compact: 40%;
+  --min-width-normal: 50%;
+  --min-width-expanded: 60%;
+  --max-width-compact: 80%;
+  --max-width-normal: 90%;
+  --max-width-expanded: 95%;
+
+  /* Variabel untuk animasi */
+  --transition-fast: 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-normal: 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-slow: 0.5s cubic-bezier(0.16, 1, 0.3, 1.2);
+
+  /* Variabel untuk bayangan */
+  --shadow-light: 0 4px 12px #000000; /* Bayangan solid light */
+  --shadow-medium: 0 8px 24px #000000; /* Bayangan solid medium */
+  --shadow-strong: 0 12px 36px #000000; /* Bayangan solid strong */
+
+  /* Hapus background image */
+  --background-image: none;
+}
+
+/* Reset semua elemen */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  background-color: transparent !important;
+  resize: none !important; /* Mencegah resize */
+  /* Hapus pointer-events: none global karena menyebabkan masalah interaksi */
+}
+
+/* Pengaturan dasar untuk html dan body */
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: transparent !important;
+  border: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+}
+
+/* Pengaturan body */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: transparent !important; /* Ubah menjadi transparan */
+  color: var(--text-color);
+  overflow: hidden;
+  border: none !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  position: relative; /* Untuk efek partikel */
+}
+
+/* Efek partikel latar belakang yang subtle */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 50% 50%, rgba(var(--primary-color-rgb), 0.03) 0%, transparent 40%),
+              radial-gradient(circle at 80% 20%, rgba(var(--secondary-color-rgb), 0.03) 0%, transparent 35%),
+              radial-gradient(circle at 20% 80%, rgba(var(--accent-color-rgb), 0.03) 0%, transparent 35%);
+  pointer-events: none;
+  z-index: -1;
+  opacity: 0.7;
+  animation: backgroundShift 15s ease-in-out infinite alternate;
+}
+
+@keyframes backgroundShift {
+  0% {
+    background-position: 0% 0%;
+  }
+  100% {
+    background-position: 100% 100%;
+  }
+}
+
+/* Container aplikasi */
+.app-container {
+  display: flex;
+  justify-content: flex-start; /* Ubah dari center ke flex-start */
+  align-items: flex-start; /* Ubah dari center ke flex-start */
+  height: 100vh;
+  width: 100vw;
+  background: transparent !important; /* Ubah menjadi transparan */
+  border: none !important;
+  box-shadow: none !important;
+  overflow: hidden;
+  /* Ubah dari none menjadi auto agar bisa melewatkan klik ke aplikasi di belakangnya */
+  pointer-events: auto !important;
+}
+
+/* Window aplikasi */
+.app-window {
+  width: 100%;
+  height: 100%;
+  background-color: transparent !important; /* Ubah menjadi transparan */
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  border: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+  /* Ubah dari none menjadi auto agar bisa melewatkan klik ke aplikasi di belakangnya */
+  pointer-events: auto !important;
+}
+
+/* CSS untuk menghilangkan tanda panah resize */
+html, body, .app-container, .app-window {
+  resize: none !important;
+  cursor: default !important;
+}
+
+/* Mencegah tanda panah resize di tepian */
+html::after,
+body::after,
+.app-container::after,
+.app-window::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 9999;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  resize: none !important;
+}
+
+/* Area untuk drag window */
+.drag-area {
+  width: 100%;
+  height: 50px; /* Tingkatkan tinggi area drag */
+  -webkit-app-region: drag;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 99; /* Di bawah input container tapi di atas elemen lain */
+  pointer-events: none !important; /* Pastikan tidak menghalangi interaksi dengan aplikasi di belakangnya */
+}
+
+/* Menu Bar */
+.menu-bar {
+  display: none !important; /* Sembunyikan menu bar */
+  visibility: hidden !important;
+  opacity: 0 !important;
+  height: 0 !important;
+  overflow: hidden !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.menu-bar-title {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  height: 0 !important;
+  overflow: hidden !important;
+}
+
+.menu-bar-controls {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  height: 0 !important;
+  overflow: hidden !important;
+}
+
+.control-button {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 14px;
+}
+
+.minimize {
+  background-color: #FFBD44;
+}
+
+.close {
+  background-color: #FF605C;
+}
+
+.control-button:hover {
+  filter: brightness(0.9);
+}
+
+/* App Content */
+.app-content {
+  flex: 1;
+  padding: 5px; /* Kurangi padding dari 20px ke 5px */
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* Ubah dari center ke flex-start untuk posisi di atas */
+  align-items: center; /* Tetap center secara horizontal */
+  overflow: hidden;
+  /* Ubah dari none menjadi auto agar bisa melewatkan klik ke aplikasi di belakangnya */
+  pointer-events: auto !important;
+}
+
+/* Status Indicators */
+.status-indicator {
+  position: fixed;
+  top: 70px;
+  right: 20px;
+  padding: 8px 12px;
+  border-radius: 20px;
+  background: rgba(20, 25, 40, 0.75);
+  backdrop-filter: blur(var(--blur-medium));
+  -webkit-backdrop-filter: blur(var(--blur-medium));
+  color: white;
+  font-size: 14px;
+  font-weight: 500;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: var(--shadow-medium),
+              var(--glow-light) var(--glow-primary);
+  border: var(--glass-border-light);
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: all var(--transition-normal);
+  pointer-events: none;
+}
+
+.status-indicator.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.status-indicator.listening {
+  background: linear-gradient(135deg,
+    rgba(var(--primary-color-rgb), 0.5) 0%,
+    rgba(var(--tertiary-color-rgb), 0.4) 100%);
+}
+
+.status-indicator.processing {
+  background: linear-gradient(135deg,
+    rgba(var(--warning-color-rgb), 0.5) 0%,
+    rgba(var(--accent-color-rgb), 0.4) 100%);
+}
+
+.status-indicator.error {
+  background: linear-gradient(135deg,
+    rgba(var(--error-color-rgb), 0.5) 0%,
+    rgba(255, 100, 100, 0.4) 100%);
+}
+
+.status-indicator.success {
+  background: linear-gradient(135deg,
+    rgba(var(--success-color-rgb), 0.5) 0%,
+    rgba(100, 255, 150, 0.4) 100%);
+}
+
+.status-indicator-icon {
+  width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.status-indicator-text {
+  white-space: nowrap;
+}
+
+/* Connection Status */
+.connection-status-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 200; /* Di atas semua elemen */
+  background-color: rgba(0, 0, 0, 0.7); /* Latar belakang gelap */
+  pointer-events: auto !important; /* Pastikan dapat menerima event mouse */
+}
+
+.connection-status-message {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: linear-gradient(135deg,
+    rgba(20, 25, 40, 0.85) 0%,
+    rgba(15, 20, 35, 0.95) 100%);
+  backdrop-filter: blur(var(--blur-strong));
+  -webkit-backdrop-filter: blur(var(--blur-strong));
+  padding: 25px 35px;
+  border-radius: 16px;
+  box-shadow: var(--shadow-strong),
+              var(--glow-medium) var(--glow-primary);
+  border: var(--glass-border-medium);
+  animation: pulseConnection 2s infinite ease-in-out;
+}
+
+.connection-status-message p {
+  margin-top: 15px;
+  font-size: 16px;
+  color: white;
+  text-shadow: var(--text-shadow);
+}
+
+@keyframes pulseConnection {
+  0%, 100% {
+    box-shadow: var(--shadow-strong),
+                var(--glow-medium) var(--glow-primary);
+  }
+  50% {
+    box-shadow: var(--shadow-strong),
+                var(--glow-strong) var(--glow-primary);
+  }
+}
+
+.connection-spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  border-top-color: var(--primary-color);
+  border-left-color: var(--accent-color);
+  animation: spin 1s linear infinite;
+  box-shadow: var(--glow-light) var(--glow-primary);
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Chat Container */
+.chat-container {
+  position: fixed;
+  top: var(--chat-top); /* Gunakan variabel untuk posisi top */
+  left: 50%; /* Posisi di tengah layar */
+  transform: translateX(-50%); /* Transformasi untuk posisi di tengah */
+  width: var(--chat-width); /* Gunakan variabel untuk lebar */
+  min-width: 350px; /* Lebar minimum */
+  max-width: 900px; /* Lebar maksimum */
+  max-height: calc(100vh - 30vh); /* Maksimum tinggi disesuaikan dengan persentase viewport height */
+  height: auto; /* Ubah dari fixed height menjadi auto */
+  overflow-y: auto !important; /* Aktifkan scroll vertikal */
+  overflow-x: hidden; /* Sembunyikan scroll horizontal */
+  padding: 2vh 2vw; /* Gunakan padding berbasis persentase viewport dengan padding atas lebih besar */
+  box-sizing: border-box; /* Pastikan padding termasuk dalam perhitungan lebar */
+  display: none !important; /* Initially hidden, dengan !important */
+  flex-direction: column;
+  opacity: 0 !important; /* Mulai dengan opacity 0, dengan !important */
+  visibility: hidden !important; /* Hidden secara default, dengan !important */
+  z-index: 50; /* Di bawah input container */
+  box-sizing: border-box; /* Pastikan padding tidak menambah ukuran */
+  scrollbar-width: thin; /* Firefox */
+  background-color: #1a202c !important; /* Warna latar solid lebih gelap */
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Transisi lebih halus */
+  pointer-events: none !important; /* Tidak dapat diinteraksi saat tersembunyi, dengan !important */
+  will-change: transform, opacity; /* Optimasi performa animasi */
+  transform-origin: top center; /* Titik asal transformasi */
+  backdrop-filter: none; /* Hapus blur */
+  border: 3px solid #0078d7; /* Tambahkan border solid lebih tebal */
+  border-radius: 20px; /* Tambahkan border-radius */
+}
+
+.hidden {
+  display: none !important;
+}
+
+.chat-container.active {
+  display: flex !important; /* Show when active */
+  visibility: visible !important;
+  opacity: 1 !important; /* Fully opaque */
+  transform: translateX(-50%) !important; /* Transformasi untuk posisi di tengah */
+  pointer-events: auto !important; /* Dapat diinteraksi saat aktif */
+  z-index: 50 !important; /* Pastikan di atas elemen lain */
+  animation: chatContainerShow 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Animasi khusus */
+  backdrop-filter: none; /* Hapus blur */
+  box-shadow: 0 10px 30px #000000; /* Bayangan solid lebih besar */
+}
+
+/* Animasi untuk chat container saat muncul */
+@keyframes chatContainerShow {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%);
+    top: calc(var(--chat-top) + var(--chat-animation-start-offset)); /* Mulai sedikit di bawah posisi akhir */
+  }
+  20% {
+    opacity: 0.5;
+  }
+  60% {
+    transform: translateX(-50%);
+    top: calc(var(--chat-top) + var(--chat-animation-overshoot-offset)); /* Sedikit overshoot ke atas */
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(-50%);
+    top: var(--chat-top); /* Kembali ke posisi normal yang dihitung dari variabel */
+  }
+}
+
+.chat-container::-webkit-scrollbar {
+  width: 6px;
+}
+
+.chat-container::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 3px;
+}
+
+.chat-container::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 3px;
+}
+
+/* Chat Bubbles - Redesain dengan efek glassmorphism */
+.chat-bubble {
+  display: flex;
+  margin: 12px 0; /* Sedikit lebih besar untuk spacing */
+  max-width: 80%;
+  animation: bubbleEntrance 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Sedikit lebih lambat */
+  overflow: visible;
+  word-wrap: break-word;
+  white-space: normal;
+  width: auto;
+  transform-origin: bottom center;
+  will-change: transform, opacity;
+  position: relative; /* Untuk efek bayangan dan pseudo-elements */
+}
+
+/* Bubble dari asisten */
+.assistant {
+  align-self: flex-start;
+  margin-right: auto;
+  margin-left: 0;
+  width: 90%;
+  animation-name: assistantBubbleEntrance;
+  transform-origin: left bottom;
+}
+
+/* Bubble dari user */
+.user {
+  align-self: flex-end;
+  margin-left: auto;
+  margin-right: 0;
+  margin-bottom: 15px;
+  max-width: 70%;
+  animation-name: userBubbleEntrance;
+  transform-origin: right bottom;
+}
+
+/* Animasi untuk bubble assistant masuk - lebih halus dengan efek bounce */
+@keyframes assistantBubbleEntrance {
+  0% {
+    opacity: 0;
+    transform: scale(0.8) translateX(-20px) translateY(10px);
+    filter: blur(2px);
+  }
+  40% {
+    opacity: 0.8;
+    transform: scale(0.9) translateX(-5px) translateY(5px);
+    filter: blur(0.5px);
+  }
+  70% {
+    opacity: 0.95;
+    transform: scale(1.03) translateX(2px) translateY(-2px);
+    filter: blur(0);
+  }
+  85% {
+    transform: scale(0.98) translateX(-1px) translateY(0);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateX(0) translateY(0);
+  }
+}
+
+/* Animasi untuk bubble user masuk - lebih halus dengan efek bounce */
+@keyframes userBubbleEntrance {
+  0% {
+    opacity: 0;
+    transform: scale(0.8) translateX(20px) translateY(10px);
+    filter: blur(2px);
+  }
+  40% {
+    opacity: 0.8;
+    transform: scale(0.9) translateX(5px) translateY(5px);
+    filter: blur(0.5px);
+  }
+  70% {
+    opacity: 0.95;
+    transform: scale(1.03) translateX(-2px) translateY(-2px);
+    filter: blur(0);
+  }
+  85% {
+    transform: scale(0.98) translateX(1px) translateY(0);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateX(0) translateY(0);
+  }
+}
+
+/* Konten bubble dengan efek glassmorphism yang lebih canggih */
+.bubble-content {
+  padding: 16px 20px; /* Lebih besar untuk kenyamanan membaca */
+  border-radius: 20px;
+  color: var(--text-color);
+  text-shadow: none; /* Hapus bayangan teks */
+  line-height: 1.6; /* Untuk keterbacaan */
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
+  max-width: 100%;
+  display: inline-block;
+  width: auto;
+  box-sizing: border-box;
+  background-color: #2d3748 !important; /* Warna solid untuk bubble */
+  background-image: none; /* Hapus gradien */
+  backdrop-filter: none; /* Hapus blur */
+  -webkit-backdrop-filter: none; /* Hapus blur untuk Safari */
+  transition: all var(--transition-normal);
+  animation: contentFadeIn 0.5s ease-out;
+  border: 1px solid #0078d7; /* Border solid */
+  box-shadow: 0 4px 12px #000000; /* Bayangan solid */
+  font-weight: 400; /* Tampilan modern */
+  letter-spacing: 0.3px; /* Spasi antar huruf untuk keterbacaan */
+  position: relative; /* Untuk pseudo-elements */
+  overflow: hidden; /* Untuk efek shine */
+}
+
+/* Animasi untuk konten bubble - lebih halus */
+@keyframes contentFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(8px);
+    filter: blur(3px);
+  }
+  50% {
+    opacity: 0.8;
+    transform: translateY(3px);
+    filter: blur(1px);
+  }
+  80% {
+    opacity: 0.95;
+    transform: translateY(-1px); /* Sedikit overshoot */
+    filter: blur(0.5px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+/* Bubble asisten dengan efek glassmorphism yang lebih canggih - sama persis dengan bubble user */
+.assistant .bubble-content {
+  background-color: var(--user-bubble-color, var(--primary-color)) !important; /* Warna solid untuk bubble user sesuai tema */
+  background-image: none; /* Hapus gradien */
+  backdrop-filter: none; /* Hapus blur */
+  -webkit-backdrop-filter: none; /* Hapus blur untuk Safari */
+  border-radius: 20px;
+  border-bottom-left-radius: 5px; /* Sudut kiri bawah lebih tajam */
+  color: white !important; /* Warna teks solid */
+  box-shadow: 0 4px 12px #000000; /* Bayangan solid */
+  width: auto;
+  border: 1px solid var(--bubble-border-color, var(--primary-color)); /* Border solid sesuai tema */
+  position: relative; /* Untuk pseudo-elements */
+  animation: userBubbleGlow 3s infinite alternate; /* Gunakan animasi yang sama dengan user */
+  overflow: hidden; /* Untuk efek shine */
+}
+
+/* Efek border glow pada bubble asisten - sama persis dengan bubble user */
+.assistant .bubble-content::before {
+  content: '';
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  border-radius: inherit;
+  background: linear-gradient(
+    135deg,
+    rgba(var(--primary-color-rgb), 0.5),
+    rgba(var(--tertiary-color-rgb), 0.3),
+    rgba(var(--accent-color-rgb), 0.5)
+  );
+  z-index: -1;
+  opacity: 0.3;
+  filter: blur(3px);
+  animation: borderGlow 3s infinite alternate;
+  pointer-events: none;
+}
+
+.assistant .bubble-content:hover::before {
+  opacity: 0.6;
+  filter: blur(4px);
+}
+
+/* Efek shine pada bubble asisten */
+.assistant .bubble-content::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
+  transform: skewX(-25deg);
+  animation: inputShine 12s infinite ease-in-out;
+  pointer-events: none;
+}
+
+/* Animasi untuk efek glow pada bubble asisten - dihapus karena menggunakan userBubbleGlow */
+
+@keyframes shine {
+  0% {
+    left: -100%;
+  }
+  20%, 100% {
+    left: 150%;
+  }
+}
+
+/* Khusus untuk typing indicator, buat lebih compact dan modern */
+.typing-indicator.bubble-content {
+  padding: 8px 15px !important;
+  width: auto !important;
+  background-color: var(--user-bubble-color, var(--primary-color)) !important; /* Gunakan warna yang sama dengan user */
+  border: 1px solid var(--bubble-border-color, var(--primary-color)) !important; /* Gunakan variabel tema */
+  box-shadow: 0 4px 12px #000000 !important; /* Gunakan shadow yang sama dengan bubble user */
+  z-index: 999 !important; /* Pastikan terlihat di atas elemen lain dengan z-index lebih tinggi */
+  position: relative !important; /* Untuk z-index */
+  opacity: 1 !important; /* Pastikan selalu terlihat */
+  visibility: visible !important; /* Pastikan selalu terlihat */
+  display: flex !important; /* Pastikan selalu terlihat */
+  pointer-events: auto !important; /* Pastikan dapat menerima event mouse */
+  min-height: 40px !important; /* Pastikan tinggi minimum untuk wave animation */
+  align-items: center !important; /* Pusatkan konten secara vertikal */
+  animation: userBubbleGlow 3s infinite alternate !important; /* Gunakan animasi yang sama dengan user */
+  overflow: hidden !important; /* Untuk efek shine */
+}
+
+/* Bubble user dengan efek glassmorphism yang lebih canggih */
+.user .bubble-content {
+  background-color: var(--user-bubble-color, var(--primary-color)) !important; /* Warna solid untuk bubble user sesuai tema */
+  background-image: none; /* Hapus gradien */
+  backdrop-filter: none; /* Hapus blur */
+  -webkit-backdrop-filter: none; /* Hapus blur untuk Safari */
+  border-radius: 20px;
+  border-bottom-right-radius: 5px; /* Sudut kanan bawah lebih tajam */
+  text-align: right;
+  color: white !important; /* Warna teks solid */
+  box-shadow: 0 4px 12px #000000; /* Bayangan solid */
+  border: 1px solid var(--bubble-border-color, var(--primary-color)); /* Border solid sesuai tema */
+  position: relative; /* Untuk pseudo-elements */
+  animation: userBubbleGlow 3s infinite alternate; /* Tambahkan animasi glow */
+  overflow: hidden; /* Untuk efek shine */
+}
+
+/* Efek border glow pada bubble user */
+.user .bubble-content::before {
+  content: '';
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  border-radius: inherit;
+  background: linear-gradient(
+    135deg,
+    rgba(var(--primary-color-rgb), 0.5),
+    rgba(var(--tertiary-color-rgb), 0.3),
+    rgba(var(--accent-color-rgb), 0.5)
+  );
+  z-index: -1;
+  opacity: 0.3;
+  filter: blur(3px);
+  animation: borderGlow 3s infinite alternate;
+  pointer-events: none;
+}
+
+.user .bubble-content:hover::before {
+  opacity: 0.6;
+  filter: blur(4px);
+}
+
+/* Animasi untuk efek glow pada bubble user */
+@keyframes userBubbleGlow {
+  0% {
+    background-color: var(--user-bubble-color);
+    box-shadow: 0 4px 12px #000000;
+  }
+  50% {
+    background-color: var(--primary-color);
+    box-shadow: 0 4px 15px var(--primary-color);
+  }
+  100% {
+    background-color: var(--user-bubble-color);
+    box-shadow: 0 4px 12px #000000;
+  }
+}
+
+/* Efek shine pada bubble user */
+.user .bubble-content::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
+  transform: skewX(-25deg);
+  animation: inputShine 12s infinite ease-in-out;
+  pointer-events: none;
+}
+
+/* Response Animation */
+.response-bubble {
+  max-height: 0;
+  opacity: 0;
+  transform: translateY(-10px) scale(0.95);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  margin: 0;
+  overflow: visible !important; /* Ubah dari hidden ke visible */
+  width: auto !important; /* Biarkan lebar menyesuaikan konten */
+  min-width: fit-content !important; /* Minimal selebar konten */
+  display: flex !important; /* Pastikan selalu flex */
+  visibility: visible !important; /* Ubah dari hidden ke visible agar selalu terlihat */
+  will-change: transform, opacity, max-height; /* Optimasi performa animasi */
+}
+
+.response-bubble.show {
+  max-height: none !important; /* Ubah dari nilai tetap ke none agar tidak terbatas */
+  opacity: 1 !important;
+  transform: translateY(0) scale(1) !important;
+  margin: 10px 0 !important;
+  overflow: visible !important; /* Pastikan visible saat ditampilkan */
+  width: auto !important; /* Biarkan menyesuaikan konten saat menampilkan indikator mengetik */
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important; /* Transisi lebih halus */
+  visibility: visible !important; /* Tampilkan saat show */
+  display: flex !important; /* Pastikan selalu flex */
+  animation: responseBubbleShow 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important; /* Animasi khusus */
+}
+
+.response-bubble.completed {
+  width: 90% !important; /* Setelah selesai, gunakan lebar 90% */
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important; /* Transisi lebih halus */
+}
+
+.response-bubble.completed .bubble-content {
+  animation: responseContentShow 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important; /* Animasi khusus */
+}
+
+/* Animasi untuk response bubble saat muncul */
+@keyframes responseBubbleShow {
+  0% {
+    opacity: 0.7;
+    transform: translateY(5px) scale(0.97);
+  }
+  60% {
+    opacity: 1;
+    transform: translateY(-2px) scale(1.02);
+  }
+  100% {
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Animasi untuk konten response bubble */
+@keyframes responseContentShow {
+  0% {
+    opacity: 0;
+    transform: translateY(8px);
+    filter: blur(2px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+/* Typing indicator dengan desain modern dan wave animation */
+.typing-indicator {
+  display: flex !important;
+  align-items: center !important;
+  padding: 8px 14px !important; /* Sedikit lebih compact */
+  justify-content: center !important;
+  width: fit-content !important;
+  margin: 0 auto 0 0 !important;
+  background-color: var(--assistant-bubble-color, #2d3748) !important; /* Warna solid untuk typing indicator sesuai tema */
+  border-radius: 18px !important;
+  min-width: 70px !important; /* Lebih lebar untuk wave animation */
+  color: white !important; /* Warna teks solid */
+  font-size: 15px !important; /* Sedikit lebih kecil */
+  font-weight: 500 !important; /* Tidak terlalu bold */
+  box-shadow: 0 4px 12px #000000 !important; /* Bayangan solid */
+  backdrop-filter: none !important; /* Hapus blur */
+  -webkit-backdrop-filter: none !important; /* Hapus blur untuk Safari */
+  border: 1px solid var(--bubble-border-color, var(--primary-color)) !important; /* Border solid sesuai tema */
+  transition: all 0.3s ease !important; /* Transisi halus */
+  animation: typingIndicatorPulse 2s infinite ease-in-out !important; /* Animasi pulse untuk indikator */
+  z-index: 10 !important; /* Pastikan terlihat di atas elemen lain */
+  position: relative !important; /* Untuk z-index */
+  visibility: visible !important;
+  opacity: 1 !important;
+  min-height: 40px !important; /* Pastikan tinggi minimum untuk wave animation */
+}
+
+/* Animasi pulse untuk typing indicator */
+@keyframes typingIndicatorPulse {
+  0%, 100% {
+    box-shadow: 0 4px 12px #000000;
+  }
+  50% {
+    box-shadow: 0 4px 15px #000000;
+  }
+}
+
+/* Container untuk animasi wave titik-titik */
+.typing-dots {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  height: 20px !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  z-index: 1000 !important;
+  padding: 0 8px !important;
+  margin: 3px auto 0 !important;
+  position: relative !important;
+  top: 2px !important;
+}
+
+/* Styling untuk setiap titik dalam wave animation */
+.typing-dot {
+  width: 6px !important;
+  height: 6px !important;
+  margin: 0 4px !important;
+  background-color: var(--text-color) !important; /* Gunakan variabel tema */
+  border-radius: 50% !important; /* Bentuk bulat untuk titik */
+  display: inline-block !important;
+  position: relative !important;
+  animation: typingWave 1.2s infinite ease-in-out !important;
+  box-shadow: 0 0 5px var(--bubble-border-color, var(--primary-color)) !important; /* Gunakan variabel tema */
+}
+
+/* Animasi yang berbeda untuk setiap titik */
+.typing-dot:nth-child(1) {
+  animation-delay: 0s !important;
+}
+
+.typing-dot:nth-child(2) {
+  animation-delay: 0.15s !important;
+}
+
+.typing-dot:nth-child(3) {
+  animation-delay: 0.3s !important;
+}
+
+/* Animasi wave untuk titik-titik */
+@keyframes typingWave {
+  0%, 100% {
+    transform: translateY(0);
+    opacity: 0.5;
+    box-shadow: 0 0 3px #0078d7;
+  }
+  50% {
+    transform: translateY(-10px);
+    opacity: 1;
+    box-shadow: 0 0 8px #0078d7;
+  }
+}
+
+
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Animasi untuk chat bubble masuk */
+@keyframes bubbleEntrance {
+  0% {
+    opacity: 0;
+    transform: scale(0.8) translateY(20px);
+  }
+  40% {
+    opacity: 1;
+  }
+  70% {
+    transform: scale(1.05) translateY(-2px);
+  }
+  100% {
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* Animasi untuk chat bubble keluar */
+@keyframes bubbleExit {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  20% {
+    transform: scale(1.05);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.8) translateY(20px);
+  }
+}
+
+/* Input Box - Modernisasi dengan efek glassmorphism yang lebih canggih */
+.input-container {
+  position: fixed; /* Tetap fixed agar tidak bergerak */
+  top: var(--input-top-position); /* Gunakan variabel untuk posisi top */
+  left: 50%; /* Posisi di tengah layar */
+  transform: translateX(-50%) !important; /* Transformasi untuk posisi di tengah */
+  width: var(--input-width); /* Gunakan variabel untuk lebar */
+  min-width: 350px; /* Lebar minimum */
+  max-width: 900px; /* Lebar maksimum */
+  height: var(--input-height); /* Gunakan variabel untuk tinggi */
+  margin: 0; /* Hapus margin auto karena kita menggunakan posisi absolut */
+  padding: 1vh 2vw; /* Gunakan padding berbasis persentase viewport */
+  box-sizing: border-box; /* Pastikan padding termasuk dalam perhitungan lebar dan tinggi */
+  border-radius: 30px;
+  background-color: var(--input-bg-color, var(--primary-color)); /* Warna latar sesuai tema */
+  background-image: none; /* Hapus gradien */
+  backdrop-filter: none; /* Hapus blur */
+  -webkit-backdrop-filter: none; /* Hapus blur untuk Safari */
+  overflow: visible;
+  z-index: 100; /* Tingkatkan z-index */
+  -webkit-app-region: drag; /* Buat seluruh container dapat di-drag */
+  cursor: move; /* Ubah cursor menjadi move */
+  pointer-events: auto !important; /* Pastikan input container dapat menerima event mouse */
+  border: 3px solid var(--input-border-color, var(--primary-color)); /* Border sesuai tema */
+  box-shadow: 0 6px 16px #000000; /* Bayangan solid lebih besar */
+  transition: all var(--transition-normal);
+  animation: inputContainerEntrance 0.8s cubic-bezier(0.16, 1, 0.3, 1.2);
+  overflow: hidden; /* Untuk efek shine */
+  /* Tambahan untuk mencegah miring */
+  perspective: none !important;
+  transform-style: flat !important;
+  rotate: 0deg !important; /* Pastikan tidak ada rotasi */
+  transform-origin: center !important; /* Tetapkan origin transformasi ke tengah */
+}
+
+/* Animasi entrance untuk input container */
+@keyframes inputContainerEntrance {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) !important; /* Transformasi untuk posisi di tengah */
+    filter: blur(5px);
+    top: calc(var(--input-top-position) - 4vh); /* Mulai dari atas layar menggunakan variabel */
+  }
+  60% {
+    opacity: 1;
+    transform: translateX(-50%) !important; /* Transformasi untuk posisi di tengah */
+    filter: blur(0);
+    top: calc(var(--input-top-position) + 1vh); /* Sedikit overshoot ke bawah menggunakan variabel */
+  }
+  80% {
+    transform: translateX(-50%) !important; /* Transformasi untuk posisi di tengah */
+    top: calc(var(--input-top-position) - 0.5vh); /* Sedikit overshoot ke atas menggunakan variabel */
+  }
+  100% {
+    transform: translateX(-50%) !important; /* Transformasi untuk posisi di tengah */
+    top: var(--input-top-position); /* Kembali ke posisi normal menggunakan variabel */
+  }
+}
+
+/* Animasi untuk efek shine pada input container */
+@keyframes inputShine {
+  0% {
+    left: -150%;
+  }
+  15%, 100% {
+    left: 150%;
+  }
+}
+
+/* Efek hover pada input container - lebih interaktif dan futuristik */
+.input-container:hover {
+  background-color: rgba(25, 30, 50, 0.65); /* Sedikit lebih gelap dan solid saat hover */
+  border-color: rgba(var(--primary-color-rgb), 0.3); /* Border lebih terlihat saat hover */
+  box-shadow: var(--shadow-strong),
+              var(--glow-strong) var(--glow-primary),
+              inset 0 1px 2px var(--glass-highlight); /* Bayangan lebih kuat dan glow effect */
+  /* Hapus transformasi vertikal untuk menjaga posisi tetap konsisten */
+  transform: translateX(-50%) !important; /* Tetap di tengah */
+}
+
+/* Efek hover pada input container - tambahan efek glow pada border */
+.input-container:hover::before {
+  content: '';
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  border-radius: 30px; /* Sesuaikan dengan border-radius input container */
+  background: linear-gradient(
+    135deg,
+    rgba(var(--primary-color-rgb), 0.5),
+    rgba(var(--tertiary-color-rgb), 0.3),
+    rgba(var(--accent-color-rgb), 0.5)
+  );
+  z-index: -1;
+  opacity: 0.5;
+  filter: blur(3px);
+  animation: borderGlow 3s infinite alternate;
+  pointer-events: none;
+}
+
+/* Animasi untuk efek glow pada border */
+@keyframes borderGlow {
+  0% {
+    opacity: 0.3;
+    filter: blur(2px);
+  }
+  100% {
+    opacity: 0.6;
+    filter: blur(4px);
+  }
+}
+
+/* Efek active pada input container - feedback saat diklik */
+.input-container:active {
+  transform: translateX(-50%) !important; /* Tetap di tengah */
+  box-shadow: var(--shadow-light),
+              var(--glow-light) var(--glow-primary),
+              inset 0 0 0 1px rgba(var(--primary-color-rgb), 0.2); /* Bayangan lebih kecil saat diklik */
+  transition: all var(--transition-fast); /* Transisi lebih cepat */
+  rotate: 0deg !important; /* Pastikan tidak ada rotasi */
+}
+
+/* Pastikan semua elemen di dalam input container dapat menerima event mouse */
+.input-container * {
+  pointer-events: auto !important;
+}
+
+/* Area drag khusus di bagian atas input container dihapus */
+
+/* Efek shine pada input container */
+.input-container::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -150%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
+  transform: skewX(-25deg);
+  animation: inputShine 12s infinite ease-in-out;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Area drag tambahan di sisi kanan input container dihapus */
+
+/* Efek neon border yang lebih modern dan halus */
+.neon-border {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  z-index: -1;
+  border-radius: 30px; /* Sesuaikan dengan border-radius input container */
+  background: linear-gradient(90deg, var(--primary-color), var(--secondary-color), var(--primary-color));
+  background-size: 300% 300%; /* Lebih besar untuk efek yang lebih halus */
+  animation: neonGlow 4s ease infinite; /* Animasi lebih lambat dan halus */
+  opacity: 0.85; /* Sedikit transparansi */
+  filter: blur(0.5px); /* Sedikit blur untuk efek yang lebih halus */
+}
+
+/* Efek neon saat mode listening */
+.listening .neon-border {
+  background: linear-gradient(90deg, var(--accent-color), #ff0000, var(--accent-color));
+  background-size: 200% 200%;
+  animation: neonGlow 1.5s ease infinite; /* Sedikit lebih lambat tapi tetap terlihat aktif */
+  opacity: 0.9; /* Lebih terlihat saat mode listening */
+}
+
+/* Animasi neon glow yang lebih halus */
+@keyframes neonGlow {
+  0% {
+    background-position: 0% 50%;
+    box-shadow: 0 0 10px rgba(var(--primary-color-rgb), 0.7),
+                0 0 20px rgba(var(--primary-color-rgb), 0.4),
+                0 0 30px rgba(var(--primary-color-rgb), 0.2);
+  }
+  50% {
+    background-position: 100% 50%;
+    box-shadow: 0 0 15px rgba(var(--secondary-color-rgb), 0.7),
+                0 0 30px rgba(var(--secondary-color-rgb), 0.4),
+                0 0 45px rgba(var(--secondary-color-rgb), 0.2);
+  }
+  100% {
+    background-position: 0% 50%;
+    box-shadow: 0 0 10px rgba(var(--primary-color-rgb), 0.7),
+                0 0 20px rgba(var(--primary-color-rgb), 0.4),
+                0 0 30px rgba(var(--primary-color-rgb), 0.2);
+  }
+}
+
+form {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  -webkit-app-region: no-drag !important; /* Mencegah drag dari form */
+  cursor: default; /* Reset cursor */
+  pointer-events: auto !important; /* Pastikan form dapat menerima event mouse */
+}
+
+/* Pastikan semua elemen interaktif di dalam form tidak dapat di-drag */
+form *,
+form *::before,
+form *::after,
+.input-box,
+.submit-button,
+.voice-button,
+.menu-button {
+  -webkit-app-region: no-drag !important;
+  cursor: default;
+  pointer-events: auto !important; /* Pastikan semua elemen dapat menerima event mouse */
+}
+
+.input-box {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 18px;
+  padding: 14px 22px;
+  outline: none;
+  -webkit-app-region: no-drag !important; /* Penting: mencegah drag dari input box agar bisa mengetik */
+  pointer-events: auto !important; /* Pastikan input box menerima event mouse/keyboard */
+  cursor: text !important; /* Pastikan cursor adalah text saat di atas input */
+  font-weight: 400; /* Sedikit lebih ringan untuk tampilan modern */
+  letter-spacing: 0.3px; /* Sedikit spasi antar huruf untuk keterbacaan */
+  transition: all 0.2s ease;
+  z-index: 10; /* Pastikan input box di atas elemen lain */
+}
+
+/* Efek focus pada input box */
+.input-box:focus {
+  color: rgba(255, 255, 255, 0.95); /* Sedikit lebih terang saat focus */
+}
+
+.input-box::placeholder {
+  color: rgba(255, 255, 255, 0.5); /* Sedikit lebih redup untuk kontras */
+  transition: color 0.3s ease, transform 0.3s ease;
+  font-size: 18px; /* Ukuran font yang sama dengan input box */
+}
+
+.input-box:focus::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+  transform: translateX(3px); /* Efek bergeser saat focus */
+}
+
+.input-container:hover .input-box::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* Tombol-tombol dengan efek modern dan futuristik */
+.submit-button, .voice-button, .menu-button {
+  background: rgba(255, 255, 255, 0.08); /* Sedikit latar untuk terlihat */
+  background-image: linear-gradient(
+    135deg,
+    rgba(var(--primary-color-rgb), 0.05) 0%,
+    rgba(var(--tertiary-color-rgb), 0.02) 40%,
+    rgba(0, 0, 0, 0.05) 100%
+  ); /* Gradien halus untuk kedalaman */
+  border: none;
+  color: white;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer !important;
+  transition: all var(--transition-normal);
+  border-radius: 50%;
+  -webkit-app-region: no-drag !important; /* Mencegah drag dari tombol */
+  pointer-events: auto !important; /* Pastikan tombol menerima event mouse */
+  position: relative;
+  overflow: hidden; /* Penting untuk efek ripple */
+  margin: 0 4px; /* Sedikit margin antar tombol */
+  backdrop-filter: blur(var(--blur-medium)); /* Efek blur untuk tombol */
+  -webkit-backdrop-filter: blur(var(--blur-medium)); /* Untuk Safari */
+  border: var(--glass-border-light); /* Border dengan variabel */
+  box-shadow: var(--shadow-light),
+              inset 0 1px 1px var(--glass-highlight); /* Bayangan dengan variabel */
+  text-shadow: var(--text-shadow); /* Bayangan teks */
+  z-index: 10; /* Pastikan tombol di atas elemen lain */
+}
+
+/* Efek hover pada tombol - lebih interaktif dan futuristik */
+.submit-button:hover, .voice-button:hover, .menu-button:hover {
+  background-color: rgba(var(--primary-color-rgb), 0.15);
+  transform: scale(1.08) translateY(-2px); /* Lebih besar dan terangkat */
+  box-shadow: var(--shadow-medium),
+              var(--glow-medium) var(--glow-primary),
+              inset 0 1px 1px var(--glass-highlight); /* Glow effect dengan variabel */
+  color: rgba(255, 255, 255, 1); /* Warna teks lebih terang saat hover */
+  border-color: rgba(var(--primary-color-rgb), 0.25); /* Border lebih terlihat */
+}
+
+/* Efek glow pada tombol saat hover */
+.submit-button::before, .voice-button::before, .menu-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    circle at center,
+    rgba(var(--primary-color-rgb), 0.3),
+    transparent 70%
+  );
+  opacity: 0;
+  transition: opacity var(--transition-normal);
+  pointer-events: none;
+  z-index: -1;
+}
+
+.submit-button:hover::before, .voice-button:hover::before, .menu-button:hover::before {
+  opacity: 1;
+}
+
+/* Efek ripple untuk tombol */
+.submit-button::after, .voice-button::after, .menu-button::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 5px;
+  height: 5px;
+  background: rgba(var(--primary-color-rgb), 0.7);
+  opacity: 0;
+  border-radius: 100%;
+  transform: scale(1, 1) translate(-50%, -50%);
+  transform-origin: 50% 50%;
+}
+
+.submit-button:active::after, .voice-button:active::after, .menu-button:active::after {
+  animation: ripple 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes ripple {
+  0% {
+    transform: scale(0, 0) translate(-50%, -50%);
+    opacity: 0.7;
+  }
+  50% {
+    opacity: 0.4;
+  }
+  100% {
+    transform: scale(25, 25) translate(-50%, -50%);
+    opacity: 0;
+  }
+}
+
+/* Styling khusus untuk menu button */
+.menu-button {
+  background: linear-gradient(135deg,
+    rgba(var(--primary-color-rgb), 0.1),
+    rgba(var(--tertiary-color-rgb), 0.1)
+  );
+  border: 1px solid rgba(var(--primary-color-rgb), 0.1);
+}
+
+/* Styling khusus untuk submit button */
+.submit-button {
+  background: linear-gradient(135deg,
+    rgba(var(--accent-color-rgb), 0.1),
+    rgba(var(--primary-color-rgb), 0.1)
+  );
+  border: 1px solid rgba(var(--accent-color-rgb), 0.1);
+}
+
+/* Styling khusus untuk voice button */
+.voice-button {
+  background: linear-gradient(135deg,
+    rgba(var(--tertiary-color-rgb), 0.1),
+    rgba(var(--secondary-color-rgb), 0.1)
+  );
+  border: 1px solid rgba(var(--tertiary-color-rgb), 0.1);
+}
+
+/* Efek active pada tombol - lebih responsif dan taktil */
+.submit-button:active, .voice-button:active, .menu-button:active {
+  transform: scale(0.92); /* Lebih mengecil saat diklik untuk feedback taktil */
+  background-color: rgba(var(--primary-color-rgb), 0.25); /* Warna latar berubah saat diklik */
+  box-shadow: var(--shadow-light),
+              var(--glow-light) var(--glow-primary),
+              inset 0 1px 3px rgba(0, 0, 0, 0.2); /* Bayangan inset untuk efek ditekan */
+  transition: all var(--transition-fast); /* Transisi lebih cepat saat diklik */
+}
+
+/* Efek ripple yang lebih canggih */
+.ripple {
+  position: absolute;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.4);
+  transform: scale(0);
+  animation: ripple-animation 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+}
+
+@keyframes ripple-animation {
+  0% {
+    transform: scale(0);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(2.5);
+    opacity: 0;
+  }
+}
+
+/* Efek Ripple */
+.ripple {
+  position: absolute;
+  background-color: rgba(255, 255, 255, 0.6);
+  border-radius: 50%;
+  transform: scale(0);
+  animation: ripple-animation 0.6s cubic-bezier(0, 0.2, 0.8, 1);
+  pointer-events: none !important; /* Pastikan tidak mengganggu event mouse */
+  z-index: 10; /* Pastikan ripple di atas konten tombol */
+}
+
+/* Animasi untuk efek ripple */
+@keyframes ripple-animation {
+  0% {
+    transform: scale(0);
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+/* Tambahkan class untuk tombol yang mendukung ripple */
+.ripple-button {
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+/* Tombol Window Control di Input Container */
+.window-controls {
+  position: absolute;
+  top: -35px;
+  right: 10px;
+  display: flex;
+  gap: 12px;
+  z-index: 101; /* Lebih tinggi dari input container */
+  pointer-events: auto !important; /* Pastikan dapat menerima event mouse */
+}
+
+/* Pastikan semua elemen di dalam window controls dapat menerima event mouse */
+.window-controls * {
+  pointer-events: auto !important;
+}
+
+.window-control-button {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  font-size: 14px;
+  -webkit-app-region: no-drag;
+  position: relative;
+  overflow: hidden; /* Penting untuk efek ripple */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.window-minimize {
+  background: linear-gradient(135deg, #FFBD44, #FFD500);
+}
+
+.window-minimize span {
+  color: rgba(0, 0, 0, 0.5);
+  font-weight: bold;
+  position: relative;
+  top: -2px;
+}
+
+.window-close {
+  background: linear-gradient(135deg, #FF605C, #FF3860);
+}
+
+.window-close span {
+  color: rgba(0, 0, 0, 0.5);
+  font-weight: bold;
+  position: relative;
+  top: -1px;
+}
+
+.window-control-button:hover {
+  transform: scale(1.1) translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.25),
+              0 0 10px rgba(255, 255, 255, 0.2);
+  filter: brightness(1.1);
+}
+
+.window-control-button:active {
+  transform: scale(0.95);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.voice-button.active {
+  color: var(--accent-color);
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.7;
+    border-color: rgba(0, 100, 255, 0.3);
+  }
+  50% {
+    transform: scale(1.02);
+    opacity: 1;
+    border-color: rgba(0, 100, 255, 0.8);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0.7;
+    border-color: rgba(0, 100, 255, 0.3);
+  }
+}
+
+/* Drag mode styles */
+.drag-mode {
+  cursor: move !important;
+}
+
+#drag-overlay {
+  animation: pulse 1s infinite;
+  pointer-events: none !important;
+}
+
+/* Hide Chat Button */
+.hide-chat-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background-color: rgba(50, 50, 50, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 100;
+  transition: all 0.2s ease;
+  pointer-events: auto !important; /* Pastikan dapat menerima event mouse */
+  position: relative;
+  overflow: hidden; /* Penting untuk efek ripple */
+}
+
+.hide-chat-btn span {
+  color: white;
+  font-size: 18px;
+  line-height: 1;
+  z-index: 2; /* Pastikan teks tetap di atas efek ripple */
+}
+
+.hide-chat-btn:hover {
+  background-color: rgba(255, 50, 50, 0.7);
+  transform: scale(1.1);
+  box-shadow: 0 0 8px rgba(255, 50, 50, 0.5);
+}
+
+/* Voice Visualizer */
+.voice-visualizer-container {
+  position: fixed;
+  top: var(--chat-top); /* Gunakan variabel untuk posisi top */
+  left: var(--element-left-position); /* Gunakan variabel untuk posisi horizontal yang konsisten */
+  transform: translateX(var(--element-transform-x)); /* Gunakan variabel untuk transformasi yang konsisten */
+  width: var(--chat-width); /* Gunakan variabel untuk lebar */
+  min-width: 350px; /* Lebar minimum */
+  max-width: 900px; /* Lebar maksimum */
+  height: 100px;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  animation: fadeIn 0.3s ease;
+  z-index: 90; /* Di bawah input container tapi di atas chat */
+  pointer-events: auto !important; /* Pastikan dapat menerima event mouse */
+}
+
+.voice-visualizer {
+  width: 100%;
+  height: 100%;
+}
+
+/* Slide Menu - Redesain dengan efek glassmorphism modern dan futuristik yang selaras dengan input container */
+.slide-menu {
+  position: fixed;
+  top: calc(var(--input-top-position) + var(--input-height) + 20px); /* Posisikan di bawah input container */
+  left: var(--element-left-position); /* Gunakan variabel untuk posisi horizontal yang konsisten */
+  transform: translateX(var(--element-transform-x)) translateY(0); /* Gunakan variabel untuk transformasi yang konsisten */
+  width: var(--input-width); /* Gunakan lebar yang sama dengan input container */
+  min-width: 350px; /* Lebar minimum */
+  max-width: 900px; /* Lebar maksimum */
+  background-color: var(--menu-bg-color, var(--primary-color)); /* Warna latar sesuai tema */
+  background-image: none; /* Hapus gradien */
+  backdrop-filter: none; /* Hapus blur */
+  -webkit-backdrop-filter: none; /* Hapus blur untuk Safari */
+  border-radius: 25px; /* Radius yang konsisten */
+  padding: 30px; /* Padding lebih besar untuk kenyamanan */
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1.2); /* Transisi lebih halus dengan sedikit bounce */
+  z-index: 1000;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2); /* Bayangan yang selaras dengan input container */
+  max-height: 70vh; /* Kurangi sedikit max-height agar tidak terlalu tinggi */
+  overflow-y: auto !important; /* Pastikan overflow-y: auto dengan !important */
+  overflow-x: visible !important; /* Ubah ke visible agar submenu tidak terpotong */
+  pointer-events: none;
+  border: 1px solid var(--menu-border-color, var(--primary-color)); /* Border sesuai tema */
+  opacity: 0;
+  visibility: hidden;
+  scrollbar-width: thin; /* Untuk Firefox */
+  scrollbar-color: rgba(var(--primary-color-rgb), 0.5) rgba(0, 0, 0, 0.1); /* Untuk Firefox */
+}
+
+/* Scrollbar untuk slide menu */
+.slide-menu::-webkit-scrollbar {
+  width: 8px; /* Sedikit lebih lebar agar lebih mudah digunakan */
+  height: 8px;
+}
+
+.slide-menu::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  margin: 5px 0;
+}
+
+.slide-menu::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg,
+              rgba(var(--primary-color-rgb), 0.5) 0%,
+              rgba(var(--tertiary-color-rgb), 0.5) 100%);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 5px rgba(var(--primary-color-rgb), 0.3);
+}
+
+.slide-menu::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg,
+              rgba(var(--primary-color-rgb), 0.7) 0%,
+              rgba(var(--tertiary-color-rgb), 0.7) 100%);
+  cursor: pointer;
+}
+
+/* Tambahkan scrollbar corner styling */
+.slide-menu::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+.slide-menu.active {
+  transform: translateX(var(--element-transform-x)) translateY(0);
+  pointer-events: auto !important;
+  opacity: 1;
+  visibility: visible;
+  animation: slideMenuAppear 0.5s cubic-bezier(0.16, 1, 0.3, 1.2); /* Animasi saat muncul */
+}
+
+/* Animasi untuk slide menu saat muncul */
+@keyframes slideMenuAppear {
+  0% {
+    transform: translateX(var(--element-transform-x)) translateY(20px);
+    opacity: 0;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+  }
+  60% {
+    transform: translateX(var(--element-transform-x)) translateY(-5px); /* Sedikit overshoot */
+    opacity: 0.9;
+  }
+  80% {
+    transform: translateX(var(--element-transform-x)) translateY(2px); /* Bounce back */
+  }
+  100% {
+    transform: translateX(var(--element-transform-x)) translateY(0);
+    opacity: 1;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4),
+                0 0 20px rgba(var(--primary-color-rgb), 0.15);
+  }
+}
+
+.menu-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px; /* Margin lebih besar */
+  border-bottom: 1px solid rgba(var(--primary-color-rgb), 0.15); /* Border berwarna */
+  padding-bottom: 18px; /* Padding lebih besar */
+  position: sticky; /* Buat header tetap terlihat saat scroll */
+  top: 0; /* Posisikan di bagian atas */
+  z-index: 10; /* Pastikan di atas konten lain */
+  background: inherit; /* Gunakan background yang sama dengan parent */
+  backdrop-filter: inherit; /* Gunakan backdrop filter yang sama dengan parent */
+  -webkit-backdrop-filter: inherit; /* Untuk Safari */
+  margin-top: -10px; /* Kompensasi untuk padding parent */
+  padding-top: 10px; /* Tambahkan padding atas */
+}
+
+.menu-header::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 100px;
+  height: 2px;
+  background: linear-gradient(90deg,
+              rgba(var(--primary-color-rgb), 0.8),
+              rgba(var(--tertiary-color-rgb), 0.4));
+  border-radius: 2px;
+}
+
+.menu-header h3 {
+  color: white;
+  margin: 0;
+  font-size: 22px; /* Ukuran font lebih besar */
+  font-weight: 500; /* Tidak terlalu bold */
+  letter-spacing: 0.5px; /* Sedikit spasi antar huruf */
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3); /* Bayangan teks */
+  background: linear-gradient(90deg, #ffffff, rgba(var(--primary-color-rgb), 0.9));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.close-menu {
+  background: rgba(255, 255, 255, 0.08); /* Sedikit latar untuk tombol */
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+  width: 38px; /* Ukuran tetap */
+  height: 38px; /* Ukuran tetap */
+  border-radius: 50%; /* Bentuk bulat */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow: hidden; /* Untuk efek ripple */
+}
+
+.close-menu:hover {
+  background: rgba(var(--accent-color-rgb), 0.15); /* Warna latar berubah saat hover */
+  transform: scale(1.05) translateY(-2px); /* Sedikit membesar saat hover */
+  box-shadow: 0 5px 15px rgba(var(--accent-color-rgb), 0.25),
+              0 0 10px rgba(var(--accent-color-rgb), 0.15); /* Glow effect */
+  border-color: rgba(var(--accent-color-rgb), 0.2);
+}
+
+.close-menu:active {
+  transform: scale(0.95);
+  box-shadow: 0 2px 8px rgba(var(--accent-color-rgb), 0.2);
+}
+
+.menu-content {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  /* Pastikan menu content tidak terlalu panjang */
+  max-height: calc(70vh - 80px); /* 70vh dikurangi tinggi header menu */
+  overflow-y: auto;
+  overflow-x: visible; /* Ubah ke visible agar submenu tidak terpotong */
+  padding-right: 5px; /* Tambahkan padding untuk scrollbar */
+}
+
+.menu-item {
+  padding: 16px 20px; /* Padding lebih besar */
+  border-radius: 14px; /* Radius lebih besar */
+  background: linear-gradient(135deg,
+              rgba(var(--primary-color-rgb), 0.08) 0%,
+              rgba(var(--tertiary-color-rgb), 0.05) 100%); /* Gradien yang selaras dengan input container */
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); /* Transisi dengan efek bounce */
+  border: 1px solid rgba(var(--primary-color-rgb), 0.15); /* Border yang selaras dengan input container */
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15),
+              0 0 10px rgba(var(--primary-color-rgb), 0.1); /* Bayangan yang selaras dengan input container */
+  font-weight: 500; /* Sedikit lebih bold */
+  letter-spacing: 0.3px; /* Sedikit spasi antar huruf */
+  position: relative;
+  overflow: hidden; /* Untuk efek ripple */
+  display: flex;
+  align-items: center;
+  gap: 15px; /* Jarak antara ikon dan teks */
+}
+
+.menu-item-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: linear-gradient(135deg,
+              rgba(var(--primary-color-rgb), 0.15) 0%,
+              rgba(var(--tertiary-color-rgb), 0.1) 100%);
+  color: white;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(var(--primary-color-rgb), 0.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.menu-item:hover .menu-item-icon {
+  background: linear-gradient(135deg,
+              rgba(var(--primary-color-rgb), 0.25) 0%,
+              rgba(var(--tertiary-color-rgb), 0.2) 100%);
+  transform: scale(1.1) rotate(5deg);
+  box-shadow: 0 4px 12px rgba(var(--primary-color-rgb), 0.2),
+              0 0 10px rgba(var(--primary-color-rgb), 0.15);
+  border-color: rgba(var(--primary-color-rgb), 0.2);
+}
+
+.menu-item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 3px;
+  background: linear-gradient(180deg,
+              rgba(var(--primary-color-rgb), 0.7),
+              rgba(var(--tertiary-color-rgb), 0.7));
+  opacity: 0;
+  transition: all 0.3s ease;
+  border-radius: 3px;
+}
+
+.menu-item:hover {
+  background: linear-gradient(135deg,
+              rgba(var(--primary-color-rgb), 0.15) 0%,
+              rgba(var(--tertiary-color-rgb), 0.1) 100%); /* Gradien saat hover yang selaras */
+  transform: translateY(-2px) translateX(2px); /* Sedikit terangkat saat hover */
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2),
+              0 0 20px rgba(var(--primary-color-rgb), 0.25); /* Bayangan dan glow effect yang selaras dengan input container */
+  border-color: rgba(var(--primary-color-rgb), 0.3);
+}
+
+.menu-item:hover::before {
+  opacity: 1;
+}
+
+.menu-section {
+  padding: 22px; /* Padding lebih besar */
+  margin: 5px 0 25px; /* Margin lebih besar */
+  background: linear-gradient(135deg,
+              rgba(25, 30, 45, 0.5) 0%,
+              rgba(20, 25, 40, 0.6) 100%); /* Gradien yang selaras dengan input container */
+  border-radius: 16px; /* Radius lebih besar */
+  display: none;
+  animation: fadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1); /* Animasi lebih halus */
+  border: 1px solid rgba(var(--primary-color-rgb), 0.15); /* Border berwarna yang selaras */
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.1),
+              0 5px 15px rgba(0, 0, 0, 0.1),
+              0 0 10px rgba(var(--primary-color-rgb), 0.1); /* Bayangan yang selaras dengan input container */
+  position: relative;
+  overflow: visible; /* Pastikan konten tidak terpotong */
+}
+
+.menu-section::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100px;
+  height: 100px;
+  background: radial-gradient(circle at top right,
+              rgba(var(--primary-color-rgb), 0.1),
+              transparent 70%);
+  pointer-events: none;
+  z-index: -1; /* Pastikan efek dekorasi tidak menghalangi konten */
+}
+
+.menu-section.active {
+  display: block;
+  animation: sectionFadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Communication Hub Section */
+.communication-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.model-selection {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-bottom: 10px;
+}
+
+.model-option {
+  flex: 1;
+  min-width: 100px;
+  background: rgba(30, 35, 50, 0.6);
+  padding: 10px;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.model-option:hover {
+  background: rgba(40, 45, 60, 0.8);
+  transform: translateY(-2px);
+}
+
+.parameter-description {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.7);
+  margin-top: 5px;
+}
+
+.auto-fallback-description,
+.model-rotation-description,
+.response-caching-description {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.7);
+  margin-top: 5px;
+}
+
+#temperature-value,
+#top-p-value {
+  font-weight: bold;
+  color: var(--accent-color);
+}
+
+#max-tokens-input {
+  width: 100%;
+  padding: 8px 12px;
+  border-radius: 6px;
+  background: rgba(30, 35, 50, 0.6) !important;
+  color: var(--text-color);
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+#max-tokens-input:focus {
+  background: rgba(40, 45, 60, 0.8) !important;
+  box-shadow: 0 0 0 2px rgba(var(--primary-color-rgb), 0.3) !important;
+}
+
+#communication-status {
+  margin-top: 10px;
+  padding: 8px;
+  border-radius: 6px;
+  font-size: 14px;
+  text-align: center;
+}
+
+#communication-status.success {
+  background: rgba(var(--success-color-rgb), 0.2);
+  color: var(--success-color);
+}
+
+#communication-status.error {
+  background: rgba(var(--error-color-rgb), 0.2);
+  color: var(--error-color);
+}
+
+/* Scrollbar untuk menu content */
+.menu-content::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.menu-content::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  margin: 4px 0;
+}
+
+.menu-content::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg,
+              rgba(var(--primary-color-rgb), 0.4) 0%,
+              rgba(var(--tertiary-color-rgb), 0.4) 100%);
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.menu-content::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg,
+              rgba(var(--primary-color-rgb), 0.6) 0%,
+              rgba(var(--tertiary-color-rgb), 0.6) 100%);
+  cursor: pointer;
+}
+
+@keyframes sectionFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(10px) scale(0.98);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.menu-section p {
+  margin: 10px 0; /* Margin lebih besar */
+  font-size: 15px; /* Ukuran font lebih besar */
+  line-height: 1.7; /* Line height lebih besar */
+  color: rgba(255, 255, 255, 0.85); /* Warna teks lebih terang */
+  letter-spacing: 0.2px; /* Sedikit spasi antar huruf */
+}
+
+/* Theme Selector */
+.theme-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.theme-option {
+  padding: 8px 15px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.theme-option:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.theme-option.active {
+  background-color: var(--primary-color);
+  color: #000;
+  font-weight: 500;
+}
+
+/* API Settings Form */
+.api-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-group label {
+  font-size: 14px;
+  color: #ccc;
+}
+
+.form-group input,
+.form-group select {
+  padding: 8px 12px;
+  border-radius: 6px;
+  background-color: rgba(60, 60, 60, 0.8);
+  border: 1px solid rgba(100, 100, 100, 0.5);
+  color: white;
+  font-size: 14px;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px rgba(var(--primary-color-rgb), 0.3) !important;
+}
+
+.button-group {
+  display: flex;
+  gap: 8px;
+}
+
+.btn {
+  padding: 8px 16px;
+  border-radius: 6px;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden; /* Penting untuk efek ripple */
+}
+
+.btn:hover {
+  background-color: var(--secondary-color);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.btn-secondary {
+  background-color: rgba(100, 100, 100, 0.8);
+}
+
+.btn-secondary:hover {
+  background-color: rgba(120, 120, 120, 0.9);
+}
+
+/* Display Mode Toggle - Dihapus */
+
+.display-mode-option {
+  flex: 1;
+  padding: 12px;
+  background: linear-gradient(135deg,
+    rgba(var(--primary-color-rgb), 0.08) 0%,
+    rgba(var(--tertiary-color-rgb), 0.05) 100%);
+  border-radius: 12px;
+  text-align: center;
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  border: var(--glass-border-light);
+  box-shadow: var(--shadow-light);
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
+
+.display-mode-option:hover {
+  background: linear-gradient(135deg,
+    rgba(var(--primary-color-rgb), 0.15) 0%,
+    rgba(var(--tertiary-color-rgb), 0.1) 100%);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-medium),
+              var(--glow-light) var(--glow-primary);
+}
+
+.display-mode-option.active {
+  background: linear-gradient(135deg,
+    rgba(var(--primary-color-rgb), 0.25) 0%,
+    rgba(var(--tertiary-color-rgb), 0.2) 100%);
+  border: 1px solid rgba(var(--primary-color-rgb), 0.3);
+  box-shadow: var(--shadow-medium),
+              var(--glow-medium) var(--glow-primary),
+              inset 0 1px 1px var(--glass-highlight);
+}
+
+.display-mode-option.active::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg,
+    rgba(var(--primary-color-rgb), 0.7),
+    rgba(var(--tertiary-color-rgb), 0.7));
+}
+
+.display-mode-option .icon {
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
+.display-mode-option .label {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* Toggle Switch untuk Tools */
+.toggle-container {
+  display: flex;
+  align-items: center;
+  margin: 10px 0;
+}
+
+.toggle-checkbox {
+  display: none;
+}
+
+.toggle-label {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 24px;
+  background-color: rgba(100, 100, 100, 0.5);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  pointer-events: auto !important;
+}
+
+.toggle-label:after {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: white;
+  top: 2px;
+  left: 2px;
+  transition: all 0.3s ease;
+}
+
+.toggle-checkbox:checked + .toggle-label {
+  background-color: var(--primary-color);
+}
+
+.toggle-checkbox:checked + .toggle-label:after {
+  left: calc(100% - 22px);
+}
+
+.toggle-text {
+  margin-left: 10px;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.tools-description {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.6);
+  margin-top: 5px;
+  line-height: 1.4;
+}
+
+.status-message {
+  margin-top: 10px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 14px;
+  display: none;
+}
+
+.status-message.success {
+  display: block;
+  background-color: rgba(0, 200, 0, 0.2);
+  color: #00ff00;
+  border: 1px solid rgba(0, 200, 0, 0.3);
+}
+
+.status-message.error {
+  display: block;
+  background-color: rgba(200, 0, 0, 0.2);
+  color: #ff5555;
+  border: 1px solid rgba(200, 0, 0, 0.3);
+}
+
+.status-message.info {
+  display: block;
+  background-color: rgba(0, 100, 200, 0.2);
+  color: #55aaff;
+  border: 1px solid rgba(0, 100, 200, 0.3);
+}
+
+/* Slider styles */
+.slider-container {
+  width: 100%;
+  margin: 10px 0;
+}
+
+.slider {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 6px;
+  border-radius: 5px;
+  background: rgba(var(--primary-color-rgb), 0.3);
+  outline: none;
+  transition: all 0.3s;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--primary-color);
+  cursor: pointer;
+  box-shadow: 0 0 5px rgba(var(--primary-color-rgb), 0.5) !important;
+  transition: all 0.3s;
+}
+
+.slider::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--primary-color);
+  cursor: pointer;
+  box-shadow: 0 0 5px rgba(var(--primary-color-rgb), 0.5) !important;
+  transition: all 0.3s;
+}
+
+.slider:hover {
+  background: rgba(var(--primary-color-rgb), 0.4);
+}
+
+.slider:hover::-webkit-slider-thumb {
+  background: var(--accent-color);
+  box-shadow: 0 0 8px rgba(var(--accent-color-rgb), 0.7) !important;
+  transform: scale(1.1);
+}
+
+.slider:hover::-moz-range-thumb {
+  background: var(--accent-color);
+  box-shadow: 0 0 8px rgba(var(--accent-color-rgb), 0.7) !important;
+  transform: scale(1.1);
+}
+
+.slider:active::-webkit-slider-thumb {
+  background: var(--tertiary-color);
+  box-shadow: 0 0 10px rgba(var(--tertiary-color-rgb), 0.8) !important;
+  transform: scale(1.2);
+}
+
+.slider:active::-moz-range-thumb {
+  background: var(--tertiary-color);
+  box-shadow: 0 0 10px rgba(var(--tertiary-color-rgb), 0.8) !important;
+  transform: scale(1.2);
+}
+
+/* Styling untuk MCP Configuration */
+.mcp-description {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 15px;
+}
+
+.mcp-servers-list {
+  margin-bottom: 15px;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.mcp-server-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgba(30, 30, 30, 0.7);
+  border-radius: 6px;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid rgba(var(--primary-color-rgb), 0.3);
+  transition: all 0.2s ease;
+}
+
+.mcp-server-item:hover {
+  border-color: rgba(var(--primary-color-rgb), 0.6);
+  background-color: rgba(40, 40, 40, 0.8);
+}
+
+.mcp-server-info {
+  flex: 1;
+}
+
+.mcp-server-name {
+  font-weight: 500;
+  color: var(--primary-color);
+  margin-bottom: 5px;
+}
+
+.mcp-server-command {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.mcp-server-actions {
+  display: flex;
+  gap: 5px;
+}
+
+.mcp-server-actions button {
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.6);
+  cursor: pointer;
+  padding: 5px;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.mcp-server-actions button:hover {
+  color: var(--primary-color);
+  background-color: rgba(var(--primary-color-rgb), 0.1);
+}
+
+.mcp-server-actions .edit-server {
+  color: var(--primary-color);
+}
+
+.mcp-server-actions .delete-server {
+  color: #ff5252;
+}
+
+.mcp-server-actions .edit-server:hover {
+  color: var(--accent-color);
+}
+
+.mcp-server-actions .delete-server:hover {
+  color: #ff0000;
+  background-color: rgba(255, 0, 0, 0.1);
+}
+
+/* Modal Styling */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  pointer-events: auto !important;
+}
+
+.modal-content {
+  position: relative;
+  background-color: rgba(30, 30, 30, 0.95);
+  margin: 10% auto;
+  padding: 0;
+  border-radius: 10px;
+  width: 80%;
+  max-width: 500px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(var(--primary-color-rgb), 0.3);
+  pointer-events: auto !important;
+}
+
+.modal-header {
+  padding: 15px;
+  border-bottom: 1px solid rgba(var(--primary-color-rgb), 0.3);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-header h3 {
+  margin: 0;
+  color: var(--primary-color);
+}
+
+.close-modal {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close-modal:hover {
+  color: var(--accent-color);
+}
+
+.modal-body {
+  padding: 15px;
+}
+
+.modal-footer {
+  padding: 15px;
+  border-top: 1px solid rgba(var(--primary-color-rgb), 0.3);
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.modal textarea {
+  width: 100%;
+  background-color: rgba(20, 20, 20, 0.8);
+  color: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(var(--primary-color-rgb), 0.3);
+  border-radius: 4px;
+  padding: 8px 12px;
+  font-family: monospace;
+  resize: vertical;
+  min-height: 80px;
+}
+
+.modal textarea:focus {
+  outline: none;
+  border-color: var(--primary-color);
+}
+
+/* Styling untuk Tool Results */
+.tool-result {
+  margin-top: 10px;
+  background-color: rgba(30, 30, 30, 0.7);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(var(--primary-color-rgb), 0.3);
+  transition: all 0.3s ease;
+  pointer-events: auto !important;
+}
+
+.tool-result:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  border-color: rgba(var(--primary-color-rgb), 0.5);
+  transform: translateY(-2px);
+}
+
+.tool-header {
+  display: flex;
+  align-items: center;
+  padding: 8px 12px;
+  background-color: rgba(var(--primary-color-rgb), 0.2);
+  border-bottom: 1px solid rgba(var(--primary-color-rgb), 0.3);
+  pointer-events: auto !important;
+}
+
+.tool-icon {
+  font-size: 18px;
+  margin-right: 8px;
+}
+
+.tool-name {
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.tool-content {
+  padding: 12px;
+  pointer-events: auto !important;
+}
+
+/* Weather Tool Styling */
+.weather-result {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.weather-location {
+  font-weight: 500;
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.weather-main {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.weather-temp {
+  font-size: 24px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.weather-condition {
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.weather-details {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.weather-note {
+  margin-top: 8px;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.6);
+  font-style: italic;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 8px;
+}
+
+/* Search Tool Styling */
+.search-result {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.search-query {
+  font-weight: 500;
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 5px;
+}
+
+.search-results {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.search-result-item {
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.search-result-item:last-child {
+  border-bottom: none;
+}
+
+.search-result-title {
+  display: block;
+  color: var(--primary-color);
+  text-decoration: none;
+  font-weight: 500;
+  margin-bottom: 4px;
+  transition: color 0.2s ease;
+  pointer-events: auto !important;
+}
+
+.search-result-title:hover {
+  color: var(--accent-color);
+  text-decoration: underline;
+}
+
+.search-result-snippet {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.4;
+}
+
+.search-note {
+  margin-top: 8px;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.6);
+  font-style: italic;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 8px;
+}
+
+/* Time Tool Styling */
+.time-result {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+.time-main {
+  font-size: 28px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.time-date {
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.time-timezone {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.7);
+  margin-top: 5px;
+}
+
+/* Generic Tool Result Styling */
+.generic-tool-result pre {
+  background-color: rgba(0, 0, 0, 0.2);
+  padding: 10px;
+  border-radius: 5px;
+  overflow-x: auto;
+  font-family: 'Consolas', 'Monaco', monospace;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.8);
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+/* Screenshot Widget */
+.screenshot-result {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-top: 10px;
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.screenshot-image-container {
+  width: 100%;
+  max-height: 300px;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.screenshot-image {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+.screenshot-info {
+  padding: 8px;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.7);
+  text-align: right;
+}
+
+.screenshot-error {
+  padding: 10px;
+  background-color: rgba(255, 0, 0, 0.2);
+  border-radius: 8px;
+  color: #ff6b6b;
+}
+
+/* Application Widget */
+.application-result {
+  margin-top: 10px;
+  padding: 10px;
+  background-color: rgba(0, 255, 0, 0.1);
+  border-radius: 8px;
+}
+
+.application-success {
+  display: flex;
+  align-items: center;
+}
+
+.success-icon {
+  font-size: 18px;
+  color: #00ff00;
+  margin-right: 10px;
+}
+
+.application-error {
+  padding: 10px;
+  background-color: rgba(255, 0, 0, 0.2);
+  border-radius: 8px;
+  color: #ff6b6b;
+}
+
+/* Running Applications Widget */
+.running-apps-result {
+  margin-top: 10px;
+  padding: 10px;
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 8px;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.running-apps-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+}
+
+.app-item {
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 5px;
+}
+
+.app-icon {
+  margin-right: 8px;
+}
+
+.app-name {
+  font-size: 12px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.running-apps-info {
+  margin-top: 10px;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.7);
+  text-align: right;
+}
+
+.no-apps {
+  padding: 10px;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* Camera Widgets */
+.camera-status-result {
+  margin-top: 10px;
+  padding: 10px;
+  background-color: rgba(0, 255, 0, 0.1);
+  border-radius: 8px;
+}
+
+.camera-status-success {
+  display: flex;
+  align-items: center;
+}
+
+.camera-error {
+  padding: 10px;
+  background-color: rgba(255, 0, 0, 0.2);
+  border-radius: 8px;
+  color: #ff6b6b;
+}
+
+.camera-capture-result {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-top: 10px;
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.camera-image-container {
+  width: 100%;
+  max-height: 300px;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.camera-image {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+.camera-info {
+  padding: 8px;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.7);
+  text-align: right;
+}
+
+.image-analysis-result {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-top: 10px;
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.analysis-result {
+  padding: 10px;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.analysis-title {
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: var(--accent-color);
+}
+
+.analysis-text {
+  white-space: pre-wrap;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* Widget Styles */
+.widget-error {
+  padding: 10px;
+  background-color: rgba(255, 0, 0, 0.2);
+  border-radius: 8px;
+  color: #ff6b6b;
+  margin-top: 10px;
+}
+
+/* Weather Widget */
+.weather-result {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-top: 10px;
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  overflow: hidden;
+  padding: 15px;
+}
+
+.weather-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.weather-location {
+  font-size: 18px;
+  font-weight: bold;
+  color: var(--accent-color);
+}
+
+.weather-icon img {
+  width: 50px;
+  height: 50px;
+}
+
+.weather-main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.weather-temp {
+  font-size: 36px;
+  font-weight: bold;
+}
+
+.weather-condition {
+  font-size: 18px;
+  margin-top: 5px;
+}
+
+.weather-description {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.7);
+  margin-top: 5px;
+}
+
+.weather-details {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.weather-detail-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 5px;
+}
+
+.detail-label {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.weather-sun-info {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.sun-info-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.sun-info-label {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.weather-footer {
+  text-align: right;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.5);
+  margin-top: 10px;
+}
+
+/* News Widget */
+.news-result {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-top: 10px;
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  overflow: hidden;
+  padding: 15px;
+}
+
+.news-header {
+  margin-bottom: 15px;
+}
+
+.news-query {
+  font-size: 18px;
+  font-weight: bold;
+  color: var(--accent-color);
+}
+
+.news-count {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.7);
+  margin-top: 5px;
+}
+
+.news-articles {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.news-article {
+  display: flex;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.article-image {
+  width: 100px;
+  height: 100px;
+  overflow: hidden;
+}
+
+.article-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.article-content {
+  flex: 1;
+  padding: 10px;
+}
+
+.article-title {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.article-title a {
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-source {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 5px;
+}
+
+.article-description {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.no-articles {
+  padding: 20px;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.news-footer {
+  text-align: right;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.5);
+  margin-top: 15px;
+}
+
+/* Calendar Widget */
+.calendar-result {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-top: 10px;
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  overflow: hidden;
+  padding: 15px;
+}
+
+.calendar-header {
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.calendar-date {
+  font-size: 18px;
+  font-weight: bold;
+  color: var(--accent-color);
+}
+
+.calendar-days-header {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 5px;
+  margin-bottom: 10px;
+}
+
+.day-header {
+  text-align: center;
+  font-weight: bold;
+  padding: 5px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 5px;
+}
+
+.calendar-days-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 5px;
+}
+
+.day-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px 5px;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 5px;
+  min-height: 40px;
+}
+
+.day-cell.empty {
+  background-color: transparent;
+}
+
+.day-cell.today {
+  background-color: rgba(var(--primary-color-rgb), 0.3);
+  border: 1px solid var(--primary-color);
+}
+
+.day-number {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.day-name {
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.calendar-footer {
+  text-align: right;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.5);
+  margin-top: 15px;
+}
+
+/* Currency Widget */
+.currency-result {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-top: 10px;
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  overflow: hidden;
+  padding: 15px;
+}
+
+.currency-header {
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.currency-title {
+  font-size: 18px;
+  font-weight: bold;
+  color: var(--accent-color);
+}
+
+.currency-body {
+  margin-bottom: 15px;
+}
+
+.currency-main {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.currency-rate, .currency-inverse-rate {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+}
+
+.currency-base, .currency-target {
+  font-weight: bold;
+}
+
+.currency-equals {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.currency-footer {
+  text-align: right;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* Stocks Widget */
+.stocks-result {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-top: 10px;
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  overflow: hidden;
+  padding: 15px;
+}
+
+.stocks-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.stocks-symbol {
+  font-size: 18px;
+  font-weight: bold;
+  color: var(--accent-color);
+}
+
+.stocks-date {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.stocks-body {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  padding: 10px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+}
+
+.stocks-price {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.stocks-change {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+.stocks-change.positive {
+  color: #00ff00;
+  background-color: rgba(0, 255, 0, 0.1);
+}
+
+.stocks-change.negative {
+  color: #ff0000;
+  background-color: rgba(255, 0, 0, 0.1);
+}
+
+.stocks-details {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.stocks-detail-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 5px;
+}
+
+.stocks-footer {
+  text-align: right;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* Travel Time Widget */
+.travel-time-result {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-top: 10px;
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  overflow: hidden;
+  padding: 15px;
+}
+
+.travel-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.travel-mode-icon {
+  font-size: 24px;
+}
+
+.travel-mode-name {
+  font-size: 18px;
+  font-weight: bold;
+  color: var(--accent-color);
+}
+
+.travel-route {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  padding: 10px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+}
+
+.travel-origin, .travel-destination {
+  flex: 1;
+  font-size: 14px;
+}
+
+.travel-arrow {
+  margin: 0 10px;
+  color: var(--primary-color);
+}
+
+.travel-info {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.travel-time, .travel-distance {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  text-align: center;
+}
+
+.info-label {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 5px;
+}
+
+.info-value {
+  font-weight: bold;
+}
+
+.travel-footer {
+  text-align: right;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* Mode Tampilan - Compact, Normal, dan Expanded */
+
+/* Mode Compact */
+.app-container.compact .input-container {
+  width: var(--input-width-compact);
+  min-width: var(--min-width-compact);
+  max-width: var(--max-width-compact);
+  transform: translateX(var(--element-transform-x)) !important; /* Gunakan variabel untuk transformasi yang konsisten */
+  padding: 6px 10px;
+  height: var(--input-height-compact);
+}
+
+.app-container.compact .chat-container,
+.app-container.compact .voice-visualizer-container {
+  width: var(--chat-width-compact);
+  min-width: var(--min-width-compact);
+  max-width: var(--max-width-compact);
+  top: var(--chat-top-compact);
+}
+
+/* Animasi khusus untuk mode compact */
+.app-container.compact .chat-container.active {
+  animation-name: chatContainerShowCompact;
+}
+
+@keyframes chatContainerShowCompact {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%);
+    backdrop-filter: blur(0);
+    top: calc(var(--chat-top-compact) + var(--chat-animation-start-offset));
+  }
+  20% {
+    opacity: 0.5;
+  }
+  60% {
+    transform: translateX(-50%);
+    backdrop-filter: blur(8px);
+    top: calc(var(--chat-top-compact) + var(--chat-animation-overshoot-offset));
+  }
+  100% {
+    opacity: 0.95;
+    transform: translateX(-50%);
+    backdrop-filter: blur(5px);
+    top: var(--chat-top-compact);
+  }
+}
+
+.app-container.compact .bubble-content {
+  padding: 12px 16px;
+  font-size: 0.95em;
+}
+
+.app-container.compact .submit-button,
+.app-container.compact .voice-button,
+.app-container.compact .menu-button {
+  width: 38px;
+  height: 38px;
+}
+
+.app-container.compact .input-box {
+  padding: 8px 16px;
+  font-size: 14px;
+}
+
+/* Mode Normal (default) */
+.app-container.normal .input-container {
+  width: var(--input-width-normal);
+  min-width: var(--min-width-normal);
+  max-width: var(--max-width-normal);
+  transform: translateX(var(--element-transform-x)) !important; /* Gunakan variabel untuk transformasi yang konsisten */
+  height: var(--input-height-normal);
+}
+
+.app-container.normal .chat-container,
+.app-container.normal .voice-visualizer-container {
+  width: var(--chat-width-normal);
+  min-width: var(--min-width-normal);
+  max-width: var(--max-width-normal);
+  top: var(--chat-top-normal);
+}
+
+/* Mode Expanded */
+.app-container.expanded .input-container {
+  width: var(--input-width-expanded);
+  min-width: var(--min-width-expanded);
+  max-width: var(--max-width-expanded);
+  transform: translateX(var(--element-transform-x)) !important; /* Gunakan variabel untuk transformasi yang konsisten */
+  padding: 12px 20px;
+  height: var(--input-height-expanded);
+}
+
+.app-container.expanded .chat-container,
+.app-container.expanded .voice-visualizer-container {
+  width: var(--chat-width-expanded);
+  min-width: var(--min-width-expanded);
+  max-width: var(--max-width-expanded);
+  top: var(--chat-top-expanded);
+}
+
+/* Animasi khusus untuk mode expanded */
+.app-container.expanded .chat-container.active {
+  animation-name: chatContainerShowExpanded;
+}
+
+@keyframes chatContainerShowExpanded {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%);
+    backdrop-filter: blur(0);
+    top: calc(var(--chat-top-expanded) + var(--chat-animation-start-offset));
+  }
+  20% {
+    opacity: 0.5;
+  }
+  60% {
+    transform: translateX(-50%);
+    backdrop-filter: blur(8px);
+    top: calc(var(--chat-top-expanded) + var(--chat-animation-overshoot-offset));
+  }
+  100% {
+    opacity: 0.95;
+    transform: translateX(-50%);
+    backdrop-filter: blur(5px);
+    top: var(--chat-top-expanded);
+  }
+}
+
+.app-container.expanded .bubble-content {
+  padding: 18px 24px;
+  font-size: 1.05em;
+}
+
+.app-container.expanded .submit-button,
+.app-container.expanded .voice-button,
+.app-container.expanded .menu-button {
+  width: 48px;
+  height: 48px;
+}
+
+.app-container.expanded .input-box {
+  padding: 14px 24px;
+  font-size: 18px;
+}
+
+/* Transisi untuk perubahan mode */
+.app-container .input-container,
+.app-container .chat-container,
+.app-container .bubble-content,
+.app-container .submit-button,
+.app-container .voice-button,
+.app-container .menu-button,
+.app-container .input-box,
+.app-container .voice-visualizer-container {
+  transition: all var(--transition-normal);
+}
+
+/* Elemen interaktif - pastikan semua elemen yang perlu interaksi memiliki pointer-events: auto */
+.interactive, button, input, textarea, select, a,
+.input-container, .menu-toggle, .slide-menu, .settings-toggle,
+.settings-panel, .api-key-input, .model-select,
+.validate-api-key-btn, .save-api-key-btn, .save-model-btn,
+.tools-toggle, .reset-chat-btn, .chat-container.active,
+.chat-bubble, .bubble-content, .typing-indicator,
+.get-api-key-link, .api-key-help, .control-button,
+.minimize, .close, .menu-item, .menu-section,
+.menu-section-title, .menu-section-content,
+.display-mode-toggle, .display-mode-option {
+  pointer-events: auto !important; /* Elemen interaktif dapat menerima event mouse */
+}
+
+/* Voice Activation Styles */
+.input-container.listening {
+  animation: pulseListening 2s infinite ease-in-out;
+}
+
+.input-container.wake-word-detected {
+  animation: pulseWakeWord 1s infinite ease-in-out;
+  border: 2px solid var(--accent-color) !important;
+}
+
+@keyframes pulseListening {
+  0%, 100% {
+    box-shadow: var(--shadow-medium),
+                var(--glow-medium) var(--glow-primary);
+  }
+  50% {
+    box-shadow: var(--shadow-medium),
+                var(--glow-strong) var(--glow-primary);
+  }
+}
+
+@keyframes pulseWakeWord {
+  0%, 100% {
+    box-shadow: var(--shadow-medium),
+                var(--glow-medium) var(--accent-color);
+    border-color: var(--accent-color) !important;
+  }
+  50% {
+    box-shadow: var(--shadow-medium),
+                var(--glow-strong) var(--accent-color);
+    border-color: var(--tertiary-color) !important;
+  }
+}
+
+/* Class khusus untuk elemen interaktif yang ditambahkan melalui JavaScript */
+.interactive-element {
+  pointer-events: auto !important; /* Elemen interaktif dapat menerima event mouse */
+  cursor: auto !important; /* Pastikan cursor normal */
+  z-index: 1000 !important; /* Pastikan elemen berada di atas elemen lain */
+}
+
+/* Pastikan input container selalu dapat menerima event mouse */
+.input-container {
+  pointer-events: auto !important;
+  z-index: 1000 !important;
+  cursor: text !important;
+}
+
+/* Pastikan semua elemen di dalam input container juga dapat menerima event mouse */
+.input-container * {
+  pointer-events: auto !important;
+}
+
+/* Pastikan tombol voice input selalu dapat menerima event mouse */
+.voice-button {
+  pointer-events: auto !important;
+  z-index: 1001 !important;
+  cursor: pointer !important;
+}
+
+/* Pastikan tombol menu selalu dapat menerima event mouse */
+.menu-button {
+  pointer-events: auto !important;
+  z-index: 1001 !important;
+  cursor: pointer !important;
+}
+
+/* Pastikan tombol submit selalu dapat menerima event mouse */
+.submit-button {
+  pointer-events: auto !important;
+  z-index: 1001 !important;
+  cursor: pointer !important;
+}
+
+/* Pastikan input box selalu dapat menerima event mouse */
+.input-box {
+  pointer-events: auto !important;
+  z-index: 1000 !important;
+  cursor: text !important;
+}
+
+/* Pastikan window controls selalu dapat menerima event mouse */
+.window-controls, .window-controls * {
+  pointer-events: auto !important;
+  z-index: 1001 !important;
+  cursor: pointer !important;
+}
+
+/* Elemen yang bisa diklik memiliki cursor: pointer */
+button, a, .menu-toggle, .settings-toggle, .validate-api-key-btn,
+.save-api-key-btn, .save-model-btn, .tools-toggle, .reset-chat-btn,
+.get-api-key-link, .control-button, .minimize, .close, .menu-item {
+  cursor: pointer !important;
+}

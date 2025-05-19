@@ -1,0 +1,426 @@
+/* Standalone Bubble Chat Styles */
+:root {
+  /* Variabel untuk tinggi input container (berbasis persentase) */
+  --input-height: 9vh; /* Tinggi standar untuk input container */
+
+  /* Variabel untuk posisi top input container */
+  --input-top-position: 5vh; /* Diubah dari 8vh menjadi 5vh untuk posisi lebih tinggi */
+
+  /* Variabel untuk lebar input container */
+  --input-width: 500px; /* Lebar standar untuk input container */
+}
+
+/* Area konten untuk bubble chat */
+.bubble-content-area {
+  position: fixed;
+  top: calc(var(--input-top-position) + var(--input-height) + 2px); /* Mengurangi jarak dari 10px menjadi 2px */
+  left: 50%;
+  transform: translateX(-50%);
+  width: var(--input-width);
+  max-width: var(--input-width);
+  height: calc(100vh - var(--input-top-position) - var(--input-height) - 20px);
+  pointer-events: auto; /* Ubah menjadi auto agar bisa menerima event wheel untuk scrolling */
+  overflow: hidden; /* Penting: bukan overflow-y: auto */
+  z-index: 999;
+}
+
+/* Kontrol scroll dihapus */
+
+.standalone-bubble {
+  position: fixed; /* Menggunakan fixed untuk posisi tetap di layar */
+  display: flex;
+  margin: 5px 0; /* Mengurangi margin dari 12px menjadi 5px */
+  max-width: 80%;
+  animation: bubbleEntrance 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  overflow: visible;
+  word-wrap: break-word;
+  white-space: normal;
+  width: auto;
+  transform-origin: bottom center;
+  will-change: transform, opacity;
+  z-index: 9999; /* Pastikan bubble chat muncul di atas elemen lain dengan z-index yang sangat tinggi */
+  pointer-events: auto !important; /* Ubah menjadi auto agar bubble dapat menerima event mouse */
+  opacity: 1 !important; /* Langsung terlihat, tidak perlu menunggu class .show, dengan !important */
+  visibility: visible !important; /* Langsung terlihat, tidak perlu menunggu class .show, dengan !important */
+  left: 50%; /* Posisi di tengah */
+  transform: translateX(-50%); /* Geser ke kiri 50% dari lebar elemen untuk posisi tengah */
+  right: auto; /* Reset right */
+}
+
+/* Standalone bubble dari asisten */
+.standalone-bubble.assistant {
+  left: 50%; /* Posisi di tengah */
+  transform: translateX(-50%); /* Geser ke kiri 50% dari lebar elemen untuk posisi tengah */
+  margin-right: auto;
+  margin-left: auto;
+  width: var(--input-width); /* Menggunakan lebar yang sama dengan input container */
+  max-width: var(--input-width); /* Membatasi lebar maksimum */
+  animation: assistantBubbleEntrance 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transform-origin: center top;
+  z-index: 1000; /* Gunakan z-index yang sama dengan bubble user */
+}
+
+/* Standalone bubble dari user */
+.standalone-bubble.user {
+  left: 50%; /* Posisi di tengah */
+  transform: translateX(-50%); /* Geser ke kiri 50% dari lebar elemen untuk posisi tengah */
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 10px; /* Mengurangi margin-bottom dari 15px menjadi 10px */
+  width: var(--input-width); /* Menggunakan lebar yang sama dengan input container */
+  max-width: var(--input-width); /* Membatasi lebar maksimum */
+  animation: userBubbleEntrance 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transform-origin: center top;
+  z-index: 1000; /* Gunakan z-index yang sama dengan bubble asisten */
+}
+
+/* Posisi bubble akan diatur secara dinamis melalui JavaScript */
+
+/* Animasi untuk standalone bubble assistant masuk */
+@keyframes assistantBubbleEntrance {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) scale(0.8) translateY(-10px);
+    filter: blur(2px);
+  }
+  40% {
+    opacity: 0.8;
+    transform: translateX(-50%) scale(0.9) translateY(-5px);
+    filter: blur(0.5px);
+  }
+  70% {
+    opacity: 0.95;
+    transform: translateX(-50%) scale(1.03) translateY(2px);
+    filter: blur(0);
+  }
+  85% {
+    transform: translateX(-50%) scale(0.98) translateY(0);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(-50%) scale(1) translateY(0);
+  }
+}
+
+/* Animasi untuk standalone bubble user masuk */
+@keyframes userBubbleEntrance {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) scale(0.8) translateY(-10px);
+    filter: blur(2px);
+  }
+  40% {
+    opacity: 0.8;
+    transform: translateX(-50%) scale(0.9) translateY(-5px);
+    filter: blur(0.5px);
+  }
+  70% {
+    opacity: 0.95;
+    transform: translateX(-50%) scale(1.03) translateY(2px);
+    filter: blur(0);
+  }
+  85% {
+    transform: translateX(-50%) scale(0.98) translateY(0);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(-50%) scale(1) translateY(0);
+  }
+}
+
+/* Konten bubble standalone */
+.standalone-bubble .bubble-content {
+  padding: 16px 20px;
+  border-radius: 20px;
+  color: white;
+  text-shadow: none;
+  line-height: 1.6;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
+  max-width: 100%;
+  display: inline-block;
+  width: auto;
+  box-sizing: border-box;
+  background-color: var(--primary-color, #0078d7) !important; /* Gunakan variabel CSS */
+  background-image: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  transition: all 0.3s ease;
+  animation: contentFadeIn 0.5s ease-out, neonGlow 5s infinite; /* Tambahkan animasi neonGlow */
+  border: 3px solid var(--primary-color, #0078d7);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 15px rgba(var(--primary-color-rgb, '0, 120, 215'), 0.5); /* Tambahkan glow */
+  font-weight: 400;
+  letter-spacing: 0.3px;
+  position: relative;
+  overflow: hidden;
+  font-size: 16px; /* Ukuran font yang lebih besar */
+  pointer-events: auto !important; /* PENTING: Hanya konten bubble yang dapat menerima event mouse */
+  opacity: 1 !important; /* Pastikan konten terlihat */
+  visibility: visible !important; /* Pastikan konten terlihat */
+}
+
+/* Animasi untuk konten bubble */
+@keyframes contentFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(8px);
+    filter: blur(3px);
+  }
+  50% {
+    opacity: 0.8;
+    transform: translateY(3px);
+    filter: blur(1px);
+  }
+  80% {
+    opacity: 0.95;
+    transform: translateY(-1px);
+    filter: blur(0.5px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+/* Bubble asisten - sama persis dengan bubble user */
+.standalone-bubble.assistant .bubble-content {
+  background-color: var(--primary-color) !important; /* Gunakan warna primary langsung */
+  border-radius: 20px;
+  border-bottom-left-radius: 5px;
+  color: white !important;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); /* Bayangan lebih ringan */
+  border: 3px solid var(--bubble-border-color, var(--primary-color));
+  position: relative;
+  max-width: 80%; /* Lebar maksimum 80% dari container */
+  text-align: left; /* Teks rata kiri */
+  margin-right: auto; /* Posisi di kiri */
+  margin-left: calc((100% - var(--input-width)) / 2); /* Sejajar dengan input container */
+  float: left; /* Posisi di kiri */
+  transition: none; /* Hapus transisi */
+  overflow: hidden; /* Untuk efek shine */
+}
+
+/* Bubble user */
+.standalone-bubble.user .bubble-content {
+  background-color: var(--primary-color) !important; /* Gunakan warna primary langsung */
+  border-radius: 20px;
+  border-bottom-right-radius: 5px;
+  color: white !important;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); /* Bayangan lebih ringan */
+  border: 3px solid var(--bubble-border-color, var(--primary-color));
+  position: relative;
+  max-width: 80%; /* Lebar maksimum 80% dari container */
+  text-align: right; /* Teks rata kanan */
+  margin-left: auto; /* Posisi di kanan */
+  margin-right: calc((100% - var(--input-width)) / 2); /* Sejajar dengan input container */
+  float: right; /* Posisi di kanan */
+  transition: none; /* Hapus transisi */
+  overflow: hidden; /* Untuk efek shine */
+}
+
+/* Efek glow pada bubble user */
+.standalone-bubble.user .bubble-content::before {
+  content: '';
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  border-radius: inherit;
+  background: none; /* Hapus gradient */
+  z-index: -1;
+  opacity: 0;
+  filter: none; /* Hapus blur */
+  transition: none; /* Hapus transisi */
+  pointer-events: none;
+}
+
+/* Efek hover pada bubble user - sama dengan bubble asisten */
+.standalone-bubble.user .bubble-content:hover {
+  background-color: var(--primary-color); /* Gunakan warna yang sama */
+  border-color: var(--primary-color); /* Gunakan warna yang sama */
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); /* Bayangan sederhana */
+  transform: none; /* Hapus transformasi */
+}
+
+/* Efek hover pada bubble user - sama dengan bubble asisten */
+.standalone-bubble.user .bubble-content:hover::before {
+  opacity: 0;
+  filter: none;
+  animation: none;
+}
+
+/* Efek shine pada bubble user - sama dengan bubble asisten */
+.standalone-bubble.user .bubble-content::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.3) 50%, rgba(255, 255, 255, 0) 100%);
+  transform: skewX(-25deg);
+  animation: shine 3s infinite;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Efek glow pada bubble asisten - sama persis dengan bubble user */
+.standalone-bubble.assistant .bubble-content::before {
+  content: '';
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  border-radius: inherit;
+  background: none; /* Hapus gradient */
+  z-index: -1;
+  opacity: 0;
+  filter: none; /* Hapus blur */
+  transition: none; /* Hapus transisi */
+  pointer-events: none;
+}
+
+/* Efek hover pada bubble asisten - sama persis dengan bubble user */
+.standalone-bubble.assistant .bubble-content:hover {
+  background-color: var(--primary-color); /* Gunakan warna yang sama */
+  border-color: var(--primary-color); /* Gunakan warna yang sama */
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); /* Bayangan sederhana */
+  transform: none; /* Hapus transformasi */
+}
+
+/* Efek hover pada bubble asisten - sama persis dengan bubble user */
+.standalone-bubble.assistant .bubble-content:hover::before {
+  opacity: 0;
+  filter: none;
+  animation: none;
+}
+
+/* Efek shine pada bubble asisten - sama persis dengan bubble user */
+.standalone-bubble.assistant .bubble-content::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.3) 50%, rgba(255, 255, 255, 0) 100%);
+  transform: skewX(-25deg);
+  animation: shine 3s infinite;
+  pointer-events: none;
+  z-index: 1;
+}
+
+@keyframes shine {
+  0% {
+    left: -100%;
+    opacity: 0.5;
+  }
+  10% {
+    opacity: 0.8;
+  }
+  20% {
+    left: 150%;
+    opacity: 0.5;
+  }
+  100% {
+    left: 150%;
+    opacity: 0;
+  }
+}
+
+/* Animasi neon glow yang sama dengan input container */
+@keyframes neonGlow {
+  0% {
+    background-position: 0% 50%;
+    box-shadow: 0 0 10px rgba(var(--primary-color-rgb), 0.5),
+                0 0 20px rgba(var(--primary-color-rgb), 0.3),
+                0 0 30px rgba(var(--primary-color-rgb), 0.1);
+  }
+  50% {
+    background-position: 100% 50%;
+    box-shadow: 0 0 15px rgba(var(--secondary-color-rgb), 0.5),
+                0 0 30px rgba(var(--secondary-color-rgb), 0.3),
+                0 0 45px rgba(var(--secondary-color-rgb), 0.1);
+  }
+  100% {
+    background-position: 0% 50%;
+    box-shadow: 0 0 10px rgba(var(--primary-color-rgb), 0.5),
+                0 0 20px rgba(var(--primary-color-rgb), 0.3),
+                0 0 30px rgba(var(--primary-color-rgb), 0.1);
+  }
+}
+
+/* Animasi untuk efek glow pada border */
+@keyframes borderGlow {
+  0% {
+    opacity: 0.3;
+    filter: blur(2px);
+  }
+  100% {
+    opacity: 0.6;
+    filter: blur(4px);
+  }
+}
+
+/* Tombol tutup untuk bubble dihapus */
+
+/* Animasi untuk bubble keluar */
+@keyframes bubbleExit {
+  0% {
+    opacity: 1;
+    transform: translateX(-50%) scale(1);
+  }
+  20% {
+    transform: translateX(-50%) scale(1.05);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-50%) scale(0.8) translateY(-20px);
+  }
+}
+
+/* Class untuk menampilkan bubble */
+.standalone-bubble.show {
+  opacity: 1;
+  visibility: visible;
+  animation: assistantBubbleEntrance 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Class untuk menghilangkan bubble */
+.standalone-bubble.hide {
+  animation: bubbleExit 0.5s forwards;
+}
+
+/* Auto-hide timer */
+.standalone-bubble .auto-hide-timer {
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  height: 4px; /* Sedikit lebih tebal */
+  background-color: var(--bubble-border-color, var(--primary-color));
+  width: 100%;
+  transform-origin: left;
+  transform: scaleX(1);
+  transition: transform 15s linear; /* Sesuaikan dengan autoHideDelay yang baru (15 detik) */
+  border-radius: 0 0 5px 5px; /* Tambahkan border radius di bagian bawah */
+}
+
+.standalone-bubble.show .auto-hide-timer {
+  transform: scaleX(0);
+}
+
+/* Styling untuk link di dalam bubble */
+.standalone-bubble .bubble-content a {
+  color: #60cdff; /* Warna link yang kontras */
+  text-decoration: underline;
+  transition: all 0.2s ease;
+}
+
+.standalone-bubble .bubble-content a:hover {
+  color: #ffffff; /* Warna putih saat hover */
+  text-decoration: underline;
+}

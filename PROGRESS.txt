@@ -1,0 +1,454 @@
+# Progress Pengembangan Mamouse Agent
+
+## Apa yang Sudah Diimplementasikan
+
+### UI/UX
+- Desain minimalis dengan transparansi penuh
+- Input box dengan efek visual
+- Interaksi suara
+- Layout chat bubble dengan latar abu-abu transparan
+- Animasi typing indicator
+- Drag and drop untuk memindahkan jendela aplikasi
+- Click-through pada area transparan
+- Ikon kustom di taskbar
+- Bubble chat yang muncul secara berurutan (user, asisten, user, asisten) (24/05/2025)
+- Fitur scroll untuk melihat riwayat chat dengan kontrol terpisah (24/05/2025)
+- Interaksi dengan aplikasi di belakang bubble chat (24/05/2025)
+
+### Backend Sederhana
+- WebSocket server untuk komunikasi real-time
+- Penyimpanan riwayat percakapan
+- Integrasi dengan Gemini API (17/05/2023, 10:00)
+- Konfigurasi model dan parameter Gemini (17/05/2023, 10:00)
+- Validasi API key Gemini (16/05/2025, 14:30)
+- Penggunaan model Gemini 1.5 Flash (16/05/2025, 14:30)
+- Implementasi Nut.js untuk kontrol keyboard dan mouse (17/05/2025, 03:00)
+
+### Fitur Interaktif
+- Pengenalan suara (menggunakan Web Speech API)
+- Visualisasi audio saat mode suara aktif
+- Text-to-Speech dengan ElevenLabs API (27/05/2025, 11:00)
+- Streaming audio untuk Text-to-Speech (27/05/2025, 14:30)
+- Pengaturan suara di menu bar (kecepatan, pitch, volume) (27/05/2025, 16:00)
+- Voice Activation dengan Wake Word (28/05/2025, 10:30)
+- Pilihan bahasa untuk pengenalan suara (28/05/2025, 14:00)
+- Deteksi otomatis bahasa untuk pengenalan suara (28/05/2025, 14:00)
+- Sistem tema dengan 9 pilihan tema (default, dark, light, neon, ocean, sunset, forest, midnight, chameleon) (22/05/2025, 10:30)
+- Shortcut global Alt+Space untuk membuka/menutup aplikasi (menggunakan AutoHotkey)
+- Pengaturan API key dan model Gemini (17/05/2023, 10:00)
+- Validasi API key dengan tombol "Validate" (16/05/2025, 14:30)
+- Reset chat untuk memulai percakapan baru (17/05/2023, 10:00)
+- Sistem tools/widgets untuk memperluas kemampuan asisten (19/05/2025, 20:30)
+- Box konfigurasi MCP untuk mengelola server Model Context Protocol (19/05/2025, 20:30)
+
+### Fitur Aksesibilitas
+- Keyboard shortcut untuk fungsi utama
+- Responsif di berbagai ukuran layar
+- Mode high contrast untuk pengguna dengan gangguan penglihatan
+
+## Apa yang Belum Diimplementasikan
+
+### Fitur Utama
+- Kemampuan untuk berinteraksi dengan aplikasi lain
+- Fitur computer vision
+
+### Fitur Tambahan
+- Ekspor percakapan ke file
+- Penyimpanan percakapan di database lokal
+- Pengaturan bahasa untuk text-to-speech
+- Dukungan multi-bahasa dalam satu respons TTS
+- Lebih banyak pilihan suara dan kategori untuk TTS
+- Tema kustom yang dapat dibuat pengguna
+- Installer untuk berbagai platform
+
+## Langkah Selanjutnya
+
+### Prioritas Tinggi
+
+1. Implementasi Pengaturan Bahasa untuk Text-to-Speech
+   - Menambahkan pilihan bahasa untuk text-to-speech di menu pengaturan suara
+   - Mengintegrasikan dengan ElevenLabs API untuk dukungan multi-bahasa
+   - Menambahkan deteksi otomatis bahasa untuk text-to-speech
+   - Menambahkan sinkronisasi bahasa antara speech recognition dan text-to-speech
+   - Menambahkan penyimpanan preferensi bahasa TTS di localStorage
+   - Menambahkan dukungan untuk multi-bahasa dalam satu respons
+   - Menambahkan fitur untuk mendengarkan sampel suara sebelum memilih
+   - Menambahkan lebih banyak pilihan suara dan kategori (pria, wanita, anak-anak, dll.)
+
+### Prioritas Tinggi Lainnya
+1. Mengembangkan kemampuan untuk berinteraksi dengan aplikasi lain menggunakan MCP
+   - Meningkatkan kemampuan kontrol mouse dan keyboard dengan fitur Nut.js lanjutan
+   - Mengimplementasikan image recognition dengan Nut.js untuk mencari elemen UI
+   - Menambahkan kemampuan drag and drop untuk interaksi yang lebih kompleks
+   - Mengintegrasikan plugin OCR untuk mengenali teks di layar
+   - Menambahkan kemampuan screenshot untuk verifikasi visual
+   - Mengimplementasikan fungsi untuk menjalankan aplikasi eksternal
+   - Membuat tools untuk navigasi file dan direktori
+
+2. Menambahkan gambar latar belakang ke folder assets
+   - Membuat beberapa opsi latar belakang yang dapat dipilih pengguna
+   - Menambahkan pengaturan transparansi latar belakang
+
+3. Meningkatkan fitur text-to-speech dengan ElevenLabs
+   - Meningkatkan strategi caching untuk menghemat penggunaan API
+   - Menambahkan batasan penggunaan API untuk menghindari biaya berlebihan
+   - Menambahkan kompresi audio untuk menghemat bandwidth
+   - Mengintegrasikan TTS dengan sistem tools/widgets
+   - Menambahkan kemampuan untuk membaca teks dari aplikasi lain
+   - Menambahkan kemampuan untuk membaca teks yang dipilih di layar
+
+4. Meningkatkan sistem tools
+   - Menambahkan tools untuk pencarian web yang lebih canggih
+   - Mengimplementasikan tools untuk akses informasi cuaca yang lebih detail
+   - Menambahkan tools untuk kalender dan pengingat
+
+### Prioritas Menengah
+1. Menambahkan penyimpanan percakapan di database lokal
+   - Mengimplementasikan SQLite untuk penyimpanan lokal
+   - Menambahkan fitur pencarian dalam riwayat percakapan
+   - Menambahkan fitur ekspor dan impor riwayat
+
+2. Meningkatkan pengaturan suara yang lebih lengkap
+   - Meningkatkan akurasi deteksi otomatis bahasa
+   - Menambahkan dukungan untuk lebih banyak bahasa
+   - Menambahkan fitur untuk menyimpan preferensi bahasa per pengguna
+
+3. Memperbaiki animasi typing indicator untuk lebih responsif
+   - Mengimplementasikan animasi yang lebih halus dan natural
+   - Menambahkan variasi animasi berdasarkan panjang respons
+
+4. Mengoptimalkan performa aplikasi
+   - Mengurangi penggunaan memori
+   - Meningkatkan waktu startup aplikasi
+   - Mengoptimalkan rendering UI
+
+### Prioritas Rendah
+1. Menambahkan fitur computer vision
+   - Integrasi dengan API computer vision
+   - Kemampuan untuk menganalisis gambar dari clipboard atau file
+   - Fitur OCR untuk mengekstrak teks dari gambar
+
+2. Menambahkan fitur ekspor percakapan
+   - Ekspor ke format PDF, HTML, dan Markdown
+   - Opsi untuk menyertakan atau mengecualikan media
+   - Fitur untuk berbagi percakapan
+
+3. Menambahkan unit testing dan end-to-end testing
+   - Mengimplementasikan Jest untuk unit testing
+   - Menggunakan Spectron untuk end-to-end testing
+   - Menambahkan CI/CD pipeline untuk otomatisasi testing
+
+## Catatan Teknis
+
+### Dependensi Utama
+- Electron: Framework untuk aplikasi desktop
+- WebSocket: Untuk komunikasi real-time
+- UUID: Untuk menghasilkan ID unik
+- @google/generative-ai: SDK untuk Gemini API
+- dotenv: Untuk mengelola variabel lingkungan
+- @nut-tree-fork/nut-js: Untuk kontrol keyboard dan mouse, pengganti RobotJS
+- Model Context Protocol (MCP): Untuk kontrol komputer dan integrasi dengan tools eksternal
+- ElevenLabs API: Untuk text-to-speech dengan kualitas tinggi
+
+### Struktur Kode
+- main.js: Proses utama Electron dan WebSocket server
+- preload.js: Script preload untuk komunikasi antara main dan renderer
+- config.js: Konfigurasi aplikasi
+- gemini-service.js: Layanan untuk integrasi Gemini API
+- elevenlabs-service.js: Layanan untuk integrasi ElevenLabs API (27/05/2025)
+- voice-activation.js: Implementasi sistem wake word detection (28/05/2025)
+- tools.js: Implementasi sistem tools/widgets
+- renderer.js: Logika UI dan komunikasi dengan proses utama
+- index.html: Struktur UI
+- styles.css: Styling UI utama
+- theme-styles.css: Styling khusus untuk sistem tema (22/05/2025)
+- standalone-bubble.js: Implementasi bubble chat standalone (23/05/2025)
+- standalone-bubble.css: Styling untuk bubble chat standalone (23/05/2025)
+- virtual-scroll.js: Implementasi sistem virtual scrolling untuk bubble chat (24/05/2025)
+- progress.txt: Dokumentasi kemajuan proyek
+
+### Arsitektur
+- Asisten AI personal dengan kemampuan multimodal
+- Komunikasi real-time menggunakan WebSocket
+- UI dengan tema yang dapat disesuaikan
+- Pengenalan suara menggunakan Web Speech API
+- Text-to-Speech menggunakan ElevenLabs API
+- Voice Activation dengan Wake Word menggunakan Web Speech API
+- Multi-bahasa dengan dukungan untuk 16 bahasa berbeda
+- Deteksi otomatis bahasa menggunakan Web Speech API
+
+## Rencana Upgrade Fitur Komunikasi
+
+### Integrasi API Komunikasi Tambahan
+1. Integrasi dengan OpenAI API
+   - Menambahkan dukungan untuk model GPT-4 dan GPT-3.5 Turbo
+   - Mengimplementasikan sistem fallback jika Gemini API tidak tersedia
+   - Menambahkan toggle untuk memilih antara Gemini dan OpenAI
+   - Menambahkan konfigurasi model OpenAI di config.js
+   - Membuat file openai-service.js untuk layanan OpenAI
+   - Menambahkan handler untuk API OpenAI di main.js
+   - Mengekspos API OpenAI ke renderer process melalui preload.js
+   - Menambahkan UI untuk konfigurasi OpenAI di index.html
+   - Menambahkan validasi API key OpenAI
+   - Mengimplementasikan streaming respons dari OpenAI API
+
+2. Integrasi dengan Anthropic API
+   - Menambahkan dukungan untuk model Claude 3 Opus, Sonnet, dan Haiku
+   - Mengimplementasikan sistem rotasi model untuk mengoptimalkan biaya
+   - Menambahkan toggle untuk memilih antara Gemini, OpenAI, dan Anthropic
+   - Menambahkan konfigurasi model Anthropic di config.js
+   - Membuat file anthropic-service.js untuk layanan Anthropic
+   - Menambahkan handler untuk API Anthropic di main.js
+   - Mengekspos API Anthropic ke renderer process melalui preload.js
+   - Menambahkan UI untuk konfigurasi Anthropic di index.html
+   - Menambahkan validasi API key Anthropic
+   - Mengimplementasikan streaming respons dari Anthropic API
+
+3. Integrasi dengan Whisper API untuk Transkripsi Audio
+   - Menambahkan dukungan untuk transkripsi audio berkualitas tinggi
+   - Mengimplementasikan sistem fallback antara Web Speech API dan Whisper
+   - Menambahkan toggle untuk memilih antara Web Speech API dan Whisper
+   - Menambahkan konfigurasi Whisper di config.js
+   - Membuat file whisper-service.js untuk layanan Whisper
+   - Menambahkan handler untuk API Whisper di main.js
+   - Mengekspos API Whisper ke renderer process melalui preload.js
+   - Menambahkan UI untuk konfigurasi Whisper di index.html
+   - Menambahkan validasi API key Whisper
+   - Mengimplementasikan caching hasil transkripsi untuk mengoptimalkan penggunaan API
+
+### Peningkatan Fitur Voice Interaction
+1. Peningkatan Sistem Wake Word
+   - Mengimplementasikan deteksi wake word yang lebih akurat dengan machine learning
+   - Menambahkan dukungan untuk wake word dalam berbagai bahasa
+   - Menambahkan kemampuan untuk melatih wake word kustom
+   - Mengimplementasikan sistem noise cancellation untuk meningkatkan akurasi
+   - Menambahkan indikator visual yang lebih responsif untuk status wake word
+   - Mengoptimalkan penggunaan CPU saat mendeteksi wake word
+   - Menambahkan mode always-on dengan konsumsi daya rendah
+   - Mengimplementasikan deteksi jarak untuk mengaktifkan hanya ketika pengguna dekat
+
+2. Peningkatan Text-to-Speech
+   - Mengimplementasikan sistem TTS lokal sebagai fallback jika API tidak tersedia
+   - Menambahkan dukungan untuk lebih banyak bahasa dan aksen
+   - Mengimplementasikan deteksi emosi untuk menyesuaikan nada suara
+   - Menambahkan efek audio untuk meningkatkan naturalitas suara
+   - Mengimplementasikan sistem pause/resume untuk pemutaran audio
+   - Menambahkan dukungan untuk mengubah suara secara dinamis dalam satu respons
+   - Mengimplementasikan sistem antrian audio yang lebih canggih
+   - Menambahkan visualisasi audio yang sinkron dengan pemutaran
+
+3. Implementasi Mode Percakapan Kontinu
+   - Mengimplementasikan mode percakapan tanpa perlu wake word berulang
+   - Menambahkan deteksi akhir percakapan otomatis
+   - Mengimplementasikan sistem turn-taking yang natural
+   - Menambahkan indikator visual untuk mode percakapan kontinu
+   - Mengimplementasikan timeout yang dapat dikonfigurasi
+   - Menambahkan kemampuan untuk menjeda dan melanjutkan percakapan
+   - Mengimplementasikan deteksi konteks percakapan
+   - Menambahkan riwayat percakapan yang dapat diakses dengan cepat
+
+### Peningkatan Fitur Komunikasi Multimodal
+1. Implementasi Komunikasi Visual
+   - Menambahkan dukungan untuk input gambar dari kamera
+   - Mengimplementasikan analisis gambar dengan Gemini Pro Vision
+   - Menambahkan kemampuan untuk mengunggah gambar dari file
+   - Mengimplementasikan screenshot otomatis untuk analisis layar
+   - Menambahkan kemampuan untuk menggambar dan mengedit gambar
+   - Mengimplementasikan OCR untuk mengekstrak teks dari gambar
+   - Menambahkan kemampuan untuk mengenali objek dalam gambar
+   - Mengimplementasikan analisis ekspresi wajah untuk deteksi emosi
+
+2. Implementasi Komunikasi Gestural
+   - Menambahkan dukungan untuk kontrol dengan gerakan tangan
+   - Mengimplementasikan deteksi gestur dasar (swipe, tap, pinch)
+   - Menambahkan kemampuan untuk mengkonfigurasi gestur kustom
+   - Mengimplementasikan mode presentasi dengan kontrol gestur
+   - Menambahkan indikator visual untuk gestur yang terdeteksi
+   - Mengimplementasikan sistem kalibrasi untuk meningkatkan akurasi
+   - Menambahkan mode aksesibilitas untuk pengguna dengan keterbatasan
+   - Mengimplementasikan kombinasi gestur untuk perintah kompleks
+
+3. Implementasi Komunikasi Kontekstual
+   - Menambahkan kemampuan untuk memahami konteks aplikasi yang aktif
+   - Mengimplementasikan deteksi aktivitas pengguna untuk respons yang relevan
+   - Menambahkan mode "do not disturb" otomatis berdasarkan konteks
+   - Mengimplementasikan sistem prioritas notifikasi
+   - Menambahkan kemampuan untuk beradaptasi dengan pola penggunaan
+   - Mengimplementasikan pembelajaran preferensi pengguna
+   - Menambahkan mode proaktif yang dapat dikonfigurasi
+   - Mengimplementasikan sistem saran kontekstual
+
+## Rencana Pengembangan Menu Bar
+
+### Penambahan Menu Sections Baru
+1. Menu Communication Hub
+   - Menambahkan section baru "communication" di menu bar
+   - Mengimplementasikan UI untuk pemilihan model AI (Gemini, OpenAI, Anthropic)
+   - Menambahkan toggle untuk mengaktifkan/menonaktifkan masing-masing model
+   - Mengimplementasikan sistem rotasi model otomatis untuk mengoptimalkan biaya
+   - Menambahkan indikator status untuk model yang sedang aktif
+   - Mengimplementasikan sistem fallback otomatis jika model utama tidak tersedia
+   - Menambahkan pengaturan untuk parameter model (temperature, top_k, top_p)
+   - Mengimplementasikan sistem caching respons untuk menghemat token
+
+2. Menu Voice Enhancement
+   - Memperluas section "voice" yang sudah ada dengan fitur lanjutan
+   - Menambahkan pilihan model transkripsi (Web Speech API, Whisper)
+   - Mengimplementasikan pengaturan untuk sensitivitas wake word
+   - Menambahkan pengaturan untuk mode percakapan kontinu
+   - Mengimplementasikan sistem noise cancellation yang dapat dikonfigurasi
+   - Menambahkan visualisasi suara yang lebih canggih
+   - Mengimplementasikan deteksi emosi dari suara
+   - Menambahkan pengaturan untuk respons otomatis berdasarkan emosi
+   - Mengimplementasikan sistem multi-speaker recognition
+
+3. Menu Language Settings
+   - Menambahkan section baru "language" di menu bar
+   - Mengimplementasikan UI untuk pemilihan bahasa input dan output
+   - Menambahkan toggle untuk terjemahan otomatis
+   - Mengimplementasikan sistem deteksi bahasa yang lebih akurat
+   - Menambahkan dukungan untuk lebih banyak bahasa (hingga 50 bahasa)
+   - Mengimplementasikan pengaturan untuk aksen dan dialek
+   - Menambahkan kemampuan untuk menyimpan preferensi bahasa per sesi
+   - Mengimplementasikan sistem pembelajaran preferensi bahasa
+
+4. Menu Multimodal Input
+   - Menambahkan section baru "input" di menu bar
+   - Mengimplementasikan UI untuk mengaktifkan/menonaktifkan input kamera
+   - Menambahkan pengaturan untuk resolusi dan kualitas gambar
+   - Mengimplementasikan sistem deteksi objek real-time
+   - Menambahkan toggle untuk OCR otomatis
+   - Mengimplementasikan pengaturan untuk sensitivitas deteksi gestur
+   - Menambahkan kemampuan untuk mengkonfigurasi gestur kustom
+   - Mengimplementasikan sistem kalibrasi kamera
+
+5. Menu Integration Hub
+   - Menambahkan section baru "integration" di menu bar
+   - Mengimplementasikan UI untuk mengelola integrasi dengan layanan eksternal
+   - Menambahkan dukungan untuk Google Calendar, Gmail, dan Google Drive
+   - Mengimplementasikan integrasi dengan Microsoft Office
+   - Menambahkan dukungan untuk layanan produktivitas (Notion, Trello)
+   - Mengimplementasikan integrasi dengan layanan komunikasi (Slack, Discord)
+   - Menambahkan dukungan untuk layanan musik (Spotify, YouTube Music)
+   - Mengimplementasikan sistem plugin untuk integrasi pihak ketiga
+
+### Peningkatan Menu Sections yang Sudah Ada
+1. Peningkatan Menu API Settings
+   - Menambahkan tab untuk konfigurasi berbagai API (Gemini, OpenAI, Anthropic, Whisper)
+   - Mengimplementasikan sistem validasi API key yang lebih canggih
+   - Menambahkan indikator penggunaan token dan biaya
+   - Mengimplementasikan sistem batasan penggunaan untuk mencegah biaya berlebihan
+   - Menambahkan pengaturan untuk proxy API
+   - Mengimplementasikan sistem rotasi API key untuk load balancing
+   - Menambahkan kemampuan untuk mengimpor/mengekspor konfigurasi API
+   - Mengimplementasikan sistem backup API key yang aman
+
+2. Peningkatan Menu Voice Settings
+   - Menambahkan lebih banyak pilihan suara untuk TTS (hingga 100 suara)
+   - Mengimplementasikan sistem preview suara sebelum memilih
+   - Menambahkan pengaturan untuk kecepatan, pitch, dan volume yang lebih detail
+   - Mengimplementasikan equalizer untuk menyesuaikan kualitas suara
+   - Menambahkan efek suara dan filter yang dapat dikonfigurasi
+   - Mengimplementasikan sistem kloning suara (dengan izin pengguna)
+   - Menambahkan dukungan untuk TTS lokal sebagai fallback
+   - Mengimplementasikan sistem kompresi audio untuk menghemat bandwidth
+
+3. Peningkatan Menu Theme Settings
+   - Menambahkan lebih banyak tema (hingga 20 tema)
+   - Mengimplementasikan sistem tema kustom dengan color picker
+   - Menambahkan pengaturan untuk animasi dan efek visual
+   - Mengimplementasikan tema yang responsif terhadap waktu (day/night mode)
+   - Menambahkan dukungan untuk tema berdasarkan aplikasi yang aktif
+   - Mengimplementasikan sistem tema dinamis berdasarkan wallpaper
+   - Menambahkan kemampuan untuk mengimpor/mengekspor tema
+   - Mengimplementasikan preview tema secara real-time
+
+4. Peningkatan Menu MCP Servers
+   - Menambahkan template untuk konfigurasi server yang umum digunakan
+   - Mengimplementasikan sistem monitoring status server
+   - Menambahkan pengaturan untuk keamanan dan enkripsi
+   - Mengimplementasikan sistem load balancing untuk multiple servers
+   - Menambahkan kemampuan untuk mengatur prioritas server
+   - Mengimplementasikan sistem fallback otomatis jika server utama tidak tersedia
+   - Menambahkan dukungan untuk protokol komunikasi tambahan
+   - Mengimplementasikan sistem logging dan diagnostik
+
+## Log Perubahan Terbaru
+
+### 28/05/2025 - Implementasi Pilihan Bahasa untuk Pengenalan Suara
+- **14:00** - Berhasil mengimplementasikan fitur pilihan bahasa untuk pengenalan suara
+  - Menambahkan pilihan 16 bahasa berbeda untuk pengenalan suara
+  - Menambahkan toggle untuk mengaktifkan/menonaktifkan deteksi otomatis bahasa
+  - Menambahkan fungsi untuk mengubah bahasa pengenalan suara secara dinamis
+  - Menambahkan fungsi untuk mendeteksi bahasa secara otomatis dari hasil pengenalan suara
+  - Mengintegrasikan pengaturan bahasa dengan voice activation
+  - Menambahkan penyimpanan preferensi bahasa di localStorage
+  - Menambahkan fungsi untuk memuat pengaturan bahasa saat aplikasi dimulai
+  - Menambahkan UI untuk memilih bahasa di menu pengaturan suara
+  - Menambahkan indikator status untuk perubahan bahasa
+  - Menambahkan dukungan untuk bahasa: Indonesia, English (US/UK), Japanese, Korean, Chinese, French, German, Spanish, Italian, Portuguese, Russian, Arabic, Hindi, Dutch, Polish
+
+### 28/05/2025 - Implementasi Voice Activation (Wake Word)
+- **10:30** - Berhasil mengimplementasikan fitur Voice Activation dengan Wake Word
+  - Membuat file baru voice-activation.js untuk sistem wake word detection
+  - Menambahkan dukungan untuk multiple wake words ("hey mamouse", "hai mamouse", "halo mamouse", "ok mamouse")
+  - Menambahkan toggle untuk mengaktifkan/menonaktifkan voice activation di menu pengaturan suara
+  - Menambahkan input untuk kustomisasi wake words
+  - Menambahkan efek visual saat wake word terdeteksi
+  - Menambahkan efek suara notifikasi saat wake word terdeteksi
+  - Menambahkan status indikator untuk mode listening dan wake word detection
+  - Mengintegrasikan voice activation dengan sistem pengenalan suara yang sudah ada
+  - Menambahkan CSS untuk efek visual wake word detection
+  - Menambahkan event listener untuk toggle voice activation
+  - Menambahkan fungsi untuk memulai dan menghentikan voice activation
+  - Menambahkan dukungan untuk auto-restart jika recognition berhenti
+  - Menambahkan timeout untuk reset aktivasi jika tidak ada perintah
+  - Menambahkan callback system untuk event handling yang fleksibel
+
+### 27/05/2025 - Implementasi Pengaturan Suara di Menu Bar
+- **16:00** - Berhasil mengimplementasikan pengaturan suara di menu bar
+  - Menambahkan slider untuk mengatur kecepatan, pitch, dan volume suara
+  - Menambahkan tombol reset untuk mengembalikan pengaturan ke nilai default
+  - Menambahkan fungsi untuk menyimpan pengaturan ke file konfigurasi
+  - Menambahkan handler untuk mengatur kecepatan, pitch, dan volume di main.js
+  - Mengekspos API untuk mengatur kecepatan, pitch, dan volume ke renderer process
+  - Menambahkan event listener untuk slider kecepatan, pitch, dan volume
+  - Menambahkan fungsi untuk menginisialisasi slider kecepatan, pitch, dan volume
+  - Menambahkan CSS untuk slider dengan efek visual yang sesuai dengan tema
+  - Mengintegrasikan pengaturan suara dengan fungsi pemutaran audio
+  - Menambahkan indikator status untuk proses penyimpanan pengaturan
+  - Menambahkan validasi input untuk memastikan nilai yang valid
+  - Menambahkan dukungan untuk menyimpan pengaturan antar sesi aplikasi
+  - Menambahkan dukungan untuk mereset pengaturan ke nilai default
+
+### 27/05/2025 - Implementasi Streaming Audio untuk Text-to-Speech
+- **14:30** - Berhasil mengimplementasikan streaming audio untuk Text-to-Speech
+  - Meningkatkan fungsi streaming di elevenlabs-service.js
+  - Menambahkan dukungan untuk streaming chunk audio
+  - Menambahkan buffer untuk mengumpulkan chunk sebelum pemutaran
+  - Mengoptimalkan penggunaan cache untuk streaming
+  - Menambahkan handler untuk streaming TTS di main.js
+  - Mengekspos API streaming TTS ke renderer process melalui preload.js
+  - Menambahkan fungsi untuk memutar audio streaming di renderer.js
+  - Mengintegrasikan streaming TTS dengan WebSocket untuk respons real-time
+  - Menambahkan dukungan untuk memulai pemutaran segera setelah chunk pertama diterima
+  - Menambahkan penanganan error yang lebih baik untuk streaming audio
+  - Menambahkan kemampuan untuk menghentikan streaming audio
+  - Mengoptimalkan penggunaan memori dengan membersihkan buffer setelah digunakan
+  - Menambahkan indikator status untuk proses streaming audio
+
+### 27/05/2025 - Implementasi Text-to-Speech dengan ElevenLabs API
+- **11:00** - Berhasil mengimplementasikan fitur Text-to-Speech dengan ElevenLabs API
+  - Membuat file baru elevenlabs-service.js untuk layanan TTS
+  - Menambahkan konfigurasi ElevenLabs di config.js
+  - Menambahkan API key ElevenLabs ke .env.example
+  - Menambahkan handler untuk API ElevenLabs di main.js
+  - Mengekspos API ElevenLabs ke renderer process melalui preload.js
+  - Menambahkan UI untuk konfigurasi ElevenLabs di index.html
+  - Menambahkan fungsi untuk memutar audio TTS di renderer.js
+  - Menambahkan event listener untuk TTS toggle di renderer.js
+  - Mengintegrasikan TTS dengan WebSocket untuk memutar respons dari Gemini API
+  - Menambahkan caching audio untuk mengoptimalkan penggunaan API
+  - Menambahkan pilihan suara yang berbeda (Adam, Antoni, Arnold, dll.)
+  - Menambahkan validasi API key ElevenLabs
+  - Menambahkan status indikator untuk proses TTS
