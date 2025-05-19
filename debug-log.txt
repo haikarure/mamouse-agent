@@ -234,3 +234,17 @@
 [2025-05-18T13:19:52.926Z] [DEBUG] [BUBBLE_DEBUG] Callback chunk dipanggil dengan data: {"error":false,"chunk":"Saya","done":false}
 [2025-05-18T13:19:53.069Z] [DEBUG] [BUBBLE_DEBUG] Callback chunk dipanggil dengan data: {"error":false,"chunk":" adalah model bahasa besar, yang dilatih oleh Google.\n","done":false}
 [2025-05-18T13:19:53.077Z] [DEBUG] [BUBBLE_DEBUG] Callback chunk dipanggil dengan data: {"error":false,"chunk":" ","done":true}
+[2025-05-19T02:34:55.815Z] [DEBUG] [BUBBLE_DEBUG] Memproses permintaan streaming untuk pesan ID: 1d322df1-6ff4-4f66-8b6f-b7dcb2a84cd6
+[2025-05-19T02:34:55.816Z] [DEBUG] [BUBBLE_DEBUG] Pesan: hi
+[2025-05-19T02:34:55.816Z] [DEBUG] [BUBBLE_DEBUG] Status inisialisasi Gemini API: Sudah diinisialisasi
+[2025-05-19T02:34:55.816Z] [DEBUG] [BUBBLE_DEBUG] Memanggil geminiService.getStreamingResponse...
+[2025-05-19T02:34:56.418Z] [DEBUG] [BUBBLE_DEBUG] Callback chunk dipanggil dengan data: {"error":false,"chunk":"Halo","done":false}
+[2025-05-19T02:34:56.520Z] [DEBUG] [BUBBLE_DEBUG] Callback chunk dipanggil dengan data: {"error":false,"chunk":"! Ada yang bisa saya bantu?\n","done":false}
+[2025-05-19T02:34:56.533Z] [DEBUG] [BUBBLE_DEBUG] Callback chunk dipanggil dengan data: {"error":false,"chunk":" ","done":true}
+[2025-05-19T02:34:59.620Z] [DEBUG] [BUBBLE_DEBUG] Memproses permintaan streaming untuk pesan ID: 8f13cac5-72d1-455a-9f53-53c0b3c9b3ca
+[2025-05-19T02:34:59.621Z] [DEBUG] [BUBBLE_DEBUG] Pesan: siapa anda
+[2025-05-19T02:34:59.621Z] [DEBUG] [BUBBLE_DEBUG] Status inisialisasi Gemini API: Sudah diinisialisasi
+[2025-05-19T02:34:59.622Z] [DEBUG] [BUBBLE_DEBUG] Memanggil geminiService.getStreamingResponse...
+[2025-05-19T02:35:00.230Z] [DEBUG] [BUBBLE_DEBUG] Callback chunk dipanggil dengan data: {"error":false,"chunk":"Saya adalah model bahasa","done":false}
+[2025-05-19T02:35:00.320Z] [DEBUG] [BUBBLE_DEBUG] Callback chunk dipanggil dengan data: {"error":false,"chunk":" besar, yang dilatih oleh Google.\n","done":false}
+[2025-05-19T02:35:00.342Z] [DEBUG] [BUBBLE_DEBUG] Callback chunk dipanggil dengan data: {"error":false,"chunk":" ","done":true}
