@@ -7,6 +7,8 @@
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="theme-styles.css">
   <link rel="stylesheet" href="standalone-bubble.css">
+  <link rel="stylesheet" href="voice-tabs.css">
+  <link rel="stylesheet" href="voice-button.css">
   <style>
     /* Inline styles untuk memastikan transparansi */
     html, body {
@@ -87,10 +89,17 @@
               id="voice-btn"
               title="Voice Input"
             >
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M19 10v2a7 7 0 0 1-14 0v-2M12 19v4M8 23h8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
+              <div class="voice-button-icon">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="mic-icon">
+                  <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M19 10v2a7 7 0 0 1-14 0v-2M12 19v4M8 23h8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="mic-off-icon">
+                  <path d="M1 1l22 22M9 9v3a3 3 0 0 0 5.12 2.12M15 9.34V4a3 3 0 0 0-5.94-.6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M17 16.95A7 7 0 0 1 5 12v-2m14 0v2c0 .74-.12 1.47-.34 2.17M12 19v4M8 23h8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <div class="voice-button-indicator"></div>
             </button>
             <button type="button" class="menu-button" id="menu-btn" title="Menu">
               <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -310,137 +319,249 @@
           <div class="menu-section voice-section">
             <h3>Voice Settings</h3>
             <div class="voice-form">
-              <div class="form-group">
-                <label for="tts-toggle">Text-to-Speech</label>
-                <div class="toggle-container">
-                  <input type="checkbox" id="tts-toggle" class="toggle-checkbox" checked>
-                  <label for="tts-toggle" class="toggle-label"></label>
-                  <span class="toggle-text" id="tts-toggle-text">Aktif</span>
+              <!-- Tab Navigation -->
+              <div class="voice-tabs">
+                <button class="voice-tab active" data-tab="speech-recognition">Speech Recognition</button>
+                <button class="voice-tab" data-tab="text-to-speech">Text-to-Speech</button>
+                <button class="voice-tab" data-tab="conversation">Conversation</button>
+              </div>
+
+              <!-- Speech Recognition Tab -->
+              <div class="voice-tab-content active" id="speech-recognition-tab">
+                <div class="form-group">
+                  <label for="voice-activation-toggle">Voice Activation</label>
+                  <div class="toggle-container">
+                    <input type="checkbox" id="voice-activation-toggle" class="toggle-checkbox" checked>
+                    <label for="voice-activation-toggle" class="toggle-label"></label>
+                    <span class="toggle-text" id="voice-activation-toggle-text">Aktif</span>
+                  </div>
+                  <p class="voice-activation-description">
+                    Aktifkan pengenalan suara untuk berinteraksi dengan Mamouse menggunakan suara.
+                  </p>
                 </div>
-                <p class="tts-description">
-                  Aktifkan Text-to-Speech untuk mendengarkan respons dari asisten.
-                </p>
-              </div>
 
-              <div class="form-group">
-                <label for="voice-activation-toggle">Voice Activation (Wake Word)</label>
-                <div class="toggle-container">
-                  <input type="checkbox" id="voice-activation-toggle" class="toggle-checkbox" checked>
-                  <label for="voice-activation-toggle" class="toggle-label"></label>
-                  <span class="toggle-text" id="voice-activation-toggle-text">Aktif</span>
+                <div class="form-group">
+                  <label for="wake-word-toggle">Wake Word Detection</label>
+                  <div class="toggle-container">
+                    <input type="checkbox" id="wake-word-toggle" class="toggle-checkbox" checked>
+                    <label for="wake-word-toggle" class="toggle-label"></label>
+                    <span class="toggle-text" id="wake-word-toggle-text">Aktif</span>
+                  </div>
+                  <p class="wake-word-description">
+                    Aktifkan deteksi wake word untuk memulai percakapan dengan kata kunci.
+                  </p>
                 </div>
-                <p class="voice-activation-description">
-                  Aktifkan Voice Activation untuk menggunakan wake word seperti "Hey Mamouse".
-                </p>
-              </div>
 
-              <div class="form-group">
-                <label for="wake-words">Wake Words</label>
-                <input type="text" id="wake-words" placeholder="hey mamouse, hai mamouse, halo mamouse, ok mamouse" />
-                <p class="wake-words-description">
-                  Kata-kata yang akan memicu asisten (pisahkan dengan koma).
-                </p>
-              </div>
-
-              <div class="form-group">
-                <label for="speech-language">Bahasa Pengenalan Suara</label>
-                <select id="speech-language">
-                  <option value="id-ID">Indonesia (id-ID)</option>
-                  <option value="en-US">English (US)</option>
-                  <option value="en-GB">English (UK)</option>
-                  <option value="ja-JP">日本語 (Japanese)</option>
-                  <option value="ko-KR">한국어 (Korean)</option>
-                  <option value="zh-CN">中文 (Chinese)</option>
-                  <option value="fr-FR">Français (French)</option>
-                  <option value="de-DE">Deutsch (German)</option>
-                  <option value="es-ES">Español (Spanish)</option>
-                  <option value="it-IT">Italiano (Italian)</option>
-                  <option value="pt-BR">Português (Brazil)</option>
-                  <option value="ru-RU">Русский (Russian)</option>
-                  <option value="ar-SA">العربية (Arabic)</option>
-                  <option value="hi-IN">हिन्दी (Hindi)</option>
-                  <option value="nl-NL">Nederlands (Dutch)</option>
-                  <option value="pl-PL">Polski (Polish)</option>
-                </select>
-                <p class="speech-language-description">
-                  Pilih bahasa untuk pengenalan suara.
-                </p>
-              </div>
-
-              <div class="form-group">
-                <label for="auto-detect-language-toggle">Deteksi Otomatis Bahasa</label>
-                <div class="toggle-container">
-                  <input type="checkbox" id="auto-detect-language-toggle" class="toggle-checkbox">
-                  <label for="auto-detect-language-toggle" class="toggle-label"></label>
-                  <span class="toggle-text" id="auto-detect-language-toggle-text">Nonaktif</span>
+                <div class="form-group">
+                  <label for="wake-words">Wake Words</label>
+                  <input type="text" id="wake-words" placeholder="hey mamouse, hai mamouse, halo mamouse, ok mamouse" />
+                  <p class="wake-words-description">
+                    Kata-kata yang akan memicu asisten (pisahkan dengan koma).
+                  </p>
                 </div>
-                <p class="auto-detect-language-description">
-                  Aktifkan untuk mendeteksi bahasa secara otomatis (eksperimental).
-                </p>
-              </div>
 
-              <h3>ElevenLabs API Configuration</h3>
-              <div class="form-group">
-                <label for="elevenlabs-api-key">ElevenLabs API Key</label>
-                <input type="password" id="elevenlabs-api-key" placeholder="Enter your ElevenLabs API key" />
-                <div class="button-group">
-                  <button id="validate-elevenlabs-api-key-btn" class="btn btn-secondary">Validate</button>
+                <div class="form-group">
+                  <label for="mic-sensitivity">Sensitivitas Mikrofon: <span id="mic-sensitivity-value">0.7</span></label>
+                  <div class="slider-container">
+                    <input type="range" id="mic-sensitivity" min="0.1" max="1.0" step="0.1" value="0.7" class="slider">
+                  </div>
+                  <p class="mic-sensitivity-description">
+                    Atur sensitivitas mikrofon. Nilai lebih tinggi lebih sensitif terhadap suara.
+                  </p>
                 </div>
-                <div class="api-key-help">
-                  <p>Dapatkan API key dari <a href="https://elevenlabs.io/app/account" id="get-elevenlabs-api-key-link" target="_blank">ElevenLabs</a></p>
+
+                <div class="form-group">
+                  <label for="speech-language">Bahasa Pengenalan Suara</label>
+                  <select id="speech-language">
+                    <option value="id-ID">Indonesia (id-ID)</option>
+                    <option value="en-US">English (US)</option>
+                    <option value="en-GB">English (UK)</option>
+                    <option value="ja-JP">日本語 (Japanese)</option>
+                    <option value="ko-KR">한국어 (Korean)</option>
+                    <option value="zh-CN">中文 (Chinese)</option>
+                    <option value="fr-FR">Français (French)</option>
+                    <option value="de-DE">Deutsch (German)</option>
+                    <option value="es-ES">Español (Spanish)</option>
+                    <option value="it-IT">Italiano (Italian)</option>
+                    <option value="pt-BR">Português (Brazil)</option>
+                    <option value="ru-RU">Русский (Russian)</option>
+                    <option value="ar-SA">العربية (Arabic)</option>
+                    <option value="hi-IN">हिन्दी (Hindi)</option>
+                    <option value="nl-NL">Nederlands (Dutch)</option>
+                    <option value="pl-PL">Polski (Polish)</option>
+                  </select>
+                  <p class="speech-language-description">
+                    Pilih bahasa untuk pengenalan suara.
+                  </p>
                 </div>
-              </div>
 
-              <div class="form-group">
-                <label for="elevenlabs-voice">Voice</label>
-                <select id="elevenlabs-voice">
-                  <option value="pNInz6obpgDQGcFmaJgB">Adam (Default)</option>
-                  <option value="ErXwobaYiN019PkySvjV">Antoni</option>
-                  <option value="VR6AewLTigWG4xSOukaG">Arnold</option>
-                  <option value="EXAVITQu4vr4xnSDxMaL">Bella</option>
-                  <option value="IKne3meq5aSn9XLyUdCD">Charlie</option>
-                  <option value="2EiwWnXFnvU5JabPnv8n">Clyde</option>
-                  <option value="onwK4e9ZLuTAKqWW03F9">Daniel</option>
-                  <option value="CYw3kZ02Hs0563khs1Fj">Dave</option>
-                  <option value="ThT5KcBeYPX3keUQqHPh">Dorothy</option>
-                  <option value="5Q0t7uMcjvnagumLfvZi">Ethan</option>
-                  <option value="jsCqWAovK2LkecY7zXl4">Freya</option>
-                  <option value="jBpfuIE2acCO8z3wKNLl">Gigi</option>
-                  <option value="oWAxZDx7w5VEj9dCyTzz">Grace</option>
-                  <option value="SOYHLrjzK2X1ezoPC6cr">Harry</option>
-                  <option value="ZQe5CZNOzWyzPSCn5a3c">James</option>
-                  <option value="bVMeCyTHy58xNoL34h3p">Jeremy</option>
-                  <option value="TxGEqnHWrfWFTfGW9XjX">Josh</option>
-                  <option value="XrExE9yKIg1WjnnlVkGX">Matilda</option>
-                  <option value="zrHiDhphv9ZnVXBqCLjz">Mimi</option>
-                  <option value="piTKgcLEGmPE4e6mEKli">Nicole</option>
-                  <option value="21m00Tcm4TlvDq8ikWAM">Rachel</option>
-                  <option value="yoZ06aMxZJJ28mfd3POQ">Sam</option>
-                  <option value="GBv7mTt0atIp3Br8iCZE">Thomas</option>
-                  <option value="IKne3meq5aSn9XLyUdCD">Jarvis</option>
-                </select>
-              </div>
-
-              <h3>Voice Settings</h3>
-
-              <div class="form-group">
-                <label for="tts-speed">Speed: <span id="tts-speed-value">1.0</span></label>
-                <div class="slider-container">
-                  <input type="range" id="tts-speed" min="0.5" max="2.0" step="0.1" value="1.0" class="slider">
+                <div class="form-group">
+                  <label for="auto-detect-language-toggle">Deteksi Otomatis Bahasa</label>
+                  <div class="toggle-container">
+                    <input type="checkbox" id="auto-detect-language-toggle" class="toggle-checkbox">
+                    <label for="auto-detect-language-toggle" class="toggle-label"></label>
+                    <span class="toggle-text" id="auto-detect-language-toggle-text">Nonaktif</span>
+                  </div>
+                  <p class="auto-detect-language-description">
+                    Aktifkan untuk mendeteksi bahasa secara otomatis (eksperimental).
+                  </p>
                 </div>
               </div>
 
-              <div class="form-group">
-                <label for="tts-pitch">Pitch: <span id="tts-pitch-value">1.0</span></label>
-                <div class="slider-container">
-                  <input type="range" id="tts-pitch" min="0.5" max="2.0" step="0.1" value="1.0" class="slider">
+              <!-- Text-to-Speech Tab -->
+              <div class="voice-tab-content" id="text-to-speech-tab">
+                <div class="form-group">
+                  <label for="tts-toggle">Text-to-Speech</label>
+                  <div class="toggle-container">
+                    <input type="checkbox" id="tts-toggle" class="toggle-checkbox" checked>
+                    <label for="tts-toggle" class="toggle-label"></label>
+                    <span class="toggle-text" id="tts-toggle-text">Aktif</span>
+                  </div>
+                  <p class="tts-description">
+                    Aktifkan Text-to-Speech untuk mendengarkan respons dari asisten.
+                  </p>
+                </div>
+
+                <h4>ElevenLabs API Configuration</h4>
+                <div class="form-group">
+                  <label for="elevenlabs-api-key">ElevenLabs API Key</label>
+                  <input type="password" id="elevenlabs-api-key" placeholder="Enter your ElevenLabs API key" />
+                  <div class="button-group">
+                    <button id="validate-elevenlabs-api-key-btn" class="btn btn-secondary">Validate</button>
+                  </div>
+                  <div class="api-key-help">
+                    <p>Dapatkan API key dari <a href="https://elevenlabs.io/app/account" id="get-elevenlabs-api-key-link" target="_blank">ElevenLabs</a></p>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="voice-gender">Gender Suara</label>
+                  <div class="voice-gender-options">
+                    <div class="voice-gender-option">
+                      <input type="radio" id="voice-gender-male" name="voice-gender" value="male" checked>
+                      <label for="voice-gender-male">Pria</label>
+                    </div>
+                    <div class="voice-gender-option">
+                      <input type="radio" id="voice-gender-female" name="voice-gender" value="female">
+                      <label for="voice-gender-female">Wanita</label>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="elevenlabs-voice">Voice</label>
+                  <select id="elevenlabs-voice">
+                    <!-- Male Voices -->
+                    <optgroup label="Male Voices" id="male-voices">
+                      <option value="pNInz6obpgDQGcFmaJgB">Adam (Default)</option>
+                      <option value="ErXwobaYiN019PkySvjV">Antoni</option>
+                      <option value="VR6AewLTigWG4xSOukaG">Arnold</option>
+                      <option value="IKne3meq5aSn9XLyUdCD">Charlie</option>
+                      <option value="2EiwWnXFnvU5JabPnv8n">Clyde</option>
+                      <option value="onwK4e9ZLuTAKqWW03F9">Daniel</option>
+                      <option value="CYw3kZ02Hs0563khs1Fj">Dave</option>
+                      <option value="5Q0t7uMcjvnagumLfvZi">Ethan</option>
+                      <option value="SOYHLrjzK2X1ezoPC6cr">Harry</option>
+                      <option value="ZQe5CZNOzWyzPSCn5a3c">James</option>
+                      <option value="bVMeCyTHy58xNoL34h3p">Jeremy</option>
+                      <option value="TxGEqnHWrfWFTfGW9XjX">Josh</option>
+                      <option value="yoZ06aMxZJJ28mfd3POQ">Sam</option>
+                      <option value="GBv7mTt0atIp3Br8iCZE">Thomas</option>
+                      <option value="IKne3meq5aSn9XLyUdCD">Jarvis</option>
+                    </optgroup>
+                    <!-- Female Voices -->
+                    <optgroup label="Female Voices" id="female-voices">
+                      <option value="EXAVITQu4vr4xnSDxMaL">Bella</option>
+                      <option value="ThT5KcBeYPX3keUQqHPh">Dorothy</option>
+                      <option value="jsCqWAovK2LkecY7zXl4">Freya</option>
+                      <option value="jBpfuIE2acCO8z3wKNLl">Gigi</option>
+                      <option value="oWAxZDx7w5VEj9dCyTzz">Grace</option>
+                      <option value="XrExE9yKIg1WjnnlVkGX">Matilda</option>
+                      <option value="zrHiDhphv9ZnVXBqCLjz">Mimi</option>
+                      <option value="piTKgcLEGmPE4e6mEKli">Nicole</option>
+                      <option value="21m00Tcm4TlvDq8ikWAM">Rachel</option>
+                    </optgroup>
+                  </select>
+                  <button id="test-voice-btn" class="btn btn-secondary">Test Voice</button>
+                </div>
+
+                <h4>Voice Parameters</h4>
+                <div class="form-group">
+                  <label for="tts-speed">Speed: <span id="tts-speed-value">1.0</span></label>
+                  <div class="slider-container">
+                    <input type="range" id="tts-speed" min="0.5" max="2.0" step="0.1" value="1.0" class="slider">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="tts-pitch">Pitch: <span id="tts-pitch-value">1.0</span></label>
+                  <div class="slider-container">
+                    <input type="range" id="tts-pitch" min="0.5" max="2.0" step="0.1" value="1.0" class="slider">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="tts-volume">Volume: <span id="tts-volume-value">1.0</span></label>
+                  <div class="slider-container">
+                    <input type="range" id="tts-volume" min="0.0" max="1.0" step="0.1" value="1.0" class="slider">
+                  </div>
                 </div>
               </div>
 
-              <div class="form-group">
-                <label for="tts-volume">Volume: <span id="tts-volume-value">1.0</span></label>
-                <div class="slider-container">
-                  <input type="range" id="tts-volume" min="0.0" max="1.0" step="0.1" value="1.0" class="slider">
+              <!-- Conversation Tab -->
+              <div class="voice-tab-content" id="conversation-tab">
+                <div class="form-group">
+                  <label for="continuous-conversation-toggle">Percakapan Berkelanjutan</label>
+                  <div class="toggle-container">
+                    <input type="checkbox" id="continuous-conversation-toggle" class="toggle-checkbox" checked>
+                    <label for="continuous-conversation-toggle" class="toggle-label"></label>
+                    <span class="toggle-text" id="continuous-conversation-toggle-text">Aktif</span>
+                  </div>
+                  <p class="continuous-conversation-description">
+                    Aktifkan untuk percakapan berkelanjutan tanpa perlu mengklik tombol mikrofon setiap kali.
+                  </p>
+                </div>
+
+                <div class="form-group">
+                  <label for="auto-respond-toggle">Respons Otomatis</label>
+                  <div class="toggle-container">
+                    <input type="checkbox" id="auto-respond-toggle" class="toggle-checkbox" checked>
+                    <label for="auto-respond-toggle" class="toggle-label"></label>
+                    <span class="toggle-text" id="auto-respond-toggle-text">Aktif</span>
+                  </div>
+                  <p class="auto-respond-description">
+                    Aktifkan untuk respons otomatis dari asisten setelah Anda selesai berbicara.
+                  </p>
+                </div>
+
+                <div class="form-group">
+                  <label for="conversation-timeout">Timeout Percakapan: <span id="conversation-timeout-value">10</span> detik</label>
+                  <div class="slider-container">
+                    <input type="range" id="conversation-timeout" min="5" max="30" step="1" value="10" class="slider">
+                  </div>
+                  <p class="conversation-timeout-description">
+                    Waktu tunggu sebelum percakapan dianggap selesai jika tidak ada input suara.
+                  </p>
+                </div>
+
+                <div class="form-group">
+                  <label for="save-conversation-toggle">Simpan Transkripsi Percakapan</label>
+                  <div class="toggle-container">
+                    <input type="checkbox" id="save-conversation-toggle" class="toggle-checkbox">
+                    <label for="save-conversation-toggle" class="toggle-label"></label>
+                    <span class="toggle-text" id="save-conversation-toggle-text">Nonaktif</span>
+                  </div>
+                  <p class="save-conversation-description">
+                    Aktifkan untuk menyimpan transkripsi percakapan secara otomatis.
+                  </p>
+                </div>
+
+                <div class="form-group">
+                  <label for="conversation-folder">Folder Penyimpanan Transkripsi</label>
+                  <div class="folder-selector">
+                    <input type="text" id="conversation-folder" placeholder="Pilih folder untuk menyimpan transkripsi" readonly />
+                    <button id="browse-folder-btn" class="btn btn-secondary">Browse</button>
+                  </div>
                 </div>
               </div>
 
@@ -448,7 +569,7 @@
                 <button id="reset-voice-settings-btn" class="btn btn-secondary">Reset to Default</button>
               </div>
 
-              <div id="elevenlabs-status" class="status-message"></div>
+              <div id="voice-status" class="status-message"></div>
             </div>
           </div>
 
@@ -607,6 +728,9 @@
   <script src="virtual-scroll.js"></script>
   <script src="standalone-bubble.js"></script>
   <script src="voice-activation.js"></script>
+  <script src="voice-interaction.js"></script>
+  <script src="voice-tabs.js"></script>
+  <script src="voice-button.js"></script>
   <script src="renderer.js"></script>
 </body>
 </html>

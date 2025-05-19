@@ -82,6 +82,9 @@ let voiceActivation = null;
 let isVoiceActivationEnabled = true;
 let isWakeWordDetected = false;
 
+// Voice Interaction
+let voiceInteraction = null;
+
 // Speech Recognition Language
 let speechLanguage = 'id-ID';
 let isAutoDetectLanguage = false;
@@ -174,6 +177,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Initialize speech recognition
   initSpeechRecognition();
+
+  // Initialize voice interaction
+  initVoiceInteraction();
 
   // Load theme
   loadTheme();
@@ -1089,6 +1095,113 @@ function startVoiceActivation() {
     voiceActivation.start();
     console.log('Voice activation started');
     showStatusIndicator('listening', 'Mendengarkan wake word...', 3000);
+  }
+}
+
+// Fungsi untuk menginisialisasi voice interaction
+function initVoiceInteraction() {
+  try {
+    // Dapatkan pengaturan dari localStorage
+    const wakeWords = localStorage.getItem('wakeWords') || 'hey mamouse, hai mamouse, halo mamouse, ok mamouse';
+    const language = localStorage.getItem('speechLanguage') || 'id-ID';
+    const sensitivity = parseFloat(localStorage.getItem('micSensitivity') || '0.7');
+    const continuousConversation = localStorage.getItem('continuousConversation') !== 'false';
+    const autoRespond = localStorage.getItem('autoRespond') !== 'false';
+    const conversationTimeout = parseInt(localStorage.getItem('conversationTimeout') || '10') * 1000;
+    const saveConversation = localStorage.getItem('saveConversation') === 'true';
+    const conversationFolder = localStorage.getItem('conversationFolder') || '';
+
+    // Inisialisasi VoiceInteraction
+    voiceInteraction = new VoiceInteraction({
+      wakeWords: wakeWords.split(',').map(word => word.trim()),
+      language: language,
+      sensitivity: sensitivity,
+      continuousListening: continuousConversation,
+      autoRestart: true,
+      conversationTimeout: conversationTimeout,
+      autoRespond: autoRespond,
+      saveConversation: saveConversation,
+      conversationFolder: conversationFolder
+    });
+
+    // Set callback untuk wake word detection
+    voiceInteraction.callbacks.onWakeWordDetected = (transcript) => {
+      console.log('Wake word detected in:', transcript);
+
+      // Tampilkan bubble chat untuk wake word
+      addBubble({
+        id: 'wake-word-' + Date.now(),
+        text: 'Listening...',
+        isUser: true,
+        timestamp: new Date().toISOString()
+      });
+    };
+
+    // Set callback untuk speech result
+    voiceInteraction.callbacks.onSpeechResult = (transcript, isFinal) => {
+      if (isFinal) {
+        console.log('Final speech result:', transcript);
+
+        // Tampilkan bubble chat untuk user input
+        addBubble({
+          id: 'user-voice-' + Date.now(),
+          text: transcript,
+          isUser: true,
+          timestamp: new Date().toISOString()
+        });
+      }
+    };
+
+    // Set callback untuk command detection
+    voiceInteraction.callbacks.onCommandDetected = (command) => {
+      console.log('Command detected:', command);
+
+      // Set input value
+      if (messageInput) {
+        messageInput.value = command;
+      }
+
+      // Submit form
+      if (messageForm && voiceInteraction.options.autoRespond) {
+        messageForm.dispatchEvent(new Event('submit'));
+      }
+    };
+
+    // Set callback untuk listening start
+    voiceInteraction.callbacks.onListeningStart = () => {
+      console.log('Voice interaction listening started');
+    };
+
+    // Set callback untuk listening stop
+    voiceInteraction.callbacks.onListeningStop = () => {
+      console.log('Voice interaction listening stopped');
+    };
+
+    // Set callback untuk error
+    voiceInteraction.callbacks.onError = (error) => {
+      console.error('Voice interaction error:', error);
+      showStatusIndicator('error', `Error: ${error}`, 3000);
+    };
+
+    // Set callback untuk mute change
+    voiceInteraction.callbacks.onMuteChange = (isMuted) => {
+      console.log('Voice interaction mute changed:', isMuted);
+    };
+
+    // Set callback untuk conversation end
+    voiceInteraction.callbacks.onConversationEnd = () => {
+      console.log('Conversation ended');
+    };
+
+    // Mulai voice interaction jika voice activation diaktifkan
+    const voiceActivation = localStorage.getItem('voiceActivation');
+    if (voiceActivation === null || voiceActivation === 'true') {
+      voiceInteraction.start();
+    }
+
+    console.log('Voice interaction initialized successfully');
+  } catch (error) {
+    console.error('Error initializing voice interaction:', error);
   }
 }
 
