@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mamous Agent</title>
+  <link rel="stylesheet" href="../shared/styles/variables.css">
+  <link rel="stylesheet" href="../shared/styles/base.css">
+  <link rel="stylesheet" href="../shared/styles/animations.css">
+  <link rel="stylesheet" href="../shared/styles/utilities.css">
+  <link rel="stylesheet" href="../shared/styles/components.css">
+  <!-- colors.css removed - functionality moved to components/menu-bar/menu-bar.css -->
+  <!-- forms.css removed - functionality moved to components/input-container/forms.css -->
+  <link rel="stylesheet" href="../shared/styles/layout.css">
+  <link rel="stylesheet" href="../shared/styles/critical-inline.css">
+  <!-- Bubble Chat CSS moved to components/bubble-chat/bubble-chat.css -->
+
+  <!-- Window Component CSS -->
+  <link rel="stylesheet" href="../components/window/window.css">
+  <!-- Input Container Component CSS -->
+  <link rel="stylesheet" href="../components/input-container/input-container.css">
+  <link rel="stylesheet" href="../components/input-container/forms.css">
+  <!-- Voice Component CSS -->
+  <link rel="stylesheet" href="../components/voice/voice.css">
+  <!-- Camera Component CSS -->
+  <link rel="stylesheet" href="../components/camera/camera.css">
+  <!-- Menu Bar Component CSS -->
+  <link rel="stylesheet" href="../components/menu-bar/menu-bar.css">
+  <!-- Bubble Chat Component CSS -->
+  <link rel="stylesheet" href="../components/bubble-chat/bubble-chat.css">
+  <style>
+    /* Critical inline styles for transparency and pointer events */
+    /* These styles are kept inline as they are essential for app functionality */
+    html, body {
+      background: transparent !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      border: none !important;
+      overflow: hidden !important;
+      width: 100% !important;
+      height: 100% !important;
+      pointer-events: none !important; /* Essential for click-through functionality */
+    }
+  </style>
+</head>
+<body>
+  <div class="app-container normal">
+    <div class="app-window">
+      <!-- Drag Area -->
+      <div class="drag-area"></div>
+
+      <!-- App Content -->
+      <main class="app-content" role="main">
+        <!-- Connection Status -->
+        <div class="connection-status-container" id="connection-status">
+          <div class="connection-status-message">
+            <div class="connection-spinner"></div>
+            <p>Connecting to server...</p>
+          </div>
+        </div>
+
+        <!-- Camera Container Above Input -->
+        <div class="camera-above-input" id="camera-above-input">
+          <!-- Camera content taking full space -->
+          <div class="camera-content-above">
+            <video id="camera-video-above" autoplay playsinline></video>
+            <canvas id="camera-canvas-above"></canvas>
+            <div id="camera-error-above" class="camera-error">
+              <p>Camera not available</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Input Box -->
+        <section class="input-container" id="input-container" role="search" aria-label="Message Input">
+          <div class="neon-border"></div>
+          <form id="message-form">
+            <input
+              type="text"
+              id="message-input"
+              placeholder="Tell Mamouse what to do"
+              class="input-box"
+            />
+            <button type="submit" class="submit-button" title="Send">
+              <span class="icon-send"></span>
+            </button>
+            <button
+              type="button"
+              class="voice-button"
+              id="voice-btn"
+              title="Voice Input"
+            >
+              <span class="icon-microphone"></span>
+            </button>
+            <button type="button" class="camera-button" id="camera-btn" title="Camera">
+              <span class="icon-camera"></span>
+            </button>
+            <button type="button" class="menu-button" id="menu-btn" title="Menu">
+              <span class="icon-menu"></span>
+            </button>
+          </form>
+        </section>
+
+        <!-- Voice Visualizer -->
+        <div class="voice-visualizer-container" id="voice-visualizer">
+          <canvas id="visualizer-canvas" class="voice-visualizer"></canvas>
+        </div>
+
+        <!-- Status Indicator -->
+        <div class="status-indicator" id="status-indicator">
+          <div class="status-indicator-icon" id="status-indicator-icon">
+            <span class="icon-clock"></span>
+          </div>
+          <div class="status-indicator-text" id="status-indicator-text">Processing...</div>
+        </div>
+
+        <!-- Area konten untuk bubble chat -->
+        <section class="bubble-content-area" id="bubble-content-area" role="log" aria-label="Chat Messages" aria-live="polite">
+          <!-- Bubble chat akan ditambahkan di sini -->
+        </section>
+      </main>
+
+      <!-- Slide Menu -->
+      <div class="slide-menu" id="slide-menu">
+        <div class="menu-header">
+          <h3>Menu</h3>
+        </div>
+        <div class="menu-content">
+          <div class="menu-item" data-section="api">
+            <div class="menu-item-icon">
+              <span class="icon-settings"></span>
+            </div>
+            <span>Gemini API Settings</span>
+          </div>
+          <div class="menu-section api-section">
+            <h3>Gemini API Configuration</h3>
+            <div class="api-form">
+              <div class="form-group">
+                <label for="gemini-api-key">API Key</label>
+                <input type="password" id="gemini-api-key" placeholder="Enter your Gemini API key" />
+                <div class="button-group-with-status">
+                  <div class="button-group">
+                    <button id="save-api-key-btn" class="btn">Save API Key</button>
+                  </div>
+                  <div id="api-status" class="status-message inline-status"></div>
+                </div>
+                <div class="api-key-help">
+                  <p>Dapatkan API key dari <a href="https://aistudio.google.com/apikey" id="get-api-key-link" target="_blank">Google AI Studio</a></p>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="gemini-model">Model</label>
+                <div class="custom-select-container">
+                  <div class="custom-select" id="gemini-model-custom">
+                    <div class="custom-select-trigger">
+                      <span id="selected-model-text">gemini-2.5-flash (Best Cost-Performance)</span>
+                      <div class="custom-select-arrow">▼</div>
+                    </div>
+                    <div class="custom-select-options">
+                      <div class="custom-optgroup">
+                        <div class="custom-optgroup-label">Gemini 2.5 (Latest - Recommended)</div>
+                        <div class="custom-option" data-value="gemini-2.5-flash">gemini-2.5-flash (Best Cost-Performance)</div>
+                        <div class="custom-option" data-value="gemini-2.5-pro">gemini-2.5-pro (Most Advanced)</div>
+                      </div>
+                      <div class="custom-optgroup">
+                        <div class="custom-optgroup-label">Gemini 2.0</div>
+                        <div class="custom-option" data-value="gemini-2.0-flash-001">gemini-2.0-flash-001 (Fast)</div>
+                        <div class="custom-option" data-value="gemini-2.0-flash-lite">gemini-2.0-flash-lite (Cost Efficient)</div>
+                      </div>
+                      <div class="custom-optgroup">
+                        <div class="custom-optgroup-label">Gemini 1.5</div>
+                        <div class="custom-option" data-value="gemini-1.5-pro">gemini-1.5-pro (Complex Tasks)</div>
+                        <div class="custom-option" data-value="gemini-1.5-flash">gemini-1.5-flash (Versatile)</div>
+                        <div class="custom-option" data-value="gemini-1.5-flash-8b">gemini-1.5-flash-8b (High Volume)</div>
+                      </div>
+                    </div>
+                  </div>
+                  <input type="hidden" id="gemini-model" value="gemini-2.5-flash">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="menu-item" data-section="voice">
+            <div class="menu-item-icon">
+              <span class="icon-voice"></span>
+            </div>
+            <span>Voice Settings</span>
+          </div>
+          <div class="menu-section voice-section">
+            <h3>Voice Settings</h3>
+            <div class="voice-form">
+              <div class="form-group">
+                <label for="elevenlabs-api-key">ElevenLabs API Key</label>
+                <input type="password" id="elevenlabs-api-key" placeholder="Enter your ElevenLabs API key" />
+                <div class="button-group-with-status">
+                  <div class="button-group">
+                    <button id="save-elevenlabs-api-key-btn" class="btn">Save API Key</button>
+                  </div>
+                  <div id="elevenlabs-api-status" class="status-message inline-status"></div>
+                </div>
+                <div class="api-key-help">
+                  <p>Dapatkan API key dari <a href="https://elevenlabs.io/app/settings/api-keys" id="get-elevenlabs-api-key-link" target="_blank">ElevenLabs</a></p>
+                  <p><strong>Fitur yang didukung:</strong> Text-to-Speech (TTS), Speech-to-Text (STT), dan Speech-to-Speech (S2S) untuk komunikasi voice real-time.</p>
+                </div>
+              </div>
+
+              <h3>Voice Settings</h3>
+              <div class="form-group">
+                <label for="voice-model">Model</label>
+                <select id="voice-model" class="form-select">
+                  <option value="eleven_flash_v2_5">Flash v2.5 (Ultra-low latency)</option>
+                  <option value="eleven_turbo_v2_5">Turbo v2.5 (Balanced quality/speed)</option>
+                  <option value="eleven_multilingual_v2">Multilingual v2 (High quality)</option>
+                  <option value="eleven_v3">Eleven v3 (Most expressive)</option>
+                </select>
+                <p class="form-description">Pilih model TTS sesuai kebutuhan latency dan kualitas.</p>
+              </div>
+
+              <div class="form-group">
+                <label for="voice-stability">Stability: <span id="stability-value">0.5</span></label>
+                <input type="range" id="voice-stability" min="0" max="1" step="0.1" value="0.5" class="form-range" />
+                <p class="form-description">Mengontrol stabilitas suara. Nilai rendah = lebih ekspresif, nilai tinggi = lebih konsisten.</p>
+              </div>
+
+              <div class="form-group">
+                <label for="voice-similarity">Similarity Boost: <span id="similarity-value">0.75</span></label>
+                <input type="range" id="voice-similarity" min="0" max="1" step="0.05" value="0.75" class="form-range" />
+                <p class="form-description">Mengontrol seberapa mirip dengan suara asli. Nilai tinggi = lebih mirip original.</p>
+              </div>
+
+              <div class="form-group">
+                <label for="voice-style">Style Exaggeration: <span id="style-value">0</span></label>
+                <input type="range" id="voice-style" min="0" max="1" step="0.1" value="0" class="form-range" />
+                <p class="form-description">Memperkuat gaya bicara original. Direkomendasikan tetap di 0 untuk stabilitas.</p>
+              </div>
+
+              <div class="form-group">
+                <label for="voice-speaker-boost">Speaker Boost</label>
+                <div class="toggle-container">
+                  <input type="checkbox" id="voice-speaker-boost" class="toggle-checkbox">
+                  <label for="voice-speaker-boost" class="toggle-label"></label>
+                  <span class="toggle-text" id="speaker-boost-text">Nonaktif</span>
+                </div>
+                <p class="form-description">Meningkatkan kemiripan dengan speaker asli (membutuhkan komputasi lebih).</p>
+              </div>
+
+              <div class="form-group">
+                <label for="voice-speed">Speed: <span id="speed-value">1.0</span></label>
+                <input type="range" id="voice-speed" min="0.7" max="1.2" step="0.1" value="1.0" class="form-range" />
+                <p class="form-description">Kecepatan bicara. 1.0 = normal, <1.0 = lambat, >1.0 = cepat.</p>
+              </div>
+
+              <h3>Advanced Settings</h3>
+              <div class="form-group">
+                <label for="output-format">Output Format</label>
+                <select id="output-format" class="form-select">
+                  <option value="mp3_44100_128">MP3 44.1kHz 128kbps (Balanced)</option>
+                  <option value="mp3_44100_64">MP3 44.1kHz 64kbps (Low bandwidth)</option>
+                  <option value="mp3_44100_192">MP3 44.1kHz 192kbps (High quality)</option>
+                  <option value="pcm_16000">PCM 16kHz (Raw audio)</option>
+                  <option value="pcm_22050">PCM 22.05kHz (Raw audio)</option>
+                  <option value="pcm_24000">PCM 24kHz (Raw audio)</option>
+                  <option value="pcm_44100">PCM 44.1kHz (Raw audio)</option>
+                </select>
+                <p class="form-description">Format output audio. MP3 untuk ukuran file kecil, PCM untuk kualitas maksimal.</p>
+              </div>
+
+              <div class="form-group">
+                <label for="streaming-latency">Streaming Latency Optimization: <span id="latency-value">1</span></label>
+                <input type="range" id="streaming-latency" min="0" max="4" step="1" value="1" class="form-range" />
+                <p class="form-description">Optimasi latency streaming. 0 = kualitas maksimal, 4 = latency minimal.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="menu-item" data-section="color">
+            <div class="menu-item-icon">
+              <span class="icon-palette"></span>
+            </div>
+            <span>Color Settings</span>
+          </div>
+          <div class="menu-section color-section">
+            <h3>🎨 Express Your Colors</h3>
+
+            <!-- Primary Color -->
+            <div class="color-group">
+              <label>Primary Color</label>
+              <div class="color-picker-container">
+                <input type="color" id="primary-color-picker" value="#00a8ff" class="color-input">
+                <div class="color-palette" data-target="primary-color-picker">
+                  <div class="color-dot" data-color="#00a8ff" title="Default Blue"></div>
+                  <div class="color-dot" data-color="#ff0080" title="Neon Pink"></div>
+                  <div class="color-dot" data-color="#00ff80" title="Neon Green"></div>
+                  <div class="color-dot" data-color="#ff8000" title="Orange"></div>
+                  <div class="color-dot" data-color="#8000ff" title="Purple"></div>
+                  <div class="color-dot" data-color="#ff4757" title="Red"></div>
+                  <div class="color-dot" data-color="#2ed573" title="Green"></div>
+                  <div class="color-dot" data-color="#ffa502" title="Yellow"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Secondary Color -->
+            <div class="color-group">
+              <label>Secondary Color</label>
+              <div class="color-picker-container">
+                <input type="color" id="secondary-color-picker" value="#0078d4" class="color-input">
+                <div class="color-palette" data-target="secondary-color-picker">
+                  <div class="color-dot" data-color="#0078d4" title="Default Blue"></div>
+                  <div class="color-dot" data-color="#6c5ce7" title="Purple"></div>
+                  <div class="color-dot" data-color="#a29bfe" title="Light Purple"></div>
+                  <div class="color-dot" data-color="#fd79a8" title="Pink"></div>
+                  <div class="color-dot" data-color="#fdcb6e" title="Yellow"></div>
+                  <div class="color-dot" data-color="#e17055" title="Orange"></div>
+                  <div class="color-dot" data-color="#00b894" title="Teal"></div>
+                  <div class="color-dot" data-color="#0984e3" title="Blue"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Quick Presets -->
+            <div class="color-group">
+              <label>Quick Presets</label>
+              <div class="preset-palette">
+                <div class="preset-option" data-preset="default" title="Default Theme">
+                  <div class="preset-colors">
+                    <div data-color="#00a8ff"></div>
+                    <div data-color="#0078d4"></div>
+                  </div>
+                  <span>Default</span>
+                </div>
+                <div class="preset-option" data-preset="neon" title="Neon Theme">
+                  <div class="preset-colors">
+                    <div data-color="#ff0080"></div>
+                    <div data-color="#8000ff"></div>
+                  </div>
+                  <span>Neon</span>
+                </div>
+                <div class="preset-option" data-preset="ocean" title="Ocean Theme">
+                  <div class="preset-colors">
+                    <div data-color="#0077be"></div>
+                    <div data-color="#4ecdc4"></div>
+                  </div>
+                  <span>Ocean</span>
+                </div>
+                <div class="preset-option" data-preset="sunset" title="Sunset Theme">
+                  <div class="preset-colors">
+                    <div data-color="#ff6b35"></div>
+                    <div data-color="#f7931e"></div>
+                  </div>
+                  <span>Sunset</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="color-actions">
+              <button class="btn apply-colors-btn" id="apply-colors-btn">💾 Save Settings</button>
+              <button class="btn reset-colors-btn" id="reset-colors-btn">🔄 Reset to Default</button>
+            </div>
+          </div>
+
+          <div class="menu-item" data-section="about">
+            <div class="menu-item-icon">
+              <span class="icon-info"></span>
+            </div>
+            <span>About</span>
+          </div>
+          <div class="menu-section about-section">
+            <p>Mamous Agent v1.0</p>
+            <p>An AI personal assistant with multimodal capabilities.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- External Dependencies -->
+  <script src="https://cdn.jsdelivr.net/npm/axios@1.9.0/dist/axios.min.js"></script>
+
+  <!-- Services -->
+  <!-- elevenlabs-stt.js removed - DDR Cleanup: Dead code (file doesn't exist) -->
+
+  <!-- Constants (Load First) -->
+  <script src="../shared/ui/ui-constants.js"></script>
+
+  <!-- Utility Libraries (moved from ui/utils/ to shared/utils/) -->
+  <!-- CONSOLIDATION: Merged console-logger.js + error-handler.js → logging-utilities.js -->
+  <script src="../shared/utils/logging-utilities.js"></script>
+  <script src="../shared/utils/dom-helper.js"></script>
+  <script src="../shared/utils/api-helper.js"></script>
+  <script src="../shared/utils/status-helper.js"></script>
+  <!-- CONSOLIDATION: utilities-index.js merged into renderer-utilities.js -->
+
+  <!-- UI Components & Utilities -->
+  <!-- ARCHITECTURAL MIGRATION: Renamed from icons.js for naming consistency -->
+  <script src="../shared/utils/icon-utilities.js"></script>
+  <script src="../shared/ui/icon-manager.js"></script>
+
+  <!-- Bubble Chat Legacy Components - REMOVED (DDR Cleanup: Dead code eliminated) -->
+  <script src="../shared/ui/ui-utils.js"></script>
+
+  <!-- Core Managers -->
+  <!-- API Manager - REMOVED (DDR Cleanup: Redundant legacy implementation eliminated) -->
+  <script src="../shared/ui/websocket-manager.js"></script>
+  <!-- Message Manager - REMOVED (DDR Cleanup: Redundant bridge layer eliminated) -->
+  <script src="../shared/ui/event-manager.js"></script>
+
+  <!-- Input & Interaction -->
+  <!-- voice-output.js removed - DDR Cleanup: Dead code (file doesn't exist) -->
+  <script src="../shared/ui/mouse-handler.js"></script>
+  <!-- color-controller.js removed - functionality moved to components/menu-bar/color-settings.js -->
+
+  <!-- Window Component -->
+  <script src="../components/window/window-manager.js"></script>
+  <script src="../components/window/index.js"></script>
+
+  <!-- Voice Component -->
+  <script src="../components/voice/voice-manager.js"></script>
+  <script src="../components/voice/voice-service.js"></script>
+  <script src="../components/voice/index.js"></script>
+
+  <!-- Camera Component (Unified) - REMOVED: Duplicate script tag, camera.js loaded after renderer.js -->
+
+  <!-- Menu Bar Component -->
+  <script type="module" src="../components/menu-bar/menu-manager.js"></script>
+  <script type="module" src="../components/menu-bar/menu-service.js"></script>
+  <script type="module" src="../components/menu-bar/submenus/gemini-settings.js"></script>
+  <script type="module" src="../components/menu-bar/submenus/voice-settings.js"></script>
+  <script type="module" src="../components/menu-bar/submenus/color-settings.js"></script>
+  <script type="module" src="../components/menu-bar/submenus/about-section.js"></script>
+  <script type="module" src="../components/menu-bar/index.js"></script>
+
+  <!-- Bubble Chat Component -->
+  <script type="module" src="../components/bubble-chat/bubble-manager.js"></script>
+  <script type="module" src="../components/bubble-chat/bubble-service.js"></script>
+  <script type="module" src="../components/bubble-chat/index.js"></script>
+
+  <!-- Input Container Component -->
+  <script src="../components/input-container/input-container.js"></script>
+  <script src="../components/input-container/input-service.js"></script>
+  <script src="../components/input-container/index.js"></script>
+
+  <!-- Mock Service for Browser Testing -->
+  <!-- ARCHITECTURAL CORRECTION: Moved from shared/services/mock-service.js to shared/utils/mock-service.js -->
+  <script src="../shared/utils/mock-service.js"></script>
+
+  <!-- Camera Configuration moved to components/camera/camera-config.js -->
+
+  <!-- DDR CLEANUP: Voice utilities moved to voice component (SSOT) -->
+  <!-- Voice configuration, utilities, and ElevenLabs client now loaded via components/voice/index.js -->
+
+  <!-- Utility Manager System - ARCHITECTURAL MIGRATION: Renamed from renderer-utilities.js -->
+  <script src="../shared/utils/utility-manager.js"></script>
+
+  <!-- ElevenLabs Client - REMOVED MOCK IMPLEMENTATION -->
+  <!-- The real ElevenLabs client is loaded from shared/utils/real-elevenlabs-client.js -->
+
+
+
+
+
+
+
+
+
+
+
+  </script>
+
+  <!-- Initialization & Main Renderer (Load BEFORE Camera) -->
+  <script src="initialization-manager.js"></script>
+  <!-- ARCHITECTURAL MIGRATION: Core renderer functions now included in renderer.js -->
+  <script src="renderer.js"></script>
+
+  <!-- Essential Functions - Required for Core Functionality -->
+  <!-- ARCHITECTURAL CORRECTION: Moved from shared/services/ to shared/utils/ - contains utility functions, not service logic -->
+  <script src="../shared/utils/essential-functions.js"></script>
+
+  <!-- DDR CLEANUP: Menu debug/fix/test scripts removed - functionality handled by menu-bar component -->
+
+  <!-- Utility Diagnostic Script (for debugging utility issues) - DISABLED -->
+  <!-- <script src="../shared/utils/utility-diagnostic.js"></script> -->
+
+  <!-- Production Configuration (disable all testing and notifications) -->
+  <!-- ARCHITECTURAL MIGRATION: Moved from shared/utils/production-mode.js to core/production-config.js -->
+  <script src="production-config.js"></script>
+
+  <!-- Direct Menu Fix - Emergency Fallback for Menu Interactivity -->
+  <script>
+    // Debug function to check menu state
+    function debugMenuState() {
+      console.log('🔍 MENU DEBUG: Checking menu state...');
+
+      const menuItems = document.querySelectorAll('.menu-item[data-section]');
+      const menuSections = document.querySelectorAll('.menu-section');
+
+      console.log(`🔍 Found ${menuItems.length} menu items:`);
+      menuItems.forEach((item, index) => {
+        const section = item.getAttribute('data-section');
+        console.log(`  ${index + 1}. ${section} - Element:`, item);
+      });
+
+      console.log(`🔍 Found ${menuSections.length} menu sections:`);
+      menuSections.forEach((section, index) => {
+        const classes = Array.from(section.classList);
+        const display = window.getComputedStyle(section).display;
+        const visibility = window.getComputedStyle(section).visibility;
+        const opacity = window.getComputedStyle(section).opacity;
+        console.log(`  ${index + 1}. Classes: [${classes.join(', ')}] - Display: ${display}, Visibility: ${visibility}, Opacity: ${opacity}`);
+      });
+    }
+
+    // Emergency fallback to ensure menu items work
+    function ensureMenuInteractivity() {
+      console.log('🚨 Emergency menu fallback activated');
+
+      // First, debug the current state
+      debugMenuState();
+
+      const menuItems = document.querySelectorAll('.menu-item[data-section]');
+      console.log(`🚨 Emergency fallback found ${menuItems.length} menu items`);
+
+      menuItems.forEach(item => {
+        const section = item.getAttribute('data-section');
+
+        // Remove existing listeners by cloning
+        const newItem = item.cloneNode(true);
+        item.parentNode.replaceChild(newItem, item);
+
+        // Add direct click handler
+        newItem.addEventListener('click', function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          console.log(`🚨 Emergency fallback: Menu item clicked: ${section}`);
+
+          const targetClass = section + '-section';
+          const targetSection = document.querySelector('.' + targetClass);
+
+          if (!targetSection) {
+            console.error(`🚨 Emergency fallback: Target section not found: .${targetClass}`);
+            console.log('🚨 Available sections:', Array.from(document.querySelectorAll('.menu-section')).map(s => s.className));
+            return;
+          }
+
+          console.log(`🚨 Found target section:`, targetSection);
+
+          const allSections = document.querySelectorAll('.menu-section');
+          const isActive = targetSection.classList.contains('active');
+
+          console.log(`🚨 Section ${section} is currently ${isActive ? 'active' : 'inactive'}`);
+
+          if (isActive) {
+            console.log(`🚨 Closing section: ${section}`);
+            targetSection.classList.remove('active');
+            targetSection.style.display = 'none';
+            targetSection.style.opacity = '0';
+            targetSection.style.visibility = 'hidden';
+          } else {
+            console.log(`🚨 Opening section: ${section}`);
+
+            // Close all sections first
+            allSections.forEach(s => {
+              s.classList.remove('active');
+              s.style.display = 'none';
+              s.style.opacity = '0';
+              s.style.visibility = 'hidden';
+            });
+
+            // Open the target section with all necessary styles
+            targetSection.classList.add('active');
+            targetSection.style.display = 'block';
+            targetSection.style.opacity = '1';
+            targetSection.style.visibility = 'visible';
+            targetSection.style.pointerEvents = 'auto';
+
+            console.log(`🚨 Section ${section} should now be visible`);
+
+            // Debug the final state
+            setTimeout(() => {
+              const finalDisplay = window.getComputedStyle(targetSection).display;
+              const finalOpacity = window.getComputedStyle(targetSection).opacity;
+              const finalVisibility = window.getComputedStyle(targetSection).visibility;
+              console.log(`🚨 Final state - Display: ${finalDisplay}, Opacity: ${finalOpacity}, Visibility: ${finalVisibility}`);
+            }, 100);
+          }
+        });
+
+        console.log(`🚨 Added click listener to ${section} menu item`);
+      });
+    }
+
+    // Run emergency fallback after a delay
+    setTimeout(ensureMenuInteractivity, 2000);
+
+    // Also run on window load as final fallback
+    window.addEventListener('load', () => {
+      setTimeout(ensureMenuInteractivity, 500);
+    });
+
+    // Add a manual test function
+    window.testMenuSection = function(section) {
+      console.log(`🧪 Manual test: Opening section ${section}`);
+      const targetSection = document.querySelector('.' + section + '-section');
+      if (targetSection) {
+        targetSection.classList.add('active');
+        targetSection.style.display = 'block';
+        targetSection.style.opacity = '1';
+        targetSection.style.visibility = 'visible';
+        console.log(`🧪 Section ${section} manually opened`);
+      } else {
+        console.error(`🧪 Section not found: ${section}`);
+      }
+    };
+
+    // Camera debugging and testing functionality moved to components/camera/camera-debug.js
+
+    // Emergency camera functionality moved to components/camera/camera-debug.js
+
+    // All camera testing and debugging functionality moved to dedicated camera files:
+    // - components/camera/camera-debug.js (debugging and emergency fixes)
+    // - components/camera/camera-ultimate-fix.js (ultimate camera fix)
+  </script>
+
+  <!-- Camera Component (Unified) -->
+  <script src="../components/camera/camera.js"></script>
+</body>
+</html>

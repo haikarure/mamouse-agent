@@ -1,0 +1,527 @@
+/* Input Container Component Styles */
+/* Consolidated input container-related styles following SSOT principles */
+/* Migrated from css/input-container.css */
+
+/* ===== INPUT CONTAINER STYLING ===== */
+
+/* Input Container - Main container dengan efek glassmorphism dan animasi */
+.input-container {
+  position: fixed; /* Tetap fixed agar tidak bergerak */
+  top: var(--input-top-position); /* Gunakan variabel untuk posisi top */
+  left: 50%; /* Posisi di tengah layar */
+  transform: translateX(-50%) !important; /* Transformasi untuk posisi di tengah */
+  width: var(--input-width); /* Gunakan variabel untuk lebar */
+  height: var(--input-height); /* Gunakan variabel untuk tinggi */
+  background-color: rgba(20, 25, 45, 0.6); /* Warna latar solid lebih gelap */
+  backdrop-filter: none; /* Hapus blur */
+  -webkit-backdrop-filter: none; /* Hapus blur untuk Safari */
+  border-radius: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 18px;
+  -webkit-app-region: drag; /* Buat seluruh container dapat di-drag */
+  /* pointer-events managed by mouse-handler.js */
+  border: 3px solid var(--input-border-color, var(--primary-color)); /* Border sesuai tema */
+  box-shadow: 0 6px 16px #000000; /* Bayangan solid lebih besar */
+  transition: all var(--transition-normal);
+  animation: inputContainerEntrance 0.8s cubic-bezier(0.16, 1, 0.3, 1.2);
+  overflow: hidden; /* Untuk efek shine */
+  /* Tambahan untuk mencegah miring */
+  perspective: none !important;
+  transform-style: flat !important;
+  rotate: 0deg !important; /* Pastikan tidak ada rotasi */
+  will-change: transform; /* Optimasi performa */
+  /* Utilities */
+  z-index: 99999 !important; /* Consistent with layout hierarchy - input container in front of camera */
+  cursor: move !important;
+}
+
+/* Efek hover pada input container - lebih interaktif dan futuristik */
+.input-container:hover {
+  background-color: rgba(25, 30, 50, 0.65); /* Sedikit lebih gelap dan solid saat hover */
+  border-color: rgba(var(--primary-color-rgb), 0.3); /* Border lebih terlihat saat hover */
+  box-shadow: var(--shadow-strong),
+              var(--glow-medium) var(--glow-primary);
+  /* transform removed - redundant, already defined in base rule */
+}
+
+/* Efek hover pada input container - tambahan efek glow pada border seperti air berkilau */
+.input-container:hover::before {
+  content: '';
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  border-radius: 30px; /* Sesuaikan dengan border-radius input container */
+  background: linear-gradient(
+    135deg,
+    rgba(var(--primary-color-rgb), 0.5),
+    rgba(var(--tertiary-color-rgb), 0.3),
+    rgba(var(--accent-color-rgb), 0.5)
+  );
+  z-index: -1;
+  opacity: 0.5;
+  filter: blur(3px);
+  animation: borderGlow 3s infinite alternate;
+  pointer-events: none;
+}
+
+/* Efek shine pada input container - seperti air mengalir */
+.input-container::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -150%;
+  width: 100%; /* Full width untuk efek air yang mengalir */
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.1), /* Natural seperti air */
+    transparent
+  );
+  transform: skewX(-25deg);
+  animation: shine 12s infinite ease-in-out; /* Lebih lambat seperti air */
+  pointer-events: none;
+  z-index: 0; /* Di bawah content */
+}
+
+/* ===== INPUT CONTAINER STATES ===== */
+
+/* Input container conversation mode */
+.input-container.conversation-mode {
+  border: 2px solid rgba(0, 210, 255, 0.8);
+  box-shadow: 0 0 30px rgba(0, 210, 255, 0.4);
+  background: rgba(0, 210, 255, 0.1);
+}
+
+/* Input container conversation mode when listening */
+.input-container.conversation-mode.listening {
+  border: 2px solid rgba(255, 107, 107, 0.8);
+  box-shadow: 0 0 30px rgba(255, 107, 107, 0.4);
+  background: rgba(255, 107, 107, 0.1);
+}
+
+/* ===== INPUT BOX STYLING ===== */
+
+.input-box {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 16px;
+  padding: 8px 15px;
+  outline: none;
+  -webkit-app-region: no-drag !important; /* Penting: mencegah drag dari input box agar bisa mengetik */
+  font-weight: 400; /* Sedikit lebih ringan untuk tampilan modern */
+  letter-spacing: 0.3px; /* Sedikit spasi antar huruf untuk keterbacaan */
+  line-height: 1.2; /* Line height yang sesuai dengan tinggi container */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Font yang konsisten */
+  /* Utilities */
+  z-index: 100000 !important; /* Higher than input container (99999) */
+  cursor: text !important;
+}
+
+.input-box::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+  font-style: italic;
+}
+
+.input-box:focus {
+  outline: none;
+  color: white;
+}
+
+/* ===== BASE BUTTON STYLING ===== */
+
+/* Tombol-tombol dengan efek modern dan futuristik - BASE STYLING KONSISTEN */
+.submit-button, .voice-button, .menu-button, .camera-button {
+  background: rgba(255, 255, 255, 0.15); /* Background konsisten untuk semua */
+  border: 1.5px solid rgba(255, 255, 255, 0.25); /* Border konsisten untuk semua */
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.9);
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  position: relative;
+  overflow: hidden;
+  -webkit-app-region: no-drag !important;
+  box-shadow: var(--shadow-medium),
+              var(--glow-medium) var(--glow-primary),
+              inset 0 1px 0 rgba(255, 255, 255, 0.2); /* Inner highlight untuk depth */
+  /* Utilities */
+  /* pointer-events removed - redundant, covered by .input-container * rule */
+  z-index: 100001 !important; /* Highest z-index for buttons - above input-box (100000) */
+  cursor: pointer !important;
+}
+
+/* Efek hover pada tombol - KONSISTEN UNTUK SEMUA */
+.submit-button:hover, .voice-button:hover, .menu-button:hover, .camera-button:hover {
+  background: rgba(255, 255, 255, 0.25); /* Background konsisten saat hover */
+  transform: scale(1.08) translateY(-2px); /* Transform konsisten */
+  border-color: rgba(255, 255, 255, 0.4); /* Border lebih terang saat hover */
+  box-shadow: var(--shadow-strong),
+              var(--glow-strong) var(--glow-primary),
+              inset 0 1px 0 rgba(255, 255, 255, 0.3); /* Inner highlight lebih terang */
+}
+
+/* Hover gradient override untuk setiap tombol */
+.submit-button:hover {
+  background-image: linear-gradient(135deg,
+    rgba(var(--primary-color-rgb), 0.3),
+    rgba(var(--secondary-color-rgb), 0.3));
+}
+
+.voice-button:hover {
+  background-image: linear-gradient(135deg,
+    rgba(var(--tertiary-color-rgb), 0.3),
+    rgba(var(--secondary-color-rgb), 0.3));
+}
+
+.camera-button:hover {
+  background-image: linear-gradient(135deg,
+    rgba(var(--secondary-color-rgb), 0.3),
+    rgba(var(--accent-color-rgb), 0.3));
+}
+
+.menu-button:hover {
+  background-image: linear-gradient(135deg,
+    rgba(var(--primary-color-rgb), 0.3),
+    rgba(var(--tertiary-color-rgb), 0.3));
+}
+
+/* Efek glow pada tombol saat hover */
+.submit-button::before, .voice-button::before, .menu-button::before, .camera-button::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  z-index: -1;
+  opacity: 0;
+  transition: opacity var(--transition-normal);
+  filter: blur(8px);
+}
+
+.submit-button:hover::before, .voice-button:hover::before, .menu-button:hover::before, .camera-button:hover::before {
+  opacity: 1;
+}
+
+/* DDR CLEANUP: Ripple effects moved to shared/styles/utilities.css to avoid duplication */
+
+/* ===== BUTTON SPECIFIC STYLES ===== */
+
+/* Styling khusus untuk setiap tombol - KONSISTEN OPACITY */
+
+/* Submit Button - Primary + Secondary (konsisten) */
+.submit-button {
+  background-image: linear-gradient(135deg,
+    rgba(var(--primary-color-rgb), 0.2),
+    rgba(var(--secondary-color-rgb), 0.2));
+  border-color: rgba(var(--primary-color-rgb), 0.25);
+}
+
+/* Voice Button - Tertiary + Secondary */
+.voice-button {
+  background-image: linear-gradient(135deg,
+    rgba(var(--tertiary-color-rgb), 0.2),
+    rgba(var(--secondary-color-rgb), 0.2));
+  border-color: rgba(var(--tertiary-color-rgb), 0.25);
+}
+
+/* Camera Button - Secondary + Accent */
+.camera-button {
+  background-image: linear-gradient(135deg,
+    rgba(var(--secondary-color-rgb), 0.2),
+    rgba(var(--accent-color-rgb), 0.2));
+  border-color: rgba(var(--secondary-color-rgb), 0.25);
+}
+
+/* Menu Button - Primary + Tertiary */
+.menu-button {
+  background-image: linear-gradient(135deg,
+    rgba(var(--primary-color-rgb), 0.2),
+    rgba(var(--tertiary-color-rgb), 0.2));
+  border-color: rgba(var(--primary-color-rgb), 0.25);
+}
+
+/* Efek active pada tombol - lebih responsif dan taktil */
+.submit-button:active, .voice-button:active, .menu-button:active, .camera-button:active {
+  transform: scale(0.92); /* Lebih mengecil saat diklik untuk feedback taktil */
+  background-color: rgba(var(--primary-color-rgb), 0.25); /* Warna latar berubah saat diklik */
+  box-shadow: var(--shadow-light),
+              var(--glow-light) var(--glow-primary),
+              inset 0 2px 4px rgba(0, 0, 0, 0.2); /* Inner shadow untuk efek pressed */
+}
+
+/* ===== VOICE BUTTON STATES ===== */
+/* DDR CLEANUP: Voice button styling moved to components/voice/voice.css (SSOT) */
+/* Voice button states are now handled by the voice component */
+
+/* ===== ANIMATIONS ===== */
+
+/* Input container entrance animation */
+@keyframes inputContainerEntrance {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(20px) scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0) scale(1);
+  }
+}
+
+/* Border glow animation */
+@keyframes borderGlow {
+  0% {
+    opacity: 0.3;
+  }
+  100% {
+    opacity: 0.7;
+  }
+}
+
+/* Shine animation */
+@keyframes shine {
+  0% {
+    left: -150%;
+  }
+  50% {
+    left: -50%;
+  }
+  100% {
+    left: 150%;
+  }
+}
+
+/* Ripple animation for buttons */
+@keyframes ripple {
+  0% {
+    width: 0;
+    height: 0;
+    opacity: 1;
+  }
+  100% {
+    width: 100px;
+    height: 100px;
+    opacity: 0;
+  }
+}
+
+/* Pulse animation for voice button */
+@keyframes pulse {
+  0%, 100% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* Pulse conversation animation */
+@keyframes pulse-conversation {
+  0%, 100% {
+    box-shadow: 0 0 25px rgba(0, 210, 255, 0.6);
+  }
+  50% {
+    box-shadow: 0 0 35px rgba(0, 210, 255, 0.8);
+  }
+}
+
+/* Pulse listening animation */
+@keyframes pulse-listening {
+  0%, 100% {
+    box-shadow: 0 0 25px rgba(255, 107, 107, 0.6);
+  }
+  50% {
+    box-shadow: 0 0 35px rgba(255, 107, 107, 0.8);
+  }
+}
+
+/* ===== NEON BORDER COMPONENT ===== */
+/* Migrated from css/components.css for input-container specific styling */
+
+/* Efek neon border yang konsisten dengan style aplikasi */
+.neon-border {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  z-index: -1; /* Di bawah input container */
+  border-radius: 30px; /* Sesuai dengan input container */
+
+  /* Background gradient seperti yang ada di styles.css */
+  background: linear-gradient(90deg, var(--primary-color), var(--secondary-color), var(--primary-color));
+  background-size: 300% 300%; /* Lebih besar untuk efek yang lebih halus */
+
+  /* Animasi neon glow yang sama dengan styles.css */
+  animation: neonGlow 4s ease infinite; /* Animasi lebih lambat dan halus */
+
+  opacity: 0.85; /* Sedikit transparansi seperti air */
+  pointer-events: none; /* Pastikan tidak menghalangi interaksi */
+
+  /* Filter sedikit blur untuk efek yang lebih halus */
+  filter: blur(0.5px);
+
+  /* Box shadow initial - akan diubah oleh animasi */
+  box-shadow:
+    0 0 10px rgba(var(--primary-color-rgb), 0.7),
+    0 0 20px rgba(var(--primary-color-rgb), 0.4),
+    0 0 30px rgba(var(--primary-color-rgb), 0.2);
+}
+
+/* ===== VOICE ACTIVATION STATES ===== */
+/* DDR CLEANUP: Voice activation styles moved to components/voice/voice.css (SSOT) */
+/* Voice activation states are now handled by the voice component */
+
+/* ===== POINTER EVENTS MANAGEMENT ===== */
+/* Migrated from css/utilities.css for component-specific control */
+
+/* Prevent pointer events on decorative pseudo-elements */
+.input-container::before,
+.input-container::after {
+  pointer-events: none;
+}
+
+/* DDR CLEANUP: Voice visualizer utilities moved to components/voice/voice.css (SSOT) */
+/* Voice visualizer styling is now handled by the voice component */
+
+/* ===== INPUT CONTAINER ANIMATIONS ===== */
+/* Migrated from css/animations.css for component-specific animations */
+
+@keyframes inputContainerEntrance {
+  0% {
+    opacity: 0;
+    transform: translateX(var(--element-transform-x)) !important; /* Transform for center positioning */
+    filter: blur(5px);
+    top: calc(var(--input-top-position) - 4vh); /* Start from top of screen using variable */
+  }
+  60% {
+    opacity: 0.8;
+    transform: translateX(var(--element-transform-x)) !important; /* Transform for center positioning */
+    filter: blur(1px);
+    top: calc(var(--input-top-position) + 1vh); /* Slight overshoot downward */
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(var(--element-transform-x)) !important; /* Transform for center positioning */
+    filter: blur(0px);
+    top: var(--input-top-position); /* Final position using variable */
+  }
+}
+
+@keyframes shine {
+  0% {
+    left: -150%;
+  }
+  15%, 100% {
+    left: 150%;
+  }
+}
+
+@keyframes borderGlow {
+  0% {
+    opacity: 0.3;
+    filter: blur(2px);
+  }
+  100% {
+    opacity: 0.7;
+    filter: blur(5px);
+  }
+}
+
+@keyframes neonGlow {
+  0% {
+    background-position: 0% 50%;
+    box-shadow: 0 0 10px rgba(var(--primary-color-rgb), 0.7),
+                0 0 20px rgba(var(--primary-color-rgb), 0.4),
+                0 0 30px rgba(var(--primary-color-rgb), 0.2);
+  }
+  50% {
+    background-position: 100% 50%;
+    box-shadow: 0 0 15px rgba(var(--secondary-color-rgb), 0.7),
+                0 0 30px rgba(var(--secondary-color-rgb), 0.4),
+                0 0 45px rgba(var(--secondary-color-rgb), 0.2);
+  }
+  100% {
+    background-position: 0% 50%;
+    box-shadow: 0 0 10px rgba(var(--primary-color-rgb), 0.7),
+                0 0 20px rgba(var(--primary-color-rgb), 0.4),
+                0 0 30px rgba(var(--primary-color-rgb), 0.2);
+  }
+}
+
+@keyframes neonGlowListening {
+  0% {
+    background-position: 0% 50%;
+    box-shadow: 0 0 30px rgba(var(--accent-color-rgb), 1.0),
+                0 0 60px rgba(var(--accent-color-rgb), 0.8),
+                0 0 90px rgba(var(--accent-color-rgb), 0.6);
+  }
+  25% {
+    background-position: 50% 50%;
+    box-shadow: 0 0 40px rgba(255, 68, 68, 1.0),
+                0 0 80px rgba(255, 68, 68, 0.8),
+                0 0 120px rgba(255, 68, 68, 0.6);
+  }
+  50% {
+    background-position: 100% 50%;
+    box-shadow: 0 0 35px rgba(var(--accent-color-rgb), 1.0),
+                0 0 70px rgba(var(--accent-color-rgb), 0.8),
+                0 0 105px rgba(var(--accent-color-rgb), 0.6);
+  }
+  75% {
+    background-position: 50% 50%;
+    box-shadow: 0 0 45px rgba(255, 68, 68, 1.0),
+                0 0 90px rgba(255, 68, 68, 0.8),
+                0 0 135px rgba(255, 68, 68, 0.6);
+  }
+  100% {
+    background-position: 0% 50%;
+    box-shadow: 0 0 30px rgba(var(--accent-color-rgb), 1.0),
+                0 0 60px rgba(var(--accent-color-rgb), 0.8),
+                0 0 90px rgba(var(--accent-color-rgb), 0.6);
+  }
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+
+@media (max-width: 768px) {
+  .input-container {
+    width: 90%;
+    padding: 0 12px;
+  }
+  
+  .input-container button {
+    width: 32px;
+    height: 32px;
+    padding: 6px;
+  }
+  
+  .input-box {
+    font-size: 14px;
+    padding: 6px 12px;
+  }
+}
+
+/* ===== ACCESSIBILITY ===== */
+
+.input-container button:focus {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+.input-box:focus {
+  box-shadow: inset 0 0 0 2px rgba(var(--primary-color-rgb), 0.3);
+}

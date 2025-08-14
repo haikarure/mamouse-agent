@@ -1,0 +1,249 @@
+/* Camera Styles for Mamouse Agent */
+
+/* ===== CAMERA VARIABLES ===== */
+:root {
+  /* Camera Above Input Variables */
+  --camera-above-width: 184px;
+  --camera-above-height: 120px;
+  --camera-above-offset-top: -100px;
+  --camera-above-z-index: 999; /* Behind input container (99999) - SAFE POSITION */
+  --camera-above-background: rgba(20, 25, 45, 0.6);
+  --camera-above-border-radius: 20px;
+  --camera-above-padding: 15px;
+
+  /* Camera Animation Variables */
+  --camera-fade-in-duration: 0.6s;
+  --camera-fade-out-duration: 0.5s;
+  --camera-shine-duration: 12s;
+  --camera-pulse-duration: 2s;
+
+  /* Camera State Colors */
+  --camera-active-color: #ff6b6b;
+  --camera-loading-color: #ffa502;
+  --camera-error-color: #ff6b6b;
+
+  /* Camera Border & Shadow Variables */
+  --camera-border-width: 3px;
+  --camera-video-border-width: 2px;
+  --camera-shadow: 0 6px 16px #000000;
+  --camera-glow-active: 0 0 20px rgba(255, 107, 107, 0.5);
+  --camera-glow-loading: 0 0 20px rgba(255, 165, 2, 0.5);
+  --camera-glow-hover: 0 0 15px rgba(var(--primary-color-rgb), 0.4);
+  --camera-btn-glow: 0 5px 15px rgba(var(--primary-color-rgb), 0.3);
+
+  /* Shared Transition */
+  --camera-opacity-transition: opacity 0.3s ease-out;
+
+  /* Animation Transform Values */
+  --camera-transform-distance: 30px;
+  --camera-video-border-radius: 15px;
+
+  /* Camera Button Styles */
+  --camera-btn-border-radius: 25px;
+  --camera-btn-padding: 10px 20px;
+}
+
+/* ===== CAMERA ABOVE INPUT STYLES ===== */
+.camera-above-input {
+  position: fixed;
+  top: calc(var(--input-top-position) + var(--camera-above-offset-top));
+  left: calc(50% + (var(--input-width) / 2) - 18px - var(--camera-above-width));
+  width: var(--camera-above-width);
+  height: var(--camera-above-height);
+  background: var(--camera-above-background) !important;
+  border: var(--camera-border-width) solid var(--input-border-color, var(--primary-color));
+  border-radius: var(--camera-above-border-radius);
+  z-index: var(--camera-above-z-index);
+  pointer-events: auto;
+  display: none;
+  visibility: hidden;
+  opacity: 0;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: var(--camera-above-padding);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  box-shadow: var(--camera-shadow) !important;
+  transition: none;
+  will-change: transform, opacity;
+  overflow: hidden;
+}
+
+.camera-content-above {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.camera-above-input video,
+.camera-above-input canvas {
+  width: 100%;
+  height: 100%;
+  border-radius: var(--camera-video-border-radius);
+  object-fit: cover;
+  border: var(--camera-video-border-width) solid var(--primary-color);
+  box-sizing: border-box;
+  transition: var(--camera-opacity-transition);
+  transform: scaleX(-1); /* Mirror effect - flip horizontal */
+}
+
+.camera-above-input:hover {
+  background-color: rgba(25, 30, 50, 0.65);
+  border-color: rgba(var(--primary-color-rgb), 0.3);
+  box-shadow: var(--camera-shadow), var(--camera-glow-hover);
+  transform: translateY(-2px);
+}
+
+.camera-above-input::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -150%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  transform: skewX(-25deg);
+  animation: cameraShine var(--camera-shine-duration) infinite ease-in-out;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.camera-above-input::before {
+  content: '';
+  position: absolute;
+  bottom: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2px;
+  height: 20px;
+  background: linear-gradient(to bottom, var(--primary-color), transparent);
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+/* ===== CAMERA ANIMATIONS ===== */
+@keyframes cameraFadeInFromBottom {
+  0% {
+    opacity: 0;
+    transform: translateY(var(--camera-transform-distance));
+    visibility: visible;
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    visibility: visible;
+  }
+}
+
+@keyframes cameraFadeOutToBottom {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+    visibility: visible;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(var(--camera-transform-distance));
+    visibility: hidden;
+  }
+}
+
+@keyframes cameraShine {
+  0%, 100% { left: -150%; }
+  50% { left: 150%; }
+}
+
+@keyframes cameraActivePulse {
+  0%, 100% {
+    box-shadow: var(--camera-shadow), var(--camera-glow-active);
+  }
+  50% {
+    box-shadow: var(--camera-shadow), 0 0 30px rgba(255, 107, 107, 0.7); /* Stronger glow effect */
+  }
+}
+
+/* Animation Classes - Enhanced for maximum specificity */
+.camera-above-input.fade-in,
+.camera-above-input.fade-out {
+  display: flex !important;
+  visibility: visible !important;
+  background: var(--camera-above-background) !important;
+  box-shadow: var(--camera-shadow) !important;
+  animation-fill-mode: forwards !important;
+}
+
+.camera-above-input.fade-in {
+  animation: cameraFadeInFromBottom var(--camera-fade-in-duration) ease-out forwards !important;
+}
+
+.camera-above-input.fade-out {
+  animation: cameraFadeOutToBottom var(--camera-fade-out-duration) ease-in forwards !important;
+}
+
+/* Fallback animation for browsers that don't support CSS animations */
+@media (prefers-reduced-motion: reduce) {
+  .camera-above-input.fade-in,
+  .camera-above-input.fade-out {
+    animation: none !important;
+    transition: var(--camera-opacity-transition), transform 0.3s ease !important;
+  }
+
+  .camera-above-input.fade-in {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+  }
+
+  .camera-above-input.fade-out {
+    opacity: 0 !important;
+    transform: translateY(var(--camera-transform-distance)) !important;
+  }
+}
+
+/* ===== CAMERA STATES ===== */
+.camera-above-input.active {
+  border-color: var(--camera-active-color);
+  box-shadow: var(--camera-shadow), var(--camera-glow-active);
+  animation: cameraActivePulse var(--camera-pulse-duration) infinite ease-in-out;
+}
+
+.camera-above-input.loading {
+  border-color: var(--camera-loading-color);
+  box-shadow: var(--camera-shadow), var(--camera-glow-loading);
+}
+
+/* SMOOTH CAMERA VIDEO LOADING */
+.camera-above-input.loading video,
+.camera-above-input.loading canvas {
+  opacity: 0;
+  transition: var(--camera-opacity-transition);
+}
+
+.camera-above-input:not(.loading) video,
+.camera-above-input:not(.loading) canvas {
+  opacity: 1;
+  transition: var(--camera-opacity-transition);
+}
+
+.camera-error {
+  color: var(--camera-error-color);
+  text-align: center;
+  font-size: 12px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.camera-error p {
+  margin: 0;
+}
+
+/* MASSIVE DDR CLEANUP: Camera controls removed - not used in current implementation */
+
+/* MASSIVE DDR CLEANUP: Responsive design removed - not needed for desktop app */

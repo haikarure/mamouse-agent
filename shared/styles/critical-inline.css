@@ -1,0 +1,30 @@
+/* Critical Inline Styles for Mamouse Agent */
+/* Styles that were previously inline but can be moved to CSS */
+/* Only non-critical styles - critical transparency & pointer events stay inline */
+
+/* Input Container Critical Styles - Duplicates removed, kept only essential transparency rules */
+/* Note: Main input container styles moved to input-container.css for better organization */
+
+/* Camera Modal Display Control */
+.camera-modal {
+  display: none; /* Initially hidden */
+}
+
+.camera-modal[style*="display: flex"] {
+  display: flex !important; /* When shown via JavaScript */
+}
+
+/* Camera Above Input styles moved to camera.css - removed duplicates to prevent conflicts */
+
+/* Camera Video Elements */
+#camera-video,
+#camera-canvas,
+#camera-video-above,
+#camera-canvas-above {
+  display: none; /* Initially hidden */
+}
+
+/* Camera Error Elements */
+#camera-error-above {
+  display: none; /* Initially hidden */
+}

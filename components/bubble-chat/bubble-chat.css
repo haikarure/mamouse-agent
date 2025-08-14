@@ -1,0 +1,398 @@
+/**
+ * Bubble Chat Component Styles for Mamouse Agent
+ * Complete styling migration with scroll isolation system
+ * @version 1.0.0
+ * @author Mamouse Agent Development Team
+ */
+
+/*
+ * SCROLL ISOLATION SYSTEM:
+ * - .app-container: pointer-events: none (global click-through)
+ * - .bubble-content-area: pointer-events: auto (selective activation)
+ * - .standalone-bubble: pointer-events: auto (individual interaction)
+ * - Spatial detection ensures scrolling only works within bubble area
+ * - Areas outside bubbles remain click-through to desktop/background
+ */
+
+/* ===== BUBBLE CONTENT AREA ===== */
+/* Enhanced spatial scroll isolation */
+.bubble-content-area {
+  position: fixed;
+  top: calc(var(--input-top-position) + var(--input-height) + 2px);
+  left: var(--element-left-position);
+  transform: translateX(var(--element-transform-x));
+  width: var(--input-width);
+  height: calc(100vh - var(--input-top-position) - var(--input-height) - 20px);
+  pointer-events: auto !important; /* Enable interaction ONLY in bubble area */
+  overflow-y: auto; /* Enable vertical scrolling for manual scroll functionality */
+  overflow-x: hidden; /* Hide horizontal scrollbar */
+  z-index: 1000; /* Above background but below individual bubbles */
+  scrollbar-width: none; /* Firefox - hide scrollbar */
+  -ms-overflow-style: none; /* IE/Edge - hide scrollbar */
+  padding: 10px 0; /* Add padding for better spacing */
+  scroll-behavior: smooth; /* Smooth scrolling */
+}
+
+/* Hide scrollbar for WebKit browsers */
+.bubble-content-area::-webkit-scrollbar {
+  display: none;
+}
+
+/* ===== STANDALONE BUBBLES ===== */
+.standalone-bubble {
+  position: relative; /* Changed from fixed to relative for proper scrolling */
+  display: flex;
+  margin: 5px auto; /* Center horizontally with auto margins */
+  max-width: 80%;
+  overflow: visible;
+  word-wrap: break-word;
+  white-space: normal;
+  width: auto; /* Dynamic width based on content */
+  z-index: 1; /* Relative z-index within container */
+  pointer-events: auto !important; /* Individual bubbles can receive events */
+  visibility: visible !important;
+  animation: bubbleGentleEnter var(--bubble-entrance-duration) var(--bubble-entrance-easing);
+  will-change: opacity;
+}
+
+.standalone-bubble.assistant,
+.standalone-bubble.user {
+  width: auto; /* Allow dynamic sizing */
+  max-width: var(--input-width); /* Constrain maximum width */
+  min-width: 60px; /* Minimum width for very short messages */
+}
+
+.standalone-bubble.user {
+  margin-bottom: 10px;
+}
+
+.standalone-bubble.assistant {
+  margin-bottom: 15px;
+}
+
+/* ===== BUBBLE CONTENT ===== */
+.bubble-content {
+  background-color: var(--secondary-color) !important; /* Solid background for visibility */
+  border: 2px solid rgba(var(--secondary-color-rgb), 0.3);
+  border-radius: 20px; /* Increased border radius to match backup */
+  padding: 16px 20px;
+  color: white !important; /* Ensure text is visible */
+  font-size: 16px; /* Increased font size to match backup */
+  font-weight: 400;
+  line-height: 1.6;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  width: auto; /* Dynamic width based on content */
+  max-width: 100%;
+  min-width: 40px; /* Minimum width for very short messages */
+  box-sizing: border-box;
+  word-wrap: break-word;
+  position: relative;
+}
+
+.standalone-bubble.user .bubble-content {
+  background-color: var(--accent-color) !important; /* User bubble with accent color */
+  border: 2px solid rgba(var(--accent-color-rgb), 0.3);
+  border-bottom-right-radius: 5px; /* Distinctive corner styling */
+  margin-left: auto;
+  text-align: right;
+}
+
+.standalone-bubble.assistant .bubble-content {
+  background-color: var(--secondary-color) !important; /* Assistant bubble with secondary color */
+  border: 2px solid rgba(var(--secondary-color-rgb), 0.3);
+  border-bottom-left-radius: 5px; /* Distinctive corner styling */
+  margin-right: auto;
+  text-align: left;
+}
+
+/* Hover effects */
+.bubble-content:hover {
+  transform: translateY(-2px) !important;
+  transition: transform 0.2s ease !important;
+}
+
+/* ===== TYPING INDICATOR ===== */
+.typing-indicator {
+  display: flex !important;
+  align-items: center !important;
+  padding: 8px 14px !important;
+  justify-content: center !important;
+  width: fit-content !important;
+  margin: 0 auto 0 0 !important;
+  background-color: var(--assistant-bubble-color, #2d3748) !important; /* Solid background */
+  border-radius: 18px !important;
+  min-width: 70px !important;
+  color: white !important;
+  font-size: 15px !important;
+  font-weight: 500 !important;
+  border: 1px solid var(--bubble-border-color) !important;
+  animation: typingIndicatorPulse var(--typing-pulse-duration) infinite ease-in-out;
+  z-index: 10 !important;
+  position: relative !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  min-height: 40px !important;
+  box-sizing: border-box;
+}
+
+.typing-dots {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  height: 20px !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  z-index: 1000 !important;
+  padding: 0 8px !important;
+  margin: 3px auto 0 !important;
+  position: relative !important;
+  top: 2px !important;
+}
+
+.typing-dot {
+  width: 6px !important;
+  height: 6px !important;
+  margin: 0 4px !important;
+  background-color: white !important;
+  border-radius: 50% !important;
+  display: inline-block !important;
+  position: relative !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  min-width: 6px !important;
+  min-height: 6px !important;
+  animation: typingWave 1.2s infinite ease-in-out;
+}
+
+.typing-dot:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.typing-dot:nth-child(2) {
+  animation-delay: 0.15s;
+}
+
+.typing-dot:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes bubbleGentleEnter {
+  0% {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes typingWave {
+  0%, 100% {
+    transform: translateY(0);
+    opacity: 0.7;
+  }
+  50% {
+    transform: translateY(-10px);
+    opacity: 1;
+  }
+}
+
+@keyframes typingIndicatorPulse {
+  0%, 100% {
+    opacity: 0.8;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* ===== BUBBLE LINKS ===== */
+.bubble-content a {
+  color: var(--accent-color);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(var(--accent-color-rgb), 0.3);
+  transition: all 0.3s ease;
+}
+
+.bubble-content a:hover {
+  color: #60cdff;
+  text-decoration: underline;
+}
+
+/* ===== CHAT CONTAINER ANIMATIONS ===== */
+/* Migrated from css/animations.css for component-specific animations */
+
+@keyframes chatContainerShowExpanded {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%);
+    backdrop-filter: blur(0);
+    top: calc(var(--chat-top-expanded) + var(--chat-animation-start-offset));
+  }
+  20% {
+    opacity: 0.5;
+  }
+  60% {
+    transform: translateX(-50%);
+    backdrop-filter: blur(8px);
+    top: calc(var(--chat-top-expanded) + var(--chat-animation-overshoot-offset));
+  }
+  100% {
+    opacity: 0.95;
+    transform: translateX(-50%);
+    backdrop-filter: blur(5px);
+    top: var(--chat-top-expanded);
+  }
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+@media (max-width: 768px) {
+  .bubble-content-area {
+    width: calc(100vw - 40px);
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .standalone-bubble {
+    max-width: 90%;
+  }
+
+  .standalone-bubble.assistant,
+  .standalone-bubble.user {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .bubble-content {
+    padding: 12px 16px;
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 480px) {
+  .bubble-content-area {
+    width: calc(100vw - 20px);
+    padding: 5px 0;
+  }
+
+  .standalone-bubble {
+    max-width: 95%;
+    margin: 3px auto;
+  }
+
+  .bubble-content {
+    padding: 10px 14px;
+    font-size: 12px;
+    border-radius: 12px;
+  }
+
+  .typing-indicator {
+    padding: 10px 14px;
+    border-radius: 12px;
+  }
+}
+
+/* ===== HIDE CHAT BUTTON ===== */
+/* Migrated from css/components.css for bubble-chat specific functionality */
+
+/* Hide Chat Button */
+.hide-chat-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background-color: rgba(50, 50, 50, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden; /* Penting untuk efek ripple */
+}
+
+.hide-chat-btn span {
+  color: white;
+  font-size: 18px;
+  line-height: 1;
+  z-index: 2; /* Pastikan teks tetap di atas efek ripple */
+}
+
+.hide-chat-btn:hover {
+  background-color: rgba(255, 50, 50, 0.7);
+  transform: scale(1.1);
+  box-shadow: 0 0 8px rgba(255, 50, 50, 0.5);
+}
+
+/* ===== ACCESSIBILITY ===== */
+@media (prefers-reduced-motion: reduce) {
+  .standalone-bubble {
+    animation: none;
+  }
+
+  .typing-dot {
+    animation: none;
+  }
+
+  .bubble-content-area {
+    scroll-behavior: auto;
+  }
+
+  .bubble-content {
+    transition: none;
+  }
+}
+
+/* ===== HIGH CONTRAST MODE ===== */
+@media (prefers-contrast: high) {
+  .bubble-content {
+    border-width: 2px;
+    background-color: var(--secondary-color) !important;
+  }
+
+  .standalone-bubble.user .bubble-content {
+    background-color: var(--accent-color) !important;
+    border-width: 2px;
+  }
+
+  .typing-indicator {
+    border-width: 2px;
+    background-color: var(--assistant-bubble-color, #2d3748) !important;
+  }
+}
+
+/* ===== PRINT STYLES ===== */
+@media print {
+  .bubble-content-area {
+    position: static;
+    width: 100%;
+    height: auto;
+    overflow: visible;
+    transform: none;
+    left: auto;
+  }
+
+  .standalone-bubble {
+    position: static;
+    width: 100%;
+    max-width: 100%;
+    margin: 10px 0;
+    page-break-inside: avoid;
+  }
+
+  .bubble-content {
+    background: white;
+    color: black;
+    border: 1px solid #ccc;
+    box-shadow: none;
+    backdrop-filter: none;
+  }
+
+  .typing-indicator {
+    display: none;
+  }
+}

@@ -1,0 +1,310 @@
+/* Forms Component Styles */
+/* Form elements styling for Input Container Component */
+/* Migrated from css/forms.css following SSOT principles */
+
+/* ===== FORM LAYOUT & INTERACTION ===== */
+
+/* Form container styling */
+form {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  -webkit-app-region: no-drag !important; /* Mencegah drag dari form */
+  cursor: default; /* Reset cursor */
+  pointer-events: auto !important; /* Pastikan form dapat menerima event mouse */
+}
+
+/* Pastikan semua elemen interaktif di dalam form tidak dapat di-drag */
+form *,
+form *::before,
+form *::after {
+  -webkit-app-region: no-drag !important;
+  cursor: default;
+  pointer-events: auto !important; /* Pastikan semua elemen dapat menerima event mouse */
+}
+
+/* ===== API SETTINGS FORM ===== */
+
+/* API Settings Form */
+.api-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-group label {
+  font-size: 14px;
+  color: #ccc;
+}
+
+.form-group input,
+.form-group select {
+  padding: 8px 12px;
+  border-radius: 6px;
+  background-color: rgba(60, 60, 60, 0.8);
+  border: 1px solid rgba(100, 100, 100, 0.5);
+  color: white;
+  font-size: 14px;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px rgba(var(--primary-color-rgb), 0.3) !important;
+}
+
+/* Styling untuk optgroup dan option dalam select dropdown */
+.form-group select optgroup {
+  background-color: rgba(40, 45, 60, 0.95);
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 600;
+  font-size: 13px;
+  padding: 8px 12px;
+  border-bottom: 1px solid rgba(100, 100, 100, 0.3);
+}
+
+.form-group select option {
+  background-color: rgba(60, 60, 60, 0.95);
+  color: white;
+  padding: 8px 12px;
+  font-size: 14px;
+  border: none;
+}
+
+.form-group select option:hover,
+.form-group select option:focus {
+  background-color: rgba(var(--primary-color-rgb), 0.3);
+  color: white;
+}
+
+.form-group select option:checked {
+  background-color: var(--primary-color);
+  color: #000;
+  font-weight: 500;
+}
+
+/* Khusus untuk gemini model select */
+#gemini-model optgroup {
+  background-color: rgba(40, 45, 60, 0.95);
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 600;
+  font-size: 13px;
+  padding: 8px 12px;
+  border-bottom: 1px solid rgba(100, 100, 100, 0.3);
+}
+
+#gemini-model option {
+  background-color: rgba(60, 60, 60, 0.95);
+  color: white;
+  padding: 8px 12px;
+  font-size: 14px;
+  border: none;
+}
+
+#gemini-model option:hover,
+#gemini-model option:focus {
+  background-color: rgba(var(--primary-color-rgb), 0.3);
+  color: white;
+}
+
+#gemini-model option:checked {
+  background-color: var(--primary-color);
+  color: #000;
+  font-weight: 500;
+}
+
+/* ===== CUSTOM SELECT DROPDOWN STYLING ===== */
+
+.custom-select-container {
+  position: relative;
+  width: 100%;
+}
+
+.custom-select {
+  position: relative;
+  width: 100%;
+  cursor: pointer;
+}
+
+.custom-select-trigger {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 12px;
+  border-radius: 6px;
+  background-color: rgba(60, 60, 60, 0.8);
+  border: 1px solid rgba(100, 100, 100, 0.5);
+  color: white;
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+.custom-select-trigger:hover {
+  border-color: rgba(100, 100, 100, 0.7);
+}
+
+.custom-select.open .custom-select-trigger {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px rgba(var(--primary-color-rgb), 0.3);
+}
+
+.custom-select-arrow {
+  transition: transform 0.2s ease;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.custom-select.open .custom-select-arrow {
+  transform: rotate(180deg);
+}
+
+.custom-select-options {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background-color: rgba(40, 45, 60, 0.95);
+  border: 1px solid rgba(100, 100, 100, 0.5);
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  z-index: 1001; /* Higher z-index to appear above menu sections */
+  max-height: 250px; /* Reduced height to fit better in menu sections */
+  overflow-y: auto;
+  display: none;
+  backdrop-filter: blur(10px);
+}
+
+.custom-select.open .custom-select-options {
+  display: block;
+  animation: fadeInDown 0.2s ease;
+}
+
+.custom-optgroup {
+  border-bottom: 1px solid rgba(100, 100, 100, 0.2);
+}
+
+.custom-optgroup:last-child {
+  border-bottom: none;
+}
+
+.custom-optgroup-label {
+  padding: 10px 12px 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+  background-color: rgba(30, 35, 50, 0.8);
+  border-bottom: 1px solid rgba(100, 100, 100, 0.2);
+}
+
+.custom-option {
+  padding: 10px 16px;
+  font-size: 14px;
+  color: white;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border-bottom: 1px solid rgba(100, 100, 100, 0.1);
+}
+
+.custom-option:last-child {
+  border-bottom: none;
+}
+
+.custom-option:hover {
+  background-color: rgba(var(--primary-color-rgb), 0.3);
+  color: white;
+}
+
+.custom-option.selected {
+  background-color: var(--primary-color);
+  color: #000;
+  font-weight: 500;
+}
+
+/* ===== FORM BUTTONS ===== */
+
+.form-button {
+  padding: 10px 20px;
+  border-radius: 6px;
+  border: none;
+  background-color: var(--primary-color);
+  color: white;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.form-button:hover {
+  background-color: rgba(var(--primary-color-rgb), 0.8);
+  transform: translateY(-1px);
+}
+
+.form-button:active {
+  transform: translateY(0);
+}
+
+.form-button:disabled {
+  background-color: rgba(100, 100, 100, 0.3);
+  color: rgba(255, 255, 255, 0.5);
+  cursor: not-allowed;
+}
+
+/* ===== API KEY BUTTONS ===== */
+/* Migrated from css/forms.css - specific button styling */
+
+.save-api-key-btn {
+  min-width: 120px; /* Pastikan lebar minimum untuk teks "Save API Key" */
+  padding: 8px 24px; /* Padding horizontal lebih besar */
+  white-space: nowrap; /* Pastikan teks tidak wrap */
+  text-overflow: ellipsis; /* Jika teks terlalu panjang, gunakan ellipsis */
+}
+
+.validate-api-key-btn {
+  min-width: 100px; /* Pastikan lebar minimum untuk teks "Validate" */
+  padding: 8px 20px; /* Padding horizontal yang cukup */
+  white-space: nowrap; /* Pastikan teks tidak wrap */
+}
+
+/* ===== FORM VALIDATION ===== */
+
+.form-group.error input,
+.form-group.error select {
+  border-color: #ff6b6b;
+  box-shadow: 0 0 0 2px rgba(255, 107, 107, 0.3);
+}
+
+.form-error-message {
+  font-size: 12px;
+  color: #ff6b6b;
+  margin-top: 4px;
+}
+
+.form-group.success input,
+.form-group.success select {
+  border-color: #51cf66;
+  box-shadow: 0 0 0 2px rgba(81, 207, 102, 0.3);
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+
+@media (max-width: 768px) {
+  .api-form {
+    gap: 12px;
+  }
+  
+  .form-group input,
+  .form-group select {
+    font-size: 16px; /* Prevent zoom on iOS */
+  }
+  
+  .custom-select-options {
+    max-height: 150px;
+  }
+}

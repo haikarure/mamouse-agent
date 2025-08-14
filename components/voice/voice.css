@@ -1,0 +1,319 @@
+/* Voice Component Styles for Mamouse Agent */
+/* Enhanced ElevenLabs Conversational AI integration with visual feedback */
+/* Following SSOT principles - voice-related styling consolidated here */
+
+/* ===== ENHANCED VOICE BUTTON STATES ===== */
+
+/* Voice button base styles with enhanced transitions */
+.voice-button {
+  position: relative;
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+/* Voice button active state */
+.voice-button.active {
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  box-shadow: 0 0 20px rgba(var(--primary-color-rgb), 0.5);
+  transform: scale(1.05);
+}
+
+/* Conversation mode with enhanced pulse animation */
+.voice-button.conversation-mode {
+  animation: conversationPulse 2s infinite;
+}
+
+@keyframes conversationPulse {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(var(--primary-color-rgb), 0.5);
+    transform: scale(1.05);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(var(--primary-color-rgb), 0.8);
+    transform: scale(1.08);
+  }
+}
+
+/* DDR CLEANUP: Removed unused state-specific styles for simplified Jarvis approach */
+/* ElevenLabs Conversational AI handles state transitions automatically */
+/* Only keeping essential .active and .conversation-mode states */
+
+/* Voice activity visualization */
+.voice-button.voice-active::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+  border-radius: inherit;
+  z-index: -1;
+  opacity: calc(var(--voice-activity-level, 0) * 0.8);
+  animation: voiceActivityPulse 0.5s ease-in-out infinite alternate;
+}
+
+@keyframes voiceActivityPulse {
+  0% { transform: scale(1); }
+  100% { transform: scale(1.1); }
+}
+
+/* ===== VOICE VISUALIZER STYLES ===== */
+
+/* Voice visualizer container (for future implementation) */
+.voice-visualizer {
+  position: fixed;
+  bottom: 100px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 300px;
+  height: 60px;
+  background: rgba(0, 0, 0, 0.8);
+  border-radius: 30px;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 100000;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.voice-visualizer.active {
+  display: flex;
+  animation: fadeInUp 0.3s ease-out;
+}
+
+/* Voice visualizer bars */
+.voice-visualizer-bars {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  height: 40px;
+}
+
+.voice-visualizer-bar {
+  width: 4px;
+  height: 8px;
+  background: var(--primary-color);
+  border-radius: 2px;
+  /* DDR CLEANUP: Removed voiceBar animation - not implemented and not used in simplified Jarvis approach */
+  opacity: 0.3;
+}
+
+.voice-visualizer-bar:nth-child(1) { animation-delay: 0s; }
+.voice-visualizer-bar:nth-child(2) { animation-delay: 0.1s; }
+.voice-visualizer-bar:nth-child(3) { animation-delay: 0.2s; }
+.voice-visualizer-bar:nth-child(4) { animation-delay: 0.3s; }
+.voice-visualizer-bar:nth-child(5) { animation-delay: 0.4s; }
+.voice-visualizer-bar:nth-child(6) { animation-delay: 0.5s; }
+.voice-visualizer-bar:nth-child(7) { animation-delay: 0.4s; }
+.voice-visualizer-bar:nth-child(8) { animation-delay: 0.3s; }
+.voice-visualizer-bar:nth-child(9) { animation-delay: 0.2s; }
+.voice-visualizer-bar:nth-child(10) { animation-delay: 0.1s; }
+
+/* ===== VOICE STATUS INDICATOR ===== */
+
+/* Voice status indicator (for conversation mode) */
+.voice-status-indicator {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  padding: 8px 16px;
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+  display: none;
+  align-items: center;
+  gap: 8px;
+  z-index: 100000;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.voice-status-indicator.active {
+  display: flex;
+  animation: fadeInDown 0.3s ease-out;
+}
+
+.voice-status-indicator.listening {
+  background: rgba(255, 107, 107, 0.9);
+  border-color: rgba(255, 107, 107, 0.5);
+}
+
+.voice-status-indicator.conversation {
+  background: rgba(0, 210, 255, 0.9);
+  border-color: rgba(0, 210, 255, 0.5);
+}
+
+/* Voice status indicator icon */
+.voice-status-icon {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: currentColor;
+  animation: pulse 1s infinite;
+}
+
+/* ===== VOICE ANIMATIONS ===== */
+
+/* DDR CLEANUP: voiceBar animation removed - not used in simplified Jarvis approach */
+/* ElevenLabs provides built-in audio visualization */
+
+/* Fade in up animation */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+/* Fade in down animation */
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Pulse animation for status icon */
+@keyframes pulse {
+  0%, 100% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}
+
+/* DDR CLEANUP: Removed unused voice waveform and feedback styles */
+/* These were marked "for future implementation" but are not currently used */
+/* ElevenLabs provides built-in audio visualization and feedback */
+
+/* ===== VOICE VISUALIZER LAYOUT ===== */
+/* Migrated from css/layout.css for component-specific positioning */
+
+/* Voice Visualizer Container */
+.voice-visualizer-container {
+  position: fixed;
+  top: var(--chat-top); /* Use variable for top position */
+  left: var(--element-left-position); /* Use variable for consistent horizontal positioning */
+  transform: translateX(var(--element-transform-x)); /* Use variable for consistent transformation */
+  width: var(--chat-width); /* Use variable for consistent width */
+  height: 100px;
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  animation: fadeIn 0.3s ease;
+  z-index: 90; /* Below input container but above chat */
+  pointer-events: auto !important; /* Ensure can receive mouse events */
+}
+
+/* DDR CLEANUP: Removed duplicate .voice-visualizer definition */
+/* The main definition is above at line 64 - this was redundant */
+
+/* ===== VOICE ACTIVATION ANIMATIONS ===== */
+/* Migrated from css/animations.css for component-specific animations */
+
+@keyframes pulseListening {
+  0%, 100% {
+    box-shadow: var(--shadow-medium),
+                var(--glow-medium) var(--glow-primary);
+  }
+  50% {
+    box-shadow: var(--shadow-strong),
+                var(--glow-strong) var(--glow-primary);
+  }
+}
+
+@keyframes pulse-listening {
+  0%, 100% {
+    transform: scale(1.1);
+    box-shadow: 0 0 20px rgba(255, 107, 107, 0.5);
+  }
+  50% {
+    transform: scale(1.15);
+    box-shadow: 0 0 30px rgba(255, 107, 107, 0.8);
+  }
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+
+@media (max-width: 768px) {
+  .voice-visualizer {
+    width: 250px;
+    height: 50px;
+    bottom: 80px;
+  }
+  
+  .voice-visualizer-bars {
+    height: 30px;
+  }
+  
+  .voice-status-indicator {
+    top: 15px;
+    right: 15px;
+    padding: 6px 12px;
+    font-size: 11px;
+  }
+  
+  /* DDR CLEANUP: Removed responsive styles for unused voice-waveform and voice-feedback */
+}
+
+/* ===== ACCESSIBILITY ===== */
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .voice-visualizer,
+  .voice-status-indicator {
+    background: rgba(0, 0, 0, 0.95);
+    border: 2px solid white;
+  }
+
+  .voice-visualizer-bar {
+    background: white;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .voice-visualizer-bar,
+  .voice-status-icon {
+    animation: none;
+  }
+  
+  .voice-visualizer.active,
+  .voice-status-indicator.active {
+    animation: none;
+  }
+}
+
+/* ===== UTILITY CLASSES ===== */
+
+/* Hide voice elements when not needed */
+.voice-hidden {
+  display: none !important;
+}
+
+/* Voice element transitions */
+.voice-transition {
+  transition: all 0.3s ease;
+}
+
+/* Voice glow effect */
+.voice-glow {
+  box-shadow: 0 0 20px rgba(var(--primary-color-rgb), 0.5);
+}

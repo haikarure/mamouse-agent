@@ -1,0 +1,6 @@
+# DDR CLEANUP: Removed unused dependencies (pyaudio, SpeechRecognition, pygame)
+# Only keeping dependencies that are actually used in the remaining Python files
+elevenlabs==1.56.0
+python-dotenv>=1.0.0
+flask>=2.0.0
+flask-cors>=4.0.0

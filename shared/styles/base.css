@@ -1,0 +1,116 @@
+/* Base Styles for Mamouse Agent */
+/* This file contains reset styles, global styles, and basic HTML/Body settings */
+
+/* Reset all elements - MASSIVE DDR CLEANUP: Exclude camera and video elements from aggressive reset */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* AGGRESSIVE RESET - EXCLUDE CAMERA ELEMENTS */
+*:not(.camera-above-input):not(.camera-above-input *):not(video):not(canvas):not([id*="camera"]) {
+  border: none !important;
+  outline: none !important;
+  resize: none !important;
+}
+
+/* MASSIVE DDR CLEANUP: Selective transparency reset - EXCLUDE ALL CAMERA ELEMENTS */
+*:not([class*="button"]):not([class*="camera"]):not([class*="bubble"]):not([class*="neon"]):not([class*="menu"]):not([class*="modal"]):not([class*="dropdown"]):not([class*="select"]):not(video):not(canvas):not([id*="camera"]) {
+  box-shadow: none !important;
+  background-color: transparent !important;
+}
+
+/* Global scrollbar hiding - exclude interactive elements that need visible scrollbars */
+*:not([class*="menu"]):not([class*="dropdown"]):not([class*="select"]):not([class*="options"]):not([class*="scroll"]) {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+}
+
+*:not([class*="menu"]):not([class*="dropdown"]):not([class*="select"]):not([class*="options"]):not([class*="scroll"])::-webkit-scrollbar {
+  display: none; /* WebKit */
+}
+
+/* Basic settings for html and body */
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: transparent !important;
+  border: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+}
+
+/* Body settings */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: transparent !important; /* Make transparent */
+  color: var(--text-color);
+  overflow: hidden;
+  border: none !important;
+  outline: none !important;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-app-region: no-drag;
+}
+
+/* Prevent text selection globally except for input elements */
+*:not(input):not(textarea):not([contenteditable]) {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Allow text selection for input elements */
+input, textarea, [contenteditable] {
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
+}
+
+/* Global font smoothing */
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Remove default button styles */
+button {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  cursor: pointer;
+}
+
+/* Remove default input styles */
+input, textarea, select {
+  background: none;
+  border: none;
+  font: inherit;
+  color: inherit;
+}
+
+/* Remove default list styles */
+ul, ol {
+  list-style: none;
+}
+
+/* Remove default link styles */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Ensure all elements use border-box */
+* {
+  box-sizing: border-box;
+}

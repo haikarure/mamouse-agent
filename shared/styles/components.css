@@ -1,0 +1,172 @@
+/* ===== GLOBAL COMPONENT STYLES ===== */
+/* This file contains only global/shared components used across multiple parts of the application */
+/* Migrated from css/components.css following SSOT principles */
+/* Component-specific styles have been migrated to their respective component directories:
+ * - Neon Border → components/input-container/input-container.css
+ * - Voice Activation → components/input-container/input-container.css
+ * - Hide Chat Button → components/bubble-chat/bubble-chat.css
+ * - Slider Components → components/menu-bar/menu-bar.css
+ * - Toggle Switches → components/menu-bar/menu-bar.css (already existed)
+ */
+
+
+
+/* ===== STATUS INDICATORS ===== */
+
+/* Status Indicator - Fixed position overlay */
+.status-indicator {
+  position: fixed;
+  top: 70px;
+  right: 20px;
+  padding: 8px 12px;
+  border-radius: 20px;
+  background: rgba(20, 25, 40, 0.75);
+  backdrop-filter: blur(var(--blur-medium));
+  -webkit-backdrop-filter: blur(var(--blur-medium));
+  color: white;
+  font-size: 14px;
+  font-weight: 500;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: var(--shadow-medium),
+              var(--glow-light) var(--glow-primary);
+  border: var(--glass-border-light);
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: all var(--transition-normal);
+  pointer-events: none;
+}
+
+.status-indicator.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.status-indicator.listening {
+  background: linear-gradient(135deg,
+    rgba(var(--primary-color-rgb), 0.5) 0%,
+    rgba(var(--tertiary-color-rgb), 0.4) 100%);
+}
+
+.status-indicator.processing {
+  background: linear-gradient(135deg,
+    rgba(var(--warning-color-rgb), 0.5) 0%,
+    rgba(var(--accent-color-rgb), 0.4) 100%);
+}
+
+.status-indicator.error {
+  background: linear-gradient(135deg,
+    rgba(var(--error-color-rgb), 0.5) 0%,
+    rgba(255, 100, 100, 0.4) 100%);
+}
+
+.status-indicator.success {
+  background: linear-gradient(135deg,
+    rgba(var(--success-color-rgb), 0.5) 0%,
+    rgba(100, 255, 150, 0.4) 100%);
+}
+
+.status-indicator-icon {
+  width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.status-indicator-text {
+  white-space: nowrap;
+}
+
+/* Inline Status Components */
+.inline-status {
+  margin-top: 10px; /* Maintain consistent spacing from .status-message */
+  padding: 8px 12px; /* Maintain consistent padding from .status-message */
+  border-radius: 6px;
+  font-size: 14px; /* Maintain consistent font size from .status-message */
+  font-weight: 500;
+  min-width: 0;
+  flex-shrink: 0;
+  white-space: normal;
+  word-wrap: break-word;
+  max-width: 300px;
+  display: none;
+}
+
+.inline-status.success {
+  display: block;
+  background-color: rgba(0, 200, 0, 0.2);
+  color: #00ff00;
+  border: 1px solid rgba(0, 200, 0, 0.3);
+}
+
+.inline-status.error {
+  display: block;
+  background-color: rgba(200, 0, 0, 0.2);
+  color: #ff5555;
+  border: 1px solid rgba(200, 0, 0, 0.3);
+}
+
+.inline-status.info {
+  display: block;
+  background-color: rgba(0, 100, 200, 0.2);
+  color: #55aaff;
+  border: 1px solid rgba(0, 100, 200, 0.3);
+}
+
+/* ===== FORM ELEMENTS ===== */
+/* Form elements styles moved to components/input-container/forms.css */
+
+/* ===== CONNECTION STATUS COMPONENT ===== */
+
+/* Connection Status */
+.connection-status-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 200; /* Di atas semua elemen */
+  background-color: rgba(0, 0, 0, 0.7); /* Latar belakang gelap */
+
+}
+
+.connection-status-message {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: linear-gradient(135deg,
+    rgba(20, 25, 40, 0.85) 0%,
+    rgba(15, 20, 35, 0.95) 100%);
+  backdrop-filter: blur(var(--blur-strong));
+  -webkit-backdrop-filter: blur(var(--blur-strong));
+  padding: 25px 35px;
+  border-radius: 16px;
+  box-shadow: var(--shadow-strong),
+              var(--glow-medium) var(--glow-primary);
+  border: var(--glass-border-medium);
+  animation: pulseConnection 2s infinite ease-in-out;
+}
+
+.connection-status-message p {
+  margin-top: 15px;
+  font-size: 16px;
+  color: white;
+  text-shadow: var(--text-shadow);
+}
+
+.connection-spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  border-top-color: var(--primary-color);
+  border-left-color: var(--accent-color);
+  animation: spin 1s linear infinite;
+  box-shadow: var(--glow-light) var(--glow-primary);
+}

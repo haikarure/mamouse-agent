@@ -1,0 +1,143 @@
+/* CSS Variables for Mamouse Agent */
+/* This file contains all CSS custom properties used throughout the application */
+
+:root {
+  /* Primary colors with blue tones aligned with Windows 11 - Dimmed version */
+  --primary-color: #005a9e; /* Darker than #0078d7 */
+  --primary-color-rgb: 0, 90, 158;
+  --secondary-color: #1f6bb3; /* Darker than #2b88d8 */
+  --secondary-color-rgb: 31, 107, 179;
+  --accent-color: #4a9fd9; /* Darker than #60cdff */
+  --accent-color-rgb: 74, 159, 217;
+  --tertiary-color: #3a9bd9; /* Darker than #4cc2ff */
+  --tertiary-color-rgb: 58, 155, 217;
+
+  /* Background and text colors */
+  --background-color: #1e1e1e; /* Solid dark color */
+  --text-color: white;
+
+  /* Bubble chat solid colors */
+  --user-bubble-color: var(--primary-color); /* User bubble uses primary color */
+  --assistant-bubble-color: var(--secondary-color); /* Assistant bubble uses secondary color */
+
+  /* Blur level variables - Used in components.css */
+  --blur-light: 8px; /* Light blur for status indicators */
+  --blur-medium: 12px; /* Medium blur for status indicators */
+  --blur-strong: 16px; /* Strong blur for connection status */
+
+  /* Transparency level variables */
+  --transparency-light: 0.8; /* Light transparency */
+  --transparency-medium: 0.6; /* Medium transparency */
+  --transparency-strong: 0.4; /* Strong transparency */
+
+  /* Colors for glassmorphism effects */
+  --glass-border-color: #ffffff; /* Solid border */
+  --glass-highlight: #ffffff; /* Solid highlight */
+
+  /* Variables for different glassmorphism effects */
+  --glass-light: #f0f0f0; /* Light solid color */
+  --glass-medium: #e0e0e0; /* Medium solid color */
+  --glass-strong: #d0d0d0; /* Strong solid color */
+
+  /* Variables for glassmorphism borders */
+  --glass-border-light: 1px solid #e0e0e0; /* Light solid border */
+  --glass-border-medium: 1px solid #d0d0d0; /* Medium solid border */
+  --glass-border-strong: 1px solid #c0c0c0; /* Strong solid border */
+
+  /* Shadow effects - Used in components.css */
+  --shadow-light: 0 2px 8px rgba(0, 0, 0, 0.1);
+  --shadow-medium: 0 4px 16px rgba(0, 0, 0, 0.15);
+  --shadow-strong: 0 8px 32px rgba(0, 0, 0, 0.2);
+
+  /* Glow effects - Used in components.css */
+  --glow-light: 0 0 10px rgba(74, 159, 217, 0.3);
+  --glow-medium: 0 0 20px rgba(74, 159, 217, 0.5);
+  --glow-strong: 0 0 30px rgba(74, 159, 217, 0.7);
+
+  /* Animation durations */
+  --animation-fast: 0.15s;
+  --animation-normal: 0.3s;
+  --animation-slow: 0.6s;
+
+  /* Border radius values */
+  --border-radius-small: 4px;
+  --border-radius-medium: 8px;
+  --border-radius-large: 12px;
+  --border-radius-xl: 16px;
+
+  /* Spacing values */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  --spacing-xxl: 48px;
+
+  /* Font sizes */
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-md: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.25rem;
+  --font-size-xxl: 1.5rem;
+
+  /* Font weights */
+  --font-weight-light: 300;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  /* Z-index layers */
+  --z-index-dropdown: 1000;
+  --z-index-sticky: 1020;
+  --z-index-fixed: 1030;
+  --z-index-modal-backdrop: 1040;
+  --z-index-modal: 1050;
+  --z-index-popover: 1060;
+  --z-index-tooltip: 1070;
+
+  /* Status colors */
+  --color-success: #28a745;
+  --color-warning: #ffc107;
+  --color-error: #dc3545;
+  --color-info: #17a2b8;
+
+  /* Interactive states */
+  --hover-opacity: 0.8;
+  --active-opacity: 0.6;
+  --disabled-opacity: 0.4;
+
+  /* Transition easing */
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --ease-in: cubic-bezier(0.4, 0, 1, 1);
+
+  /* Component specific variables */
+  --button-height: 40px;
+  --input-height: 6vh; /* Restored from backup - viewport height based */
+  --header-height: 60px;
+  --sidebar-width: 250px;
+  --scrollbar-width: 8px;
+
+  /* Layout positioning variables - Restored from backup */
+  --input-width: 500px; /* Standard width for input container */
+  --input-top-position: 12vh; /* Top position for input container */
+  --chat-width: 500px; /* Standard width for chat container */
+
+  /* Consistent positioning variables - Restored from backup */
+  --element-left-position: 50%; /* Horizontal positioning for consistent centering */
+  --element-transform-x: -50%; /* Transform for consistent horizontal centering */
+
+  /* Container spacing variables - Restored from backup */
+  --gap-between-containers: 10vh; /* Spacing between input and chat containers */
+
+  /* Chat positioning calculation - Restored from backup */
+  --chat-top: calc(var(--input-top-position) + var(--input-height) + var(--gap-between-containers));
+
+  /* Responsive breakpoints (for reference in JS) */
+  --breakpoint-sm: 576px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 992px;
+  --breakpoint-xl: 1200px;
+}

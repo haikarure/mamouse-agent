@@ -1,0 +1,162 @@
+/* Window Component Styles */
+/* Consolidated window-related styles following SSOT principles */
+/* Migrated from css/layout.css, css/critical-inline.css, and css/utilities.css */
+
+/* ===== TRANSPARENCY WINDOW CLASS ===== */
+/* Consolidated from css/critical-inline.css */
+.transparent-window {
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+  resize: none !important;
+}
+
+/* ===== DRAG AREA ===== */
+/* Migrated from css/layout.css */
+.drag-area {
+  width: 100%;
+  height: 50px; /* Increased height for better drag area */
+  -webkit-app-region: drag;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 99; /* Below input container but above other elements */
+  pointer-events: none !important; /* Ensure no interference with background apps */
+}
+
+/* Drag overlay for visual feedback */
+#drag-overlay {
+  animation: pulse 1s infinite;
+  pointer-events: none !important;
+}
+
+/* ===== APP WINDOW ===== */
+/* Migrated from css/layout.css */
+.app-window {
+  width: 100%;
+  height: 100%;
+  background-color: transparent !important;
+  overflow: hidden;
+  border: none !important;
+  box-shadow: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  pointer-events: none !important; /* Enable click-through */
+}
+
+/* ===== APP CONTAINER ===== */
+/* App container styles moved to shared/styles/layout.css following SSOT principles */
+
+/* ===== RESIZE PREVENTION ===== */
+/* Resize prevention styles moved to shared/styles/layout.css following SSOT principles */
+
+/* ===== DRAG MODE STYLES ===== */
+/* Migrated from css/utilities.css */
+.drag-mode {
+  cursor: move !important;
+}
+
+/* ===== WINDOW CONTROLS ===== */
+/* Styles for window control elements */
+.window-controls {
+  pointer-events: auto !important;
+  z-index: 100000;
+}
+
+.window-controls * {
+  pointer-events: auto !important;
+}
+
+.window-control-button {
+  cursor: pointer !important;
+  pointer-events: auto !important;
+}
+
+/* ===== CRITICAL TRANSPARENCY OVERRIDES ===== */
+/* These styles ensure transparency is maintained */
+html, body {
+  background: transparent !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: none !important;
+  overflow: hidden !important;
+  width: 100% !important;
+  height: 100% !important;
+  pointer-events: none !important; /* Essential for click-through functionality */
+}
+
+/* Prevent any visual artifacts */
+*, *::before, *::after {
+  border: none !important;
+  outline: none !important;
+  resize: none !important;
+}
+
+/* Exclude specific elements from aggressive transparency */
+*:not(.camera-above-input):not(.camera-above-input *):not(.camera-content-above):not(.camera-content-above *):not(.neon-border):not(.neon-border *):not(.standalone-bubble):not(.standalone-bubble *):not(.bubble-content):not(.bubble-content *) {
+  box-shadow: none !important;
+  background-color: transparent !important;
+}
+
+/* ===== POINTER EVENTS MANAGEMENT ===== */
+/* Window-specific pointer events rules */
+.app-window::before {
+  pointer-events: none;
+}
+
+/* Ensure interactive elements can receive events */
+.input-container,
+.input-container *,
+.window-controls,
+.window-controls *,
+.slide-menu,
+.slide-menu *,
+button,
+input,
+select,
+a {
+  pointer-events: auto !important;
+}
+
+/* ===== ANIMATIONS ===== */
+/* Window-related animations */
+@keyframes pulse {
+  0%, 100% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* ===== RESPONSIVE CONSIDERATIONS ===== */
+/* Ensure window styles work across different screen sizes */
+@media (max-width: 768px) {
+  .drag-area {
+    height: 40px; /* Slightly smaller on mobile */
+  }
+}
+
+/* ===== ACCESSIBILITY ===== */
+/* Ensure window controls are accessible */
+.window-control-button:focus {
+  outline: 2px solid var(--primary-color, #0078d4);
+  outline-offset: 2px;
+}
+
+/* ===== DEBUGGING HELPERS ===== */
+/* Uncomment for debugging window boundaries */
+/*
+.debug-window .app-window {
+  border: 2px solid red !important;
+}
+
+.debug-window .app-container {
+  border: 2px solid blue !important;
+}
+
+.debug-window .drag-area {
+  background-color: rgba(255, 0, 0, 0.2) !important;
+}
+*/

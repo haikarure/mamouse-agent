@@ -1,0 +1,101 @@
+/* Global Layout Styles for Mamouse Agent */
+/* This file contains global layout structure, containers, and positioning */
+/* Consolidated from css/layout.css and components/window/window.css following SSOT principles */
+
+/* ===== MAIN APPLICATION CONTAINER ===== */
+/* Consolidated from css/layout.css (flexbox layout) and components/window/window.css (basic properties) */
+
+.app-container {
+  /* Layout properties from css/layout.css */
+  display: flex;
+  justify-content: flex-start; /* Align to top-left for desktop positioning */
+  align-items: flex-start; /* Align to top-left for desktop positioning */
+  height: 100vh;
+  width: 100vw;
+  
+  /* Transparency and interaction properties (consolidated from both files) */
+  background: transparent !important; /* Transparent for click-through */
+  border: none !important;
+  box-shadow: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  
+  /* Behavior properties */
+  overflow: hidden;
+  pointer-events: none !important; /* Enable click-through to desktop */
+  resize: none !important; /* Prevent resize */
+  cursor: default !important;
+}
+
+/* ===== APP CONTENT CONTAINER ===== */
+/* Global content layout from css/layout.css */
+
+.app-content {
+  flex: 1;
+  padding: 5px; /* Reduced padding from 20px to 5px */
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* Changed from center to flex-start for top positioning */
+  align-items: center; /* Keep center horizontally */
+  overflow: hidden;
+  pointer-events: none !important; /* Enable click-through */
+}
+
+/* ===== APP WINDOW ===== */
+/* Global window layout (referenced in components/window/window.css) */
+
+.app-window {
+  width: 100%;
+  height: 100%;
+  background-color: transparent !important;
+  overflow: hidden;
+  border: none !important;
+  box-shadow: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  pointer-events: none !important; /* Enable click-through */
+  resize: none !important;
+  cursor: default !important;
+}
+
+/* ===== RESIZE PREVENTION ===== */
+/* Prevent resize arrows and ensure no resize capability */
+/* Consolidated from components/window/window.css */
+
+html, body, .app-container, .app-window {
+  resize: none !important;
+  cursor: default !important;
+}
+
+/* Overlay to prevent resize at edges */
+.app-container::after,
+.app-window::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 9999;
+  border: none !important;
+  outline: none !important;
+}
+
+/* ===== GLOBAL Z-INDEX LAYERING ===== */
+/* Z-index hierarchy for global layout elements */
+
+/* Base layers */
+.app-container { z-index: 1; }
+.app-content { z-index: 2; }
+.app-window { z-index: 3; }
+
+/* Component layers (reference values - actual values in component files) */
+/* Drag area: z-index: 99 */
+/* Input container: z-index: 100 */
+/* Bubble chat: z-index: 1000+ */
+/* Status indicators: z-index: 200 */
+/* Menu bar: z-index: 150 */
+/* Camera: z-index: 300+ */
+/* Window controls: z-index: 100000 */

@@ -2,7 +2,7 @@
   "name": "mamous-agent",
   "version": "1.0.0",
   "description": "An AI personal assistant with multimodal capabilities",
-  "main": "main.js",
+  "main": "core/app.js",
   "scripts": {
     "start": "electron .",
     "debug": "electron . --enable-logging --log-level=debug",
@@ -13,7 +13,6 @@
   "license": "ISC",
   "dependencies": {
     "@google/generative-ai": "^0.24.1",
-    "@nut-tree-fork/nut-js": "^4.2.6",
     "axios": "^1.9.0",
     "dotenv": "^16.5.0",
     "uuid": "^9.0.0",
@@ -36,15 +35,15 @@
     ],
     "win": {
       "target": "nsis",
-      "icon": "assets/Mamouse Icon.ico"
+      "icon": "shared/assets/Mamouse Icon.ico"
     },
     "mac": {
       "target": "dmg",
-      "icon": "assets/Mamouse Icon.ico"
+      "icon": "shared/assets/Mamouse Icon.ico"
     },
     "linux": {
       "target": "AppImage",
-      "icon": "assets/Mamouse Icon.ico"
+      "icon": "shared/assets/Mamouse Icon.ico"
     }
   }
 }
